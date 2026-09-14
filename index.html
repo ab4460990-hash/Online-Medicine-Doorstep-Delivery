@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,7 @@
 content="Online Medicine Delivery - Order medicines online from your mobile.">
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -100,6 +100,15 @@ nav a{
   background:#d62828;
 }
 
+.btn-secondary{
+  background:#555;
+}
+
+.btn-small{
+  padding:9px 14px;
+  font-size:14px;
+}
+
 .offer{
   background:#ff8a00;
   color:white;
@@ -142,7 +151,7 @@ section h2{
 }
 
 .box{
-  max-width:550px;
+  max-width:650px;
   margin:auto;
   background:white;
   padding:25px;
@@ -204,11 +213,14 @@ textarea.input{
 
 .user-panel,
 .order-panel,
-.history-panel{
+.history-panel,
+.track-panel{
   display:none;
 }
 
-.order-card{
+/* MEDICINE ROW */
+
+.medicine-row{
   background:#f7faf9;
   border:1px solid #ddd;
   padding:15px;
@@ -216,13 +228,51 @@ textarea.input{
   margin-bottom:12px;
 }
 
+.medicine-row-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:5px;
+}
+
+.medicine-number{
+  color:#087c59;
+  font-weight:bold;
+}
+
+.remove-medicine{
+  background:#d62828;
+  color:white;
+  border:none;
+  border-radius:6px;
+  padding:7px 10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.add-medicine-box{
+  margin:15px 0;
+}
+
+.order-card{
+  background:#f7faf9;
+  border:1px solid #ddd;
+  padding:18px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
 .order-card strong{
   color:#087c59;
 }
 
+.order-card p{
+  margin-bottom:8px;
+}
+
 .status{
   display:inline-block;
-  padding:5px 10px;
+  padding:6px 12px;
   border-radius:20px;
   background:#fff0d6;
   color:#9a5b00;
@@ -230,14 +280,34 @@ textarea.input{
   margin-top:8px;
 }
 
-.login-buttons{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
+.amount-box{
+  background:white;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:15px;
+  margin-top:15px;
 }
 
-.login-buttons button{
-  flex:1;
+.amount-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:7px 0;
+  border-bottom:1px solid #eee;
+}
+
+.amount-row:last-child{
+  border-bottom:none;
+}
+
+.amount-total{
+  font-size:18px;
+  font-weight:bold;
+  color:#087c59;
+}
+
+.track-result{
+  margin-top:20px;
 }
 
 .whatsapp-box{
@@ -253,12 +323,26 @@ textarea.input{
   margin-bottom:8px;
 }
 
+.login-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.login-buttons button{
+  flex:1;
+}
+
 footer{
   background:#087c59;
   color:white;
   text-align:center;
   padding:25px;
   margin-top:30px;
+}
+
+.hidden{
+  display:none !important;
 }
 
 @media(max-width:700px){
@@ -291,7 +375,13 @@ footer{
     flex-direction:column;
   }
 
+  .amount-row{
+    flex-direction:column;
+    gap:3px;
+  }
+
 }
+
 </style>
 </head>
 
@@ -310,7 +400,9 @@ Online Medicine Delivery
 <a href="#shop">Shop</a>
 <a href="#offers">Offers</a>
 <a href="#login">Login</a>
+<a href="#order">Order</a>
 <a href="#orders">My Orders</a>
+<a href="#track">Track Order</a>
 <a href="#contact">Contact</a>
 </nav>
 
@@ -318,13 +410,17 @@ Online Medicine Delivery
 
 </header>
 
+
 <div class="offer" id="offers">
 🎉 GET 10% OFF ON YOUR ORDER
 </div>
 
+
 <section class="hero" id="home">
 
-<h1>Online Medicine Delivery</h1>
+<h1>
+Online Medicine Delivery
+</h1>
 
 <p>
 Order your medicines online and get them delivered to your doorstep.
@@ -336,40 +432,45 @@ Login & Order Now
 
 </section>
 
+
+<!-- SHOP -->
+
 <section id="shop">
 
-<h2>Medicine Categories</h2>
+<h2>
+Medicine Categories
+</h2>
 
 <div class="categories">
 
 <div class="category">
 <h3>💊 Pain Relief</h3>
-<p>Browse pain relief products</p>
+<p>Tell us the medicine you need.</p>
 </div>
 
 <div class="category">
 <h3>🌡️ Fever & Cold</h3>
-<p>Browse fever and cold products</p>
+<p>Tell us the medicine you need.</p>
 </div>
 
 <div class="category">
 <h3>🩺 Diabetes Care</h3>
-<p>Diabetes care products</p>
+<p>Tell us the medicine you need.</p>
 </div>
 
 <div class="category">
 <h3>❤️ Heart Care</h3>
-<p>Heart care products</p>
+<p>Tell us the medicine you need.</p>
 </div>
 
 <div class="category">
 <h3>🧴 Skin Care</h3>
-<p>Skin care products</p>
+<p>Tell us the medicine you need.</p>
 </div>
 
 <div class="category">
 <h3>👶 Baby Care</h3>
-<p>Baby care products</p>
+<p>Tell us the medicine you need.</p>
 </div>
 
 </div>
@@ -381,7 +482,9 @@ Login & Order Now
 
 <section id="login">
 
-<h2>Customer Login</h2>
+<h2>
+Customer Login
+</h2>
 
 <div class="box">
 
@@ -403,17 +506,24 @@ placeholder="Enter password">
 
 <div class="login-buttons">
 
-<button class="btn" id="loginBtn">
+<button
+class="btn"
+id="loginBtn">
 Login
 </button>
 
-<button class="btn" id="signupBtn">
+<button
+class="btn"
+id="signupBtn">
 Create Account
 </button>
 
 </div>
 
-<div id="loginMessage" class="message"></div>
+<div
+id="loginMessage"
+class="message">
+</div>
 
 </div>
 
@@ -422,9 +532,13 @@ Create Account
 
 <!-- PROFILE -->
 
-<section id="profile" class="user-panel">
+<section
+id="profile"
+class="user-panel">
 
-<h2>My Account</h2>
+<h2>
+My Account
+</h2>
 
 <div class="box">
 
@@ -450,7 +564,9 @@ id="customerAddress"
 class="input"
 placeholder="Delivery Address"></textarea>
 
-<button class="btn" id="saveProfileBtn">
+<button
+class="btn"
+id="saveProfileBtn">
 Save Profile
 </button>
 
@@ -461,7 +577,10 @@ style="margin-top:10px;">
 Logout
 </button>
 
-<div id="profileMessage" class="message"></div>
+<div
+id="profileMessage"
+class="message">
+</div>
 
 </div>
 
@@ -470,25 +589,63 @@ Logout
 
 <!-- ORDER -->
 
-<section id="order" class="order-panel">
+<section
+id="order"
+class="order-panel">
 
-<h2>Place New Order</h2>
+<h2>
+Place New Order
+</h2>
 
 <div class="box">
 
+<p>
+Enter the medicines you need. You can add more than one medicine to the same order.
+</p>
+
+
+<!-- MEDICINES -->
+
+<div id="medicineList">
+
+<div class="medicine-row">
+
+<div class="medicine-row-header">
+
+<span class="medicine-number">
+Medicine 1
+</span>
+
+</div>
+
 <input
 type="text"
-id="medicine"
-class="input"
+class="input medicine-name"
 placeholder="Medicine / Product Name">
 
 <input
 type="number"
-id="quantity"
-class="input"
+class="input medicine-quantity"
 placeholder="Quantity"
 min="1"
 value="1">
+
+</div>
+
+</div>
+
+
+<div class="add-medicine-box">
+
+<button
+type="button"
+class="btn btn-secondary"
+id="addMedicineBtn">
+➕ Add Another Medicine
+</button>
+
+</div>
+
 
 <textarea
 id="orderAddress"
@@ -500,7 +657,9 @@ placeholder="Delivery Address"></textarea>
 
 <div class="whatsapp-box">
 
-<h3>📄 Prescription Upload</h3>
+<h3>
+📄 Prescription Upload
+</h3>
 
 <p>
 If your medicine requires a prescription, select your prescription file below.
@@ -512,7 +671,9 @@ id="prescriptionFile"
 class="file-input"
 accept=".jpg,.jpeg,.png,.pdf">
 
-<div id="fileInfo" class="file-info">
+<div
+id="fileInfo"
+class="file-info">
 No prescription selected.
 </div>
 
@@ -528,11 +689,16 @@ id="whatsappPrescriptionBtn">
 
 <br>
 
-<button class="btn" id="placeOrderBtn">
+<button
+class="btn"
+id="placeOrderBtn">
 Place Order
 </button>
 
-<div id="orderMessage" class="message"></div>
+<div
+id="orderMessage"
+class="message">
+</div>
 
 </div>
 
@@ -541,9 +707,13 @@ Place Order
 
 <!-- ORDER HISTORY -->
 
-<section id="orders" class="history-panel">
+<section
+id="orders"
+class="history-panel">
 
-<h2>My Order History</h2>
+<h2>
+My Order History
+</h2>
 
 <div class="box">
 
@@ -556,11 +726,56 @@ Loading orders...
 </section>
 
 
+<!-- TRACK ORDER -->
+
+<section
+id="track"
+class="track-panel">
+
+<h2>
+🔎 Track Your Order
+</h2>
+
+<div class="box">
+
+<p>
+Enter your Order ID to check your order status and payment details.
+</p>
+
+<input
+type="text"
+id="trackOrderId"
+class="input"
+placeholder="Example: ORD-123456789">
+
+<button
+class="btn"
+id="trackOrderBtn">
+Track Order
+</button>
+
+<div
+id="trackMessage"
+class="message">
+</div>
+
+<div
+id="trackResult"
+class="track-result">
+</div>
+
+</div>
+
+</section>
+
+
 <!-- CONTACT -->
 
 <section id="contact">
 
-<h2>Contact Us</h2>
+<h2>
+Contact Us
+</h2>
 
 <div class="box">
 
@@ -568,7 +783,9 @@ Loading orders...
 Need help with your medicine order?
 </p>
 
-<button class="btn btn-whatsapp" id="contactWhatsAppBtn">
+<button
+class="btn btn-whatsapp"
+id="contactWhatsAppBtn">
 📱 Contact on WhatsApp
 </button>
 
@@ -597,6 +814,7 @@ initializeApp
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
+
 import {
 getAuth,
 createUserWithEmailAndPassword,
@@ -605,6 +823,7 @@ onAuthStateChanged,
 signOut
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
 
 import {
 getFirestore,
@@ -691,6 +910,9 @@ document.getElementById("order");
 const ordersSection =
 document.getElementById("orders");
 
+const trackSection =
+document.getElementById("track");
+
 const userEmail =
 document.getElementById("userEmail");
 
@@ -712,11 +934,11 @@ document.getElementById("logoutBtn");
 const profileMessage =
 document.getElementById("profileMessage");
 
-const medicineInput =
-document.getElementById("medicine");
+const medicineList =
+document.getElementById("medicineList");
 
-const quantityInput =
-document.getElementById("quantity");
+const addMedicineBtn =
+document.getElementById("addMedicineBtn");
 
 const orderAddress =
 document.getElementById("orderAddress");
@@ -741,6 +963,18 @@ document.getElementById("whatsappPrescriptionBtn");
 
 const contactWhatsAppBtn =
 document.getElementById("contactWhatsAppBtn");
+
+const trackOrderId =
+document.getElementById("trackOrderId");
+
+const trackOrderBtn =
+document.getElementById("trackOrderBtn");
+
+const trackMessage =
+document.getElementById("trackMessage");
+
+const trackResult =
+document.getElementById("trackResult");
 
 
 /* MESSAGE */
@@ -767,7 +1001,7 @@ element.style.display =
 
 signupBtn.addEventListener(
 "click",
-async () => {
+async()=>{
 
 const email =
 emailInput.value.trim();
@@ -785,6 +1019,7 @@ loginMessage,
 );
 
 return;
+
 }
 
 
@@ -797,6 +1032,7 @@ loginMessage,
 );
 
 return;
+
 }
 
 
@@ -873,7 +1109,7 @@ error.code ===
 ){
 
 message =
-"Password is too weak.";
+"Password must be at least 6 characters.";
 
 }
 
@@ -900,7 +1136,7 @@ false;
 
 loginBtn.addEventListener(
 "click",
-async () => {
+async()=>{
 
 const email =
 emailInput.value.trim();
@@ -918,6 +1154,7 @@ loginMessage,
 );
 
 return;
+
 }
 
 
@@ -1012,6 +1249,10 @@ orderSection.style.display =
 ordersSection.style.display =
 "block";
 
+trackSection.style.display =
+"block";
+
+
 emailInput.value = "";
 
 passwordInput.value = "";
@@ -1031,6 +1272,9 @@ orderSection.style.display =
 "none";
 
 ordersSection.style.display =
+"none";
+
+trackSection.style.display =
 "none";
 
 }
@@ -1053,7 +1297,9 @@ user.uid
 );
 
 const customerSnap =
-await getDoc(customerRef);
+await getDoc(
+customerRef
+);
 
 
 if(customerSnap.exists()){
@@ -1096,6 +1342,7 @@ async()=>{
 const user =
 auth.currentUser;
 
+
 if(!user){
 
 showMessage(
@@ -1105,6 +1352,7 @@ profileMessage,
 );
 
 return;
+
 }
 
 
@@ -1127,6 +1375,7 @@ profileMessage,
 );
 
 return;
+
 }
 
 
@@ -1179,6 +1428,208 @@ profileMessage,
 );
 
 
+/* ADD MEDICINE */
+
+let medicineCounter = 1;
+
+
+addMedicineBtn.addEventListener(
+"click",
+()=>{
+
+medicineCounter++;
+
+
+const row =
+document.createElement("div");
+
+row.className =
+"medicine-row";
+
+
+row.innerHTML = `
+
+<div class="medicine-row-header">
+
+<span class="medicine-number">
+Medicine ${medicineCounter}
+</span>
+
+<button
+type="button"
+class="remove-medicine">
+❌ Remove
+</button>
+
+</div>
+
+<input
+type="text"
+class="input medicine-name"
+placeholder="Medicine / Product Name">
+
+<input
+type="number"
+class="input medicine-quantity"
+placeholder="Quantity"
+min="1"
+value="1">
+
+`;
+
+
+medicineList.appendChild(row);
+
+
+updateMedicineNumbers();
+
+}
+);
+
+
+/* REMOVE MEDICINE */
+
+medicineList.addEventListener(
+"click",
+(event)=>{
+
+if(
+event.target.classList.contains(
+"remove-medicine"
+)
+){
+
+const rows =
+medicineList.querySelectorAll(
+".medicine-row"
+);
+
+
+if(rows.length <= 1){
+
+alert(
+"At least one medicine is required."
+);
+
+return;
+
+}
+
+
+event.target
+.closest(".medicine-row")
+.remove();
+
+
+updateMedicineNumbers();
+
+}
+
+}
+);
+
+
+/* UPDATE MEDICINE NUMBERS */
+
+function updateMedicineNumbers(){
+
+const rows =
+medicineList.querySelectorAll(
+".medicine-row"
+);
+
+
+rows.forEach(
+(row,index)=>{
+
+const number =
+row.querySelector(
+".medicine-number"
+);
+
+number.textContent =
+"Medicine " + (index + 1);
+
+}
+);
+
+
+medicineCounter =
+rows.length;
+
+}
+
+
+/* GET MEDICINES */
+
+function getMedicines(){
+
+const rows =
+medicineList.querySelectorAll(
+".medicine-row"
+);
+
+const medicines = [];
+
+
+for(
+const row of rows
+){
+
+const name =
+row.querySelector(
+".medicine-name"
+).value.trim();
+
+const quantity =
+Number(
+row.querySelector(
+".medicine-quantity"
+).value
+);
+
+
+if(!name){
+
+return {
+error:
+"Please enter all medicine names."
+};
+
+}
+
+
+if(
+!quantity ||
+quantity < 1
+){
+
+return {
+error:
+"Please enter a valid quantity for every medicine."
+};
+
+}
+
+
+medicines.push({
+
+name:name,
+
+quantity:quantity
+
+});
+
+}
+
+
+return {
+medicines:medicines
+};
+
+}
+
+
 /* PLACE ORDER */
 
 placeOrderBtn.addEventListener(
@@ -1187,6 +1638,7 @@ async()=>{
 
 const user =
 auth.currentUser;
+
 
 if(!user){
 
@@ -1197,32 +1649,46 @@ orderMessage,
 );
 
 return;
+
 }
 
 
-const medicine =
-medicineInput.value.trim();
+const medicineResult =
+getMedicines();
 
-const quantity =
-Number(quantityInput.value);
+
+if(
+medicineResult.error
+){
+
+showMessage(
+orderMessage,
+medicineResult.error,
+"error"
+);
+
+return;
+
+}
+
+
+const medicines =
+medicineResult.medicines;
 
 const address =
 orderAddress.value.trim();
 
 
-if(
-!medicine ||
-!quantity ||
-!address
-){
+if(!address){
 
 showMessage(
 orderMessage,
-"Please fill medicine, quantity and address.",
+"Please enter delivery address.",
 "error"
 );
 
 return;
+
 }
 
 
@@ -1237,11 +1703,34 @@ const orderId =
 Date.now();
 
 
+const hasPrescription =
+prescriptionFile.files.length > 0;
+
+
+const prescriptionName =
+hasPrescription
+?
+prescriptionFile.files[0].name
+:
+"";
+
+
+/*
+IMPORTANT:
+
+Amounts are empty/null initially.
+
+Admin can update them later:
+
+originalMRP
+discountAmount
+payableAmount
+paymentAmount
+
+*/
+
 await addDoc(
-collection(
-db,
-"orders"
-),
+collection(db,"orders"),
 {
 
 orderId:
@@ -1253,14 +1742,14 @@ user.uid,
 customerEmail:
 user.email,
 
+customerName:
+customerName.value.trim(),
+
 customerPhone:
 customerMobile.value.trim(),
 
-medicine:
-medicine,
-
-quantity:
-quantity,
+medicines:
+medicines,
 
 address:
 address,
@@ -1268,15 +1757,29 @@ address,
 status:
 "Pending",
 
+originalMRP:
+null,
+
+discountAmount:
+null,
+
+discountPercent:
+10,
+
+payableAmount:
+null,
+
+paymentAmount:
+null,
+
+paymentStatus:
+"Pending",
+
 prescriptionSelected:
-prescriptionFile.files.length > 0,
+hasPrescription,
 
 prescriptionFileName:
-prescriptionFile.files.length > 0
-?
-prescriptionFile.files[0].name
-:
-"",
+prescriptionName,
 
 createdAt:
 serverTimestamp()
@@ -1292,12 +1795,51 @@ orderMessage,
 );
 
 
-medicineInput.value = "";
+/* RESET MEDICINES */
 
-quantityInput.value = 1;
+medicineList.innerHTML = `
+
+<div class="medicine-row">
+
+<div class="medicine-row-header">
+
+<span class="medicine-number">
+Medicine 1
+</span>
+
+</div>
+
+<input
+type="text"
+class="input medicine-name"
+placeholder="Medicine / Product Name">
+
+<input
+type="number"
+class="input medicine-quantity"
+placeholder="Quantity"
+min="1"
+value="1">
+
+</div>
+
+`;
+
+
+medicineCounter = 1;
+
+
+prescriptionFile.value = "";
+
+fileInfo.textContent =
+"No prescription selected.";
 
 
 await loadOrderHistory(user);
+
+
+trackOrderId.value =
+orderId;
 
 
 }catch(error){
@@ -1362,6 +1904,7 @@ orderHistory.innerHTML =
 "<p>No orders found.</p>";
 
 return;
+
 }
 
 
@@ -1372,8 +1915,11 @@ snapshot.forEach(
 (docSnap)=>{
 
 orders.push({
+
 id:docSnap.id,
+
 ...docSnap.data()
+
 });
 
 }
@@ -1409,26 +1955,55 @@ card.className =
 "order-card";
 
 
-card.innerHTML = `
+let medicinesHtml =
+"";
+
+
+if(
+Array.isArray(order.medicines)
+){
+
+order.medicines.forEach(
+(item,index)=>{
+
+medicinesHtml += `
 
 <p>
-<strong>Order ID:</strong>
-${escapeHtml(order.orderId || "N/A")}
-</p>
-
-<p>
-<strong>Medicine:</strong>
-${escapeHtml(order.medicine || "N/A")}
+<strong>Medicine ${index + 1}:</strong>
+${escapeHtml(item.name || "N/A")}
 </p>
 
 <p>
 <strong>Quantity:</strong>
-${escapeHtml(String(order.quantity || ""))}
+${escapeHtml(
+String(item.quantity || "")
+)}
 </p>
+
+`;
+
+}
+);
+
+}
+
+
+card.innerHTML = `
+
+<p>
+<strong>Order ID:</strong>
+${escapeHtml(
+order.orderId || "N/A"
+)}
+</p>
+
+${medicinesHtml}
 
 <p>
 <strong>Address:</strong>
-${escapeHtml(order.address || "N/A")}
+${escapeHtml(
+order.address || "N/A"
+)}
 </p>
 
 <p>
@@ -1436,15 +2011,31 @@ ${escapeHtml(order.address || "N/A")}
 ${
 order.prescriptionFileName
 ?
-escapeHtml(order.prescriptionFileName)
+escapeHtml(
+order.prescriptionFileName
+)
 :
 "Not selected"
 }
 </p>
 
 <span class="status">
-${escapeHtml(order.status || "Pending")}
+${escapeHtml(
+order.status || "Pending"
+)}
 </span>
+
+${createAmountHtml(order)}
+
+<br><br>
+
+<button
+class="btn btn-small"
+data-track-id="${escapeHtml(
+order.orderId || ""
+)}">
+🔎 Track This Order
+</button>
 
 `;
 
@@ -1472,16 +2063,391 @@ orderHistory.innerHTML =
 }
 
 
+/* ORDER HISTORY TRACK BUTTON */
+
+orderHistory.addEventListener(
+"click",
+(event)=>{
+
+const button =
+event.target.closest(
+"button[data-track-id]"
+);
+
+
+if(!button){
+return;
+}
+
+
+const id =
+button.getAttribute(
+"data-track-id"
+);
+
+
+trackOrderId.value =
+id;
+
+
+document
+.getElementById("track")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+
+trackOrderBtn.click();
+
+}
+);
+
+
+/* AMOUNT HTML */
+
+function createAmountHtml(order){
+
+const original =
+formatMoney(
+order.originalMRP
+);
+
+const discount =
+formatMoney(
+order.discountAmount
+);
+
+const payable =
+formatMoney(
+order.payableAmount
+);
+
+const payment =
+formatMoney(
+order.paymentAmount
+);
+
+
+return `
+
+<div class="amount-box">
+
+<div class="amount-row">
+<span>💰 Original MRP</span>
+<strong>${original}</strong>
+</div>
+
+<div class="amount-row">
+<span>🏷️ Discount Amount</span>
+<strong>${discount}</strong>
+</div>
+
+<div class="amount-row amount-total">
+<span>💵 Payable Amount</span>
+<strong>${payable}</strong>
+</div>
+
+<div class="amount-row">
+<span>💳 Customer Payment</span>
+<strong>${payment}</strong>
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* FORMAT MONEY */
+
+function formatMoney(value){
+
+if(
+value === null ||
+value === undefined ||
+value === "" ||
+Number.isNaN(Number(value))
+){
+
+return "Not updated yet";
+
+}
+
+
+return "₹" +
+Number(value).toFixed(2);
+
+}
+
+
+/* TRACK ORDER */
+
+trackOrderBtn.addEventListener(
+"click",
+async()=>{
+
+const user =
+auth.currentUser;
+
+
+if(!user){
+
+showMessage(
+trackMessage,
+"Please login first.",
+"error"
+);
+
+return;
+
+}
+
+
+const orderId =
+trackOrderId.value.trim();
+
+
+if(!orderId){
+
+showMessage(
+trackMessage,
+"Please enter your Order ID.",
+"error"
+);
+
+return;
+
+}
+
+
+trackResult.innerHTML =
+"";
+
+
+try{
+
+trackOrderBtn.disabled =
+true;
+
+
+const ordersRef =
+collection(
+db,
+"orders"
+);
+
+
+const trackQuery =
+query(
+ordersRef,
+
+where(
+"customerUid",
+"==",
+user.uid
+),
+
+where(
+"orderId",
+"==",
+orderId
+)
+
+);
+
+
+const snapshot =
+await getDocs(
+trackQuery
+);
+
+
+if(snapshot.empty){
+
+showMessage(
+trackMessage,
+"Order not found. Please check your Order ID.",
+"error"
+);
+
+return;
+
+}
+
+
+let order = null;
+
+
+snapshot.forEach(
+(docSnap)=>{
+
+order = {
+id:docSnap.id,
+...docSnap.data()
+};
+
+}
+);
+
+
+showMessage(
+trackMessage,
+"Order found successfully.",
+"success"
+);
+
+
+let medicinesHtml =
+"";
+
+
+if(
+Array.isArray(order.medicines)
+){
+
+order.medicines.forEach(
+(item,index)=>{
+
+medicinesHtml += `
+
+<div class="medicine-row">
+
+<p>
+<strong>Medicine ${index + 1}:</strong>
+${escapeHtml(
+item.name || "N/A"
+)}
+</p>
+
+<p>
+<strong>Quantity:</strong>
+${escapeHtml(
+String(item.quantity || "")
+)}
+</p>
+
+</div>
+
+`;
+
+}
+);
+
+}
+
+
+trackResult.innerHTML = `
+
+<div class="order-card">
+
+<p>
+<strong>🆔 Order ID:</strong>
+${escapeHtml(
+order.orderId || "N/A"
+)}
+</p>
+
+${medicinesHtml}
+
+<p>
+<strong>🚚 Delivery Address:</strong>
+${escapeHtml(
+order.address || "N/A"
+)}
+</p>
+
+<p>
+<strong>📄 Prescription:</strong>
+${
+order.prescriptionFileName
+?
+escapeHtml(
+order.prescriptionFileName
+)
+:
+"Not selected"
+}
+</p>
+
+<p>
+<strong>🚚 Order Status:</strong>
+</p>
+
+<span class="status">
+${escapeHtml(
+order.status || "Pending"
+)}
+</span>
+
+${createAmountHtml(order)}
+
+<p style="margin-top:15px;">
+<strong>💳 Payment Status:</strong>
+${escapeHtml(
+order.paymentStatus || "Pending"
+)}
+</p>
+
+</div>
+
+`;
+
+
+}catch(error){
+
+console.error(
+"Track order error:",
+error
+);
+
+showMessage(
+trackMessage,
+"Could not track order. Please try again.",
+"error"
+);
+
+}finally{
+
+trackOrderBtn.disabled =
+false;
+
+}
+
+}
+);
+
+
 /* ESCAPE HTML */
 
 function escapeHtml(value){
 
 return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
@@ -1534,13 +2500,18 @@ fileInfo.textContent =
 "No prescription selected.";
 
 return;
+
 }
 
 
 const allowedTypes = [
+
 "image/jpeg",
+
 "image/png",
+
 "application/pdf"
+
 ];
 
 
@@ -1557,6 +2528,7 @@ prescriptionFile.value =
 "";
 
 return;
+
 }
 
 
@@ -1585,6 +2557,7 @@ alert(
 );
 
 return;
+
 }
 
 
@@ -1607,16 +2580,23 @@ user.email +
 
 
 const message =
+
 "Hello, I want to send my prescription for medicine delivery.\n\n" +
+
 customerText +
+
 "Prescription file: " +
 file.name +
+
 "\n\n" +
+
 "Please check the prescription.";
 
 
 const whatsappUrl =
+
 "https://wa.me/916009415805?text=" +
+
 encodeURIComponent(
 message
 );
@@ -1626,7 +2606,6 @@ window.open(
 whatsappUrl,
 "_blank"
 );
-
 
 }
 );
@@ -1643,7 +2622,9 @@ const message =
 
 
 const whatsappUrl =
+
 "https://wa.me/916009415805?text=" +
+
 encodeURIComponent(
 message
 );
@@ -1661,4 +2642,3 @@ whatsappUrl,
 
 </body>
 </html>
-```
