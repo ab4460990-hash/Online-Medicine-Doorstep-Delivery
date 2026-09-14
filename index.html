@@ -1,8 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#087c59">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Medicine Delivery">
 
 <title>Online Medicine Delivery</title>
 
@@ -218,8 +226,6 @@ textarea.input{
   display:none;
 }
 
-/* MEDICINE ROW */
-
 .medicine-row{
   background:#f7faf9;
   border:1px solid #ddd;
@@ -383,6 +389,7 @@ footer{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -410,11 +417,9 @@ Online Medicine Delivery
 
 </header>
 
-
 <div class="offer" id="offers">
 🎉 GET 10% OFF ON YOUR ORDER
 </div>
-
 
 <section class="hero" id="home">
 
@@ -431,9 +436,6 @@ Login & Order Now
 </a>
 
 </section>
-
-
-<!-- SHOP -->
 
 <section id="shop">
 
@@ -477,9 +479,6 @@ Medicine Categories
 
 </section>
 
-
-<!-- LOGIN -->
-
 <section id="login">
 
 <h2>
@@ -509,14 +508,12 @@ placeholder="Enter password">
 <button
 class="btn"
 id="loginBtn">
-Login
-</button>
+Login </button>
 
 <button
 class="btn"
 id="signupBtn">
-Create Account
-</button>
+Create Account </button>
 
 </div>
 
@@ -528,9 +525,6 @@ class="message">
 </div>
 
 </section>
-
-
-<!-- PROFILE -->
 
 <section
 id="profile"
@@ -567,15 +561,13 @@ placeholder="Delivery Address"></textarea>
 <button
 class="btn"
 id="saveProfileBtn">
-Save Profile
-</button>
+Save Profile </button>
 
 <button
 class="btn btn-danger"
 id="logoutBtn"
 style="margin-top:10px;">
-Logout
-</button>
+Logout </button>
 
 <div
 id="profileMessage"
@@ -585,9 +577,6 @@ class="message">
 </div>
 
 </section>
-
-
-<!-- ORDER -->
 
 <section
 id="order"
@@ -602,9 +591,6 @@ Place New Order
 <p>
 Enter the medicines you need. You can add more than one medicine to the same order.
 </p>
-
-
-<!-- MEDICINES -->
 
 <div id="medicineList">
 
@@ -634,26 +620,20 @@ value="1">
 
 </div>
 
-
 <div class="add-medicine-box">
 
 <button
 type="button"
 class="btn btn-secondary"
 id="addMedicineBtn">
-➕ Add Another Medicine
-</button>
+➕ Add Another Medicine </button>
 
 </div>
-
 
 <textarea
 id="orderAddress"
 class="input"
 placeholder="Delivery Address"></textarea>
-
-
-<!-- PRESCRIPTION -->
 
 <div class="whatsapp-box">
 
@@ -681,19 +661,16 @@ No prescription selected.
 type="button"
 class="btn btn-whatsapp"
 id="whatsappPrescriptionBtn">
-📱 Send Prescription on WhatsApp
-</button>
+📱 Send Prescription on WhatsApp </button>
 
 </div>
-
 
 <br>
 
 <button
 class="btn"
 id="placeOrderBtn">
-Place Order
-</button>
+Place Order </button>
 
 <div
 id="orderMessage"
@@ -703,9 +680,6 @@ class="message">
 </div>
 
 </section>
-
-
-<!-- ORDER HISTORY -->
 
 <section
 id="orders"
@@ -724,9 +698,6 @@ Loading orders...
 </div>
 
 </section>
-
-
-<!-- TRACK ORDER -->
 
 <section
 id="track"
@@ -751,8 +722,7 @@ placeholder="Example: ORD-123456789">
 <button
 class="btn"
 id="trackOrderBtn">
-Track Order
-</button>
+Track Order </button>
 
 <div
 id="trackMessage"
@@ -767,9 +737,6 @@ class="track-result">
 </div>
 
 </section>
-
-
-<!-- CONTACT -->
 
 <section id="contact">
 
@@ -786,13 +753,11 @@ Need help with your medicine order?
 <button
 class="btn btn-whatsapp"
 id="contactWhatsAppBtn">
-📱 Contact on WhatsApp
-</button>
+📱 Contact on WhatsApp </button>
 
 </div>
 
 </section>
-
 
 <footer>
 
@@ -806,14 +771,12 @@ Healthcare at your doorstep.
 
 </footer>
 
-
 <script type="module">
 
 import {
 initializeApp
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
 
 import {
 getAuth,
@@ -823,7 +786,6 @@ onAuthStateChanged,
 signOut
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
 
 import {
 getFirestore,
@@ -839,8 +801,6 @@ serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -868,8 +828,6 @@ measurementId:
 };
 
 
-/* INITIALIZE */
-
 const app =
 initializeApp(firebaseConfig);
 
@@ -879,12 +837,6 @@ getAuth(app);
 const db =
 getFirestore(app);
 
-console.log(
-"Firebase connected successfully"
-);
-
-
-/* ELEMENTS */
 
 const emailInput =
 document.getElementById("email");
@@ -977,8 +929,6 @@ const trackResult =
 document.getElementById("trackResult");
 
 
-/* MESSAGE */
-
 function showMessage(
 element,
 message,
@@ -997,8 +947,6 @@ element.style.display =
 }
 
 
-/* CREATE ACCOUNT */
-
 signupBtn.addEventListener(
 "click",
 async()=>{
@@ -1008,7 +956,6 @@ emailInput.value.trim();
 
 const password =
 passwordInput.value.trim();
-
 
 if(!email || !password){
 
@@ -1022,7 +969,6 @@ return;
 
 }
 
-
 if(password.length < 6){
 
 showMessage(
@@ -1035,7 +981,6 @@ return;
 
 }
 
-
 try{
 
 signupBtn.disabled =
@@ -1047,7 +992,6 @@ auth,
 email,
 password
 );
-
 
 await setDoc(
 doc(
@@ -1065,13 +1009,11 @@ merge:true
 }
 );
 
-
 showMessage(
 loginMessage,
 "Account created successfully!",
 "success"
 );
-
 
 }catch(error){
 
@@ -1079,7 +1021,6 @@ console.error(error);
 
 let message =
 "Could not create account.";
-
 
 if(
 error.code ===
@@ -1091,7 +1032,6 @@ message =
 
 }
 
-
 if(
 error.code ===
 "auth/invalid-email"
@@ -1101,7 +1041,6 @@ message =
 "Please enter a valid email address.";
 
 }
-
 
 if(
 error.code ===
@@ -1113,13 +1052,11 @@ message =
 
 }
 
-
 showMessage(
 loginMessage,
 message,
 "error"
 );
-
 
 }finally{
 
@@ -1132,8 +1069,6 @@ false;
 );
 
 
-/* LOGIN */
-
 loginBtn.addEventListener(
 "click",
 async()=>{
@@ -1143,7 +1078,6 @@ emailInput.value.trim();
 
 const password =
 passwordInput.value.trim();
-
 
 if(!email || !password){
 
@@ -1157,7 +1091,6 @@ return;
 
 }
 
-
 try{
 
 loginBtn.disabled =
@@ -1169,13 +1102,11 @@ email,
 password
 );
 
-
 showMessage(
 loginMessage,
 "Login successful!",
 "success"
 );
-
 
 }catch(error){
 
@@ -1183,7 +1114,6 @@ console.error(error);
 
 let message =
 "Login failed.";
-
 
 if(
 error.code ===
@@ -1199,7 +1129,6 @@ message =
 
 }
 
-
 if(
 error.code ===
 "auth/invalid-email"
@@ -1210,13 +1139,11 @@ message =
 
 }
 
-
 showMessage(
 loginMessage,
 message,
 "error"
 );
-
 
 }finally{
 
@@ -1228,8 +1155,6 @@ false;
 }
 );
 
-
-/* AUTH STATE */
 
 onAuthStateChanged(
 auth,
@@ -1252,16 +1177,13 @@ ordersSection.style.display =
 trackSection.style.display =
 "block";
 
-
 emailInput.value = "";
 
 passwordInput.value = "";
 
-
 await loadCustomerProfile(user);
 
 await loadOrderHistory(user);
-
 
 }else{
 
@@ -1283,8 +1205,6 @@ trackSection.style.display =
 );
 
 
-/* LOAD PROFILE */
-
 async function loadCustomerProfile(user){
 
 try{
@@ -1300,7 +1220,6 @@ const customerSnap =
 await getDoc(
 customerRef
 );
-
 
 if(customerSnap.exists()){
 
@@ -1333,15 +1252,12 @@ error
 }
 
 
-/* SAVE PROFILE */
-
 saveProfileBtn.addEventListener(
 "click",
 async()=>{
 
 const user =
 auth.currentUser;
-
 
 if(!user){
 
@@ -1355,7 +1271,6 @@ return;
 
 }
 
-
 const name =
 customerName.value.trim();
 
@@ -1364,7 +1279,6 @@ customerMobile.value.trim();
 
 const address =
 customerAddress.value.trim();
-
 
 if(!name || !mobile || !address){
 
@@ -1377,7 +1291,6 @@ profileMessage,
 return;
 
 }
-
 
 try{
 
@@ -1400,17 +1313,14 @@ merge:true
 }
 );
 
-
 orderAddress.value =
 address;
-
 
 showMessage(
 profileMessage,
 "Profile saved successfully!",
 "success"
 );
-
 
 }catch(error){
 
@@ -1428,8 +1338,6 @@ profileMessage,
 );
 
 
-/* ADD MEDICINE */
-
 let medicineCounter = 1;
 
 
@@ -1439,13 +1347,11 @@ addMedicineBtn.addEventListener(
 
 medicineCounter++;
 
-
 const row =
 document.createElement("div");
 
 row.className =
 "medicine-row";
-
 
 row.innerHTML = `
 
@@ -1477,17 +1383,13 @@ value="1">
 
 `;
 
-
 medicineList.appendChild(row);
-
 
 updateMedicineNumbers();
 
 }
 );
 
-
-/* REMOVE MEDICINE */
 
 medicineList.addEventListener(
 "click",
@@ -1504,7 +1406,6 @@ medicineList.querySelectorAll(
 ".medicine-row"
 );
 
-
 if(rows.length <= 1){
 
 alert(
@@ -1515,11 +1416,9 @@ return;
 
 }
 
-
 event.target
 .closest(".medicine-row")
 .remove();
-
 
 updateMedicineNumbers();
 
@@ -1529,15 +1428,12 @@ updateMedicineNumbers();
 );
 
 
-/* UPDATE MEDICINE NUMBERS */
-
 function updateMedicineNumbers(){
 
 const rows =
 medicineList.querySelectorAll(
 ".medicine-row"
 );
-
 
 rows.forEach(
 (row,index)=>{
@@ -1553,14 +1449,11 @@ number.textContent =
 }
 );
 
-
 medicineCounter =
 rows.length;
 
 }
 
-
-/* GET MEDICINES */
 
 function getMedicines(){
 
@@ -1570,7 +1463,6 @@ medicineList.querySelectorAll(
 );
 
 const medicines = [];
-
 
 for(
 const row of rows
@@ -1588,7 +1480,6 @@ row.querySelector(
 ).value
 );
 
-
 if(!name){
 
 return {
@@ -1597,7 +1488,6 @@ error:
 };
 
 }
-
 
 if(
 !quantity ||
@@ -1611,7 +1501,6 @@ error:
 
 }
 
-
 medicines.push({
 
 name:name,
@@ -1622,7 +1511,6 @@ quantity:quantity
 
 }
 
-
 return {
 medicines:medicines
 };
@@ -1630,15 +1518,12 @@ medicines:medicines
 }
 
 
-/* PLACE ORDER */
-
 placeOrderBtn.addEventListener(
 "click",
 async()=>{
 
 const user =
 auth.currentUser;
-
 
 if(!user){
 
@@ -1652,10 +1537,8 @@ return;
 
 }
 
-
 const medicineResult =
 getMedicines();
-
 
 if(
 medicineResult.error
@@ -1671,13 +1554,11 @@ return;
 
 }
 
-
 const medicines =
 medicineResult.medicines;
 
 const address =
 orderAddress.value.trim();
-
 
 if(!address){
 
@@ -1691,21 +1572,17 @@ return;
 
 }
 
-
 try{
 
 placeOrderBtn.disabled =
 true;
 
-
 const orderId =
 "ORD-" +
 Date.now();
 
-
 const hasPrescription =
 prescriptionFile.files.length > 0;
-
 
 const prescriptionName =
 hasPrescription
@@ -1713,21 +1590,6 @@ hasPrescription
 prescriptionFile.files[0].name
 :
 "";
-
-
-/*
-IMPORTANT:
-
-Amounts are empty/null initially.
-
-Admin can update them later:
-
-originalMRP
-discountAmount
-payableAmount
-paymentAmount
-
-*/
 
 await addDoc(
 collection(db,"orders"),
@@ -1787,15 +1649,11 @@ serverTimestamp()
 }
 );
 
-
 showMessage(
 orderMessage,
 "Order placed successfully! Order ID: " + orderId,
 "success"
 );
-
-
-/* RESET MEDICINES */
 
 medicineList.innerHTML = `
 
@@ -1825,22 +1683,17 @@ value="1">
 
 `;
 
-
 medicineCounter = 1;
-
 
 prescriptionFile.value = "";
 
 fileInfo.textContent =
 "No prescription selected.";
 
-
 await loadOrderHistory(user);
-
 
 trackOrderId.value =
 orderId;
-
 
 }catch(error){
 
@@ -1851,7 +1704,6 @@ orderMessage,
 "Could not place order. Please try again.",
 "error"
 );
-
 
 }finally{
 
@@ -1864,13 +1716,10 @@ false;
 );
 
 
-/* ORDER HISTORY */
-
 async function loadOrderHistory(user){
 
 orderHistory.innerHTML =
 "Loading orders...";
-
 
 try{
 
@@ -1879,7 +1728,6 @@ collection(
 db,
 "orders"
 );
-
 
 const ordersQuery =
 query(
@@ -1891,12 +1739,10 @@ user.uid
 )
 );
 
-
 const snapshot =
 await getDocs(
 ordersQuery
 );
-
 
 if(snapshot.empty){
 
@@ -1907,9 +1753,7 @@ return;
 
 }
 
-
 const orders = [];
-
 
 snapshot.forEach(
 (docSnap)=>{
@@ -1925,7 +1769,6 @@ id:docSnap.id,
 }
 );
 
-
 orders.sort(
 (a,b)=>{
 
@@ -1940,10 +1783,8 @@ return timeB - timeA;
 }
 );
 
-
 orderHistory.innerHTML =
 "";
-
 
 orders.forEach(
 (order)=>{
@@ -1954,10 +1795,8 @@ document.createElement("div");
 card.className =
 "order-card";
 
-
 let medicinesHtml =
 "";
-
 
 if(
 Array.isArray(order.medicines)
@@ -1986,7 +1825,6 @@ String(item.quantity || "")
 );
 
 }
-
 
 card.innerHTML = `
 
@@ -2039,14 +1877,12 @@ order.orderId || ""
 
 `;
 
-
 orderHistory.appendChild(
 card
 );
 
 }
 );
-
 
 }catch(error){
 
@@ -2063,8 +1899,6 @@ orderHistory.innerHTML =
 }
 
 
-/* ORDER HISTORY TRACK BUTTON */
-
 orderHistory.addEventListener(
 "click",
 (event)=>{
@@ -2074,21 +1908,17 @@ event.target.closest(
 "button[data-track-id]"
 );
 
-
 if(!button){
 return;
 }
-
 
 const id =
 button.getAttribute(
 "data-track-id"
 );
 
-
 trackOrderId.value =
 id;
-
 
 document
 .getElementById("track")
@@ -2096,14 +1926,11 @@ document
 behavior:"smooth"
 });
 
-
 trackOrderBtn.click();
 
 }
 );
 
-
-/* AMOUNT HTML */
 
 function createAmountHtml(order){
 
@@ -2126,7 +1953,6 @@ const payment =
 formatMoney(
 order.paymentAmount
 );
-
 
 return `
 
@@ -2159,8 +1985,6 @@ return `
 }
 
 
-/* FORMAT MONEY */
-
 function formatMoney(value){
 
 if(
@@ -2174,14 +1998,11 @@ return "Not updated yet";
 
 }
 
-
 return "₹" +
 Number(value).toFixed(2);
 
 }
 
-
-/* TRACK ORDER */
 
 trackOrderBtn.addEventListener(
 "click",
@@ -2189,7 +2010,6 @@ async()=>{
 
 const user =
 auth.currentUser;
-
 
 if(!user){
 
@@ -2203,10 +2023,8 @@ return;
 
 }
 
-
 const orderId =
 trackOrderId.value.trim();
-
 
 if(!orderId){
 
@@ -2220,23 +2038,19 @@ return;
 
 }
 
-
 trackResult.innerHTML =
 "";
-
 
 try{
 
 trackOrderBtn.disabled =
 true;
 
-
 const ordersRef =
 collection(
 db,
 "orders"
 );
-
 
 const trackQuery =
 query(
@@ -2256,12 +2070,10 @@ orderId
 
 );
 
-
 const snapshot =
 await getDocs(
 trackQuery
 );
-
 
 if(snapshot.empty){
 
@@ -2275,21 +2087,21 @@ return;
 
 }
 
-
 let order = null;
-
 
 snapshot.forEach(
 (docSnap)=>{
 
 order = {
+
 id:docSnap.id,
+
 ...docSnap.data()
+
 };
 
 }
 );
-
 
 showMessage(
 trackMessage,
@@ -2297,10 +2109,8 @@ trackMessage,
 "success"
 );
 
-
 let medicinesHtml =
 "";
-
 
 if(
 Array.isArray(order.medicines)
@@ -2335,7 +2145,6 @@ String(item.quantity || "")
 );
 
 }
-
 
 trackResult.innerHTML = `
 
@@ -2393,7 +2202,6 @@ order.paymentStatus || "Pending"
 
 `;
 
-
 }catch(error){
 
 console.error(
@@ -2417,8 +2225,6 @@ false;
 }
 );
 
-
-/* ESCAPE HTML */
 
 function escapeHtml(value){
 
@@ -2452,8 +2258,6 @@ return String(value)
 }
 
 
-/* LOGOUT */
-
 logoutBtn.addEventListener(
 "click",
 async()=>{
@@ -2469,7 +2273,6 @@ alert(
 window.location.hash =
 "login";
 
-
 }catch(error){
 
 console.error(error);
@@ -2484,15 +2287,12 @@ alert(
 );
 
 
-/* PRESCRIPTION FILE */
-
 prescriptionFile.addEventListener(
 "change",
 ()=>{
 
 const file =
 prescriptionFile.files[0];
-
 
 if(!file){
 
@@ -2503,7 +2303,6 @@ return;
 
 }
 
-
 const allowedTypes = [
 
 "image/jpeg",
@@ -2513,7 +2312,6 @@ const allowedTypes = [
 "application/pdf"
 
 ];
-
 
 if(
 !allowedTypes.includes(
@@ -2531,7 +2329,6 @@ return;
 
 }
 
-
 fileInfo.textContent =
 "Selected: " +
 file.name;
@@ -2540,15 +2337,12 @@ file.name;
 );
 
 
-/* WHATSAPP PRESCRIPTION */
-
 whatsappPrescriptionBtn.addEventListener(
 "click",
 ()=>{
 
 const file =
 prescriptionFile.files[0];
-
 
 if(!file){
 
@@ -2560,14 +2354,11 @@ return;
 
 }
 
-
 const user =
 auth.currentUser;
 
-
 let customerText =
 "";
-
 
 if(user){
 
@@ -2577,7 +2368,6 @@ user.email +
 "\n";
 
 }
-
 
 const message =
 
@@ -2592,7 +2382,6 @@ file.name +
 
 "Please check the prescription.";
 
-
 const whatsappUrl =
 
 "https://wa.me/916009415805?text=" +
@@ -2600,7 +2389,6 @@ const whatsappUrl =
 encodeURIComponent(
 message
 );
-
 
 window.open(
 whatsappUrl,
@@ -2610,8 +2398,6 @@ whatsappUrl,
 }
 );
 
-
-/* CONTACT WHATSAPP */
 
 contactWhatsAppBtn.addEventListener(
 "click",
@@ -2620,7 +2406,6 @@ contactWhatsAppBtn.addEventListener(
 const message =
 "Hello, I need help with my medicine order.";
 
-
 const whatsappUrl =
 
 "https://wa.me/916009415805?text=" +
@@ -2629,7 +2414,6 @@ encodeURIComponent(
 message
 );
 
-
 window.open(
 whatsappUrl,
 "_blank"
@@ -2637,6 +2421,40 @@ whatsappUrl,
 
 }
 );
+
+
+/* SERVICE WORKER */
+
+if(
+"serviceWorker" in navigator
+){
+
+window.addEventListener(
+"load",
+()=>{
+
+navigator.serviceWorker
+.register("sw.js")
+.then(
+()=>{
+console.log(
+"Service Worker registered successfully."
+);
+}
+)
+.catch(
+(error)=>{
+console.error(
+"Service Worker registration failed:",
+error
+);
+}
+);
+
+}
+);
+
+}
 
 </script>
 
