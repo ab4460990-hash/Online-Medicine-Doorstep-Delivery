@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,6 +70,11 @@
       font-size: 15px;
     }
 
+    input[readonly] {
+      background: #f1f3f5;
+      font-weight: bold;
+    }
+
     button {
       border: none;
       padding: 11px 16px;
@@ -76,6 +82,11 @@
       cursor: pointer;
       font-size: 14px;
       margin: 5px 3px;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .btn-green {
@@ -156,6 +167,13 @@
       display: inline-block;
     }
 
+    .discount-info {
+      margin-top: 5px;
+      font-size: 13px;
+      color: #087c59;
+      font-weight: bold;
+    }
+
     .hidden {
       display: none;
     }
@@ -187,6 +205,10 @@
 
       .card {
         padding: 15px;
+      }
+
+      .order-card {
+        padding: 14px;
       }
     }
   </style>
@@ -517,9 +539,6 @@
 
       try {
 
-        // IMPORTANT:
-        // Directly check admins/{currentUser.uid}
-
         const adminRef =
           doc(
             db,
@@ -675,7 +694,9 @@
             "order-card";
 
 
+          // =================================
           // Medicines
+          // =================================
 
           let medicinesHTML =
             "";
@@ -699,8 +720,7 @@
                       medicine.name || ""
                     )}
 
-                    —
-                    Quantity:
+                    — Quantity:
                     ${escapeHTML(
                       medicine.quantity || ""
                     )}
@@ -715,7 +735,23 @@
           }
 
 
+          // =================================
+          // Existing values
+          // =================================
+
+          const currentMRP =
+            order.originalMRP ?? "";
+
+          const currentDiscount =
+            order.discountAmount ?? "";
+
+          const currentPayable =
+            order.payableAmount ?? "";
+
+
+          // =================================
           // Order Card
+          // =================================
 
           card.innerHTML = `
 
@@ -807,6 +843,10 @@
             </div>
 
 
+            <!-- =========================
+                 ORIGINAL MRP
+            ========================== -->
+
             <span class="field-title">
 
               💰 Original MRP
@@ -817,33 +857,45 @@
             <input
               type="number"
               class="mrp-input"
-              value="${
-                order.originalMRP ??
-                ""
-              }"
+              value="${currentMRP}"
               placeholder="Original MRP"
               min="0"
+              step="0.01"
             >
 
 
+            <!-- =========================
+                 DISCOUNT
+            ========================== -->
+
             <span class="field-title">
 
-              🏷️ Discount Amount
+              🏷️ Discount
 
             </span>
+
+
+            <div class="discount-info">
+
+              Automatic 10% Discount
+
+            </div>
 
 
             <input
               type="number"
               class="discount-input"
-              value="${
-                order.discountAmount ??
-                ""
-              }"
-              placeholder="Discount Amount"
+              value="${currentDiscount}"
+              placeholder="Automatic Discount"
               min="0"
+              step="0.01"
+              readonly
             >
 
+
+            <!-- =========================
+                 PAYABLE
+            ========================== -->
 
             <span class="field-title">
 
@@ -855,14 +907,17 @@
             <input
               type="number"
               class="payable-input"
-              value="${
-                order.payableAmount ??
-                ""
-              }"
-              placeholder="Payable Amount"
+              value="${currentPayable}"
+              placeholder="Automatic Payable Amount"
               min="0"
+              step="0.01"
+              readonly
             >
 
+
+            <!-- =========================
+                 CUSTOMER PAYMENT
+            ========================== -->
 
             <span class="field-title">
 
@@ -875,13 +930,17 @@
               type="number"
               class="payment-input"
               value="${
-                order.paymentAmount ??
-                ""
+                order.paymentAmount ?? ""
               }"
               placeholder="Customer Payment Amount"
               min="0"
+              step="0.01"
             >
 
+
+            <!-- =========================
+                 PAYMENT STATUS
+            ========================== -->
 
             <span class="field-title">
 
@@ -898,7 +957,8 @@
                 value="Pending"
                 ${
                   order.paymentStatus ===
-                  "Pending"
+                  "Pending" ||
+                  !order.paymentStatus
                     ? "selected"
                     : ""
                 }
@@ -922,6 +982,10 @@
             </select>
 
 
+            <!-- =========================
+                 ORDER STATUS
+            ========================== -->
+
             <span class="field-title">
 
               🚚 Order Status
@@ -937,7 +1001,8 @@
                 value="Pending"
                 ${
                   order.status ===
-                  "Pending"
+                  "Pending" ||
+                  !order.status
                     ? "selected"
                     : ""
                 }
@@ -1006,7 +1071,99 @@
           `;
 
 
+          // =================================
+          // Automatic 10% Calculation
+          // =================================
+
+          const mrpInput =
+            card.querySelector(
+              ".mrp-input"
+            );
+
+
+          const discountInput =
+            card.querySelector(
+              ".discount-input"
+            );
+
+
+          const payableInput =
+            card.querySelector(
+              ".payable-input"
+            );
+
+
+          function calculateAmount() {
+
+            const mrp =
+              Number(
+                mrpInput.value
+              );
+
+
+            if (
+              mrpInput.value === "" ||
+              isNaN(mrp) ||
+              mrp < 0
+            ) {
+
+              discountInput.value =
+                "";
+
+              payableInput.value =
+                "";
+
+              return;
+
+            }
+
+
+            // 10% discount
+
+            const discount =
+              mrp * 0.10;
+
+
+            // Payable = MRP - Discount
+
+            const payable =
+              mrp - discount;
+
+
+            discountInput.value =
+              discount.toFixed(2);
+
+
+            payableInput.value =
+              payable.toFixed(2);
+
+          }
+
+
+          // Calculate when MRP changes
+
+          mrpInput.addEventListener(
+            "input",
+            calculateAmount
+          );
+
+
+          // =================================
+          // Calculate existing MRP
+          // =================================
+
+          if (
+            mrpInput.value !== ""
+          ) {
+
+            calculateAmount();
+
+          }
+
+
+          // =================================
           // Save button
+          // =================================
 
           const saveBtn =
             card.querySelector(
@@ -1027,7 +1184,9 @@
           );
 
 
+          // =================================
           // Delete button
+          // =================================
 
           const deleteBtn =
             card.querySelector(
@@ -1125,6 +1284,26 @@
         ).value;
 
 
+      // =================================
+      // Validation
+      // =================================
+
+      if (
+        mrp !== "" &&
+        Number(mrp) < 0
+      ) {
+
+        showMessage(
+          ordersMessage,
+          "Original MRP সঠিকভাবে দিন.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
       await updateDoc(
 
         doc(
@@ -1139,6 +1318,12 @@
             mrp === ""
               ? null
               : Number(mrp),
+
+
+          discountPercent:
+            mrp === ""
+              ? null
+              : 10,
 
 
           discountAmount:
@@ -1173,7 +1358,7 @@
 
       showMessage(
         ordersMessage,
-        "Order successfully updated.",
+        "Order successfully updated. 10% discount automatic হিসাব হয়েছে.",
         "success"
       );
 
@@ -1215,7 +1400,9 @@
 
 
     if (!confirmDelete) {
+
       return;
+
     }
 
 
@@ -1322,3 +1509,4 @@
 
 </body>
 </html>
+```
