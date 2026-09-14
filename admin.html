@@ -1,22 +1,19 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Admin Panel | Online Medicine Delivery</title>
+  <title>Medicine Delivery - Admin Panel</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f7f6;
+      background: #f3f6f8;
       color: #222;
     }
 
@@ -28,193 +25,119 @@
     }
 
     header h1 {
+      margin: 0;
       font-size: 24px;
-    }
-
-    header p {
-      margin-top: 5px;
-      font-size: 14px;
     }
 
     .container {
       width: 95%;
       max-width: 1100px;
-      margin: 25px auto;
+      margin: 20px auto;
     }
 
-    .card {
+    .box {
       background: white;
-      border-radius: 12px;
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
-
-    .login-box {
-      max-width: 450px;
-      margin: 50px auto;
-    }
-
-    h2 {
-      margin-bottom: 15px;
-      color: #087c59;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }
 
     input,
-    select {
+    select,
+    button {
       width: 100%;
       padding: 12px;
-      margin: 8px 0;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      border-radius: 7px;
       font-size: 15px;
     }
 
     input[readonly] {
-      background: #f1f3f5;
+      background: #eeeeee;
       font-weight: bold;
     }
 
     button {
-      border: none;
-      padding: 11px 16px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 14px;
-      margin: 5px 3px;
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .btn-green {
       background: #087c59;
       color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    .btn-red {
-      background: #dc3545;
-      color: white;
+    button:hover {
+      opacity: 0.9;
     }
 
-    .btn-blue {
-      background: #0d6efd;
-      color: white;
+    .delete-btn {
+      background: #d32f2f;
     }
 
-    .message {
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 6px;
-      display: none;
+    .refresh-btn {
+      background: #444;
     }
 
-    .success {
-      background: #d1e7dd;
-      color: #0f5132;
+    .logout-btn {
+      background: #8b0000;
     }
 
-    .error {
-      background: #f8d7da;
-      color: #842029;
-    }
-
-    .order-card {
+    .order {
       border: 1px solid #ddd;
       border-radius: 10px;
       padding: 18px;
-      margin-bottom: 15px;
-      background: #fff;
+      margin-bottom: 20px;
+      background: #fafafa;
     }
 
-    .order-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
-      margin-bottom: 12px;
-    }
-
-    .order-id {
-      font-weight: bold;
+    .order h3 {
+      margin-top: 0;
       color: #087c59;
-      font-size: 18px;
     }
 
     .medicine {
-      background: #f7f7f7;
-      padding: 9px;
-      border-radius: 6px;
-      margin: 5px 0;
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
     }
 
-    .field-title {
+    .success {
+      color: green;
       font-weight: bold;
-      margin-top: 12px;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+
+    .amount-box {
+      background: #f0f8f5;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    label {
+      font-weight: bold;
       display: block;
-    }
-
-    .status {
-      font-weight: bold;
-      padding: 6px 10px;
-      border-radius: 20px;
-      background: #fff3cd;
-      color: #664d03;
-      display: inline-block;
-    }
-
-    .discount-info {
-      margin-top: 5px;
-      font-size: 13px;
-      color: #087c59;
-      font-weight: bold;
-    }
-
-    .payment-info {
-      margin-top: 5px;
-      font-size: 13px;
-      color: #0d6efd;
-      font-weight: bold;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 30px;
-      color: #666;
+      margin-top: 8px;
     }
 
     @media (max-width: 600px) {
-
       header h1 {
         font-size: 20px;
       }
 
       .container {
-        width: 94%;
+        width: 96%;
       }
 
-      .card {
-        padding: 15px;
-      }
-
-      .order-card {
+      .box {
         padding: 14px;
       }
     }
@@ -224,94 +147,64 @@
 <body>
 
 <header>
-  <h1>💊 Online Medicine Delivery</h1>
-  <p>Admin Panel</p>
+  <h1>💊 Medicine Delivery - Admin Panel</h1>
 </header>
 
+<div class="container">
 
-<!-- =========================
-     ADMIN LOGIN
-========================= -->
-
-<div id="loginSection" class="container">
-
-  <div class="card login-box">
+  <!-- LOGIN -->
+  <div class="box" id="loginBox">
 
     <h2>🔐 Admin Login</h2>
 
     <input
       type="email"
-      id="adminEmail"
+      id="email"
       placeholder="Admin Email"
-      autocomplete="email"
     >
 
     <input
       type="password"
-      id="adminPassword"
-      placeholder="Admin Password"
-      autocomplete="current-password"
+      id="password"
+      placeholder="Password"
     >
 
-    <button
-      id="loginBtn"
-      class="btn-green"
-    >
+    <button id="loginBtn">
       Login
     </button>
 
-    <div
-      id="loginMessage"
-      class="message"
-    ></div>
+    <p id="loginMessage"></p>
 
   </div>
 
-</div>
 
+  <!-- ADMIN AREA -->
+  <div id="adminArea" style="display:none;">
 
-<!-- =========================
-     ADMIN DASHBOARD
-========================= -->
+    <div class="box">
 
-<div id="adminSection" class="container hidden">
-
-  <div class="top-bar">
-
-    <div>
-      <h2>📋 Customer Orders</h2>
-      <p id="adminEmailDisplay"></p>
-    </div>
-
-    <div>
+      <h2>📋 Orders</h2>
 
       <button
+        class="refresh-btn"
         id="refreshBtn"
-        class="btn-blue"
       >
-        🔄 Refresh
+        🔄 Refresh Orders
       </button>
 
       <button
+        class="logout-btn"
         id="logoutBtn"
-        class="btn-red"
       >
-        Logout
+        🚪 Logout
       </button>
+
+      <p id="message"></p>
 
     </div>
 
-  </div>
+    <div id="ordersContainer"></div>
 
-
-  <div
-    id="ordersMessage"
-    class="message"
-  ></div>
-
-
-  <div id="ordersList">
-    Loading orders...
   </div>
 
 </div>
@@ -319,98 +212,61 @@
 
 <script type="module">
 
-  // =========================================
-  // Firebase
-  // =========================================
-
   import {
     initializeApp
-  }
-  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
   import {
     getAuth,
     signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut
-  }
-  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
   import {
     getFirestore,
     collection,
-    getDocs,
-    getDoc,
     query,
     orderBy,
+    getDocs,
     doc,
+    getDoc,
     updateDoc,
     deleteDoc
-  }
-  from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-  // =========================================
-  // Firebase Config
-  // =========================================
+  /* =========================
+     FIREBASE CONFIG
+  ========================= */
 
   const firebaseConfig = {
-
-    apiKey:
-      "AIzaSyDw2kaA5y5unNlo7QDLLQ25ZbZHYiwtUoA",
-
-    authDomain:
-      "online-medicine-delivery-74346.firebaseapp.com",
-
-    projectId:
-      "online-medicine-delivery-74346",
-
-    storageBucket:
-      "online-medicine-delivery-74346.firebasestorage.app",
-
-    messagingSenderId:
-      "1061955108881",
-
-    appId:
-      "1:1061955108881:web:64f36ad79b5c612a2171b0",
-
-    measurementId:
-      "G-LMHDFF01QC"
-
+    apiKey: "AIzaSyDw2kaA5y5unNlo7QDLLQ25ZbZHYiwtUoA",
+    authDomain: "online-medicine-delivery-74346.firebaseapp.com",
+    projectId: "online-medicine-delivery-74346",
+    storageBucket: "online-medicine-delivery-74346.firebasestorage.app",
+    messagingSenderId: "1061955108881",
+    appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
+    measurementId: "G-LMHDFF01QC"
   };
 
 
-  // =========================================
-  // Initialize Firebase
-  // =========================================
+  const app = initializeApp(firebaseConfig);
 
-  const app =
-    initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-  const auth =
-    getAuth(app);
-
-  const db =
-    getFirestore(app);
+  const db = getFirestore(app);
 
 
-  // =========================================
-  // HTML Elements
-  // =========================================
+  /* =========================
+     ELEMENTS
+  ========================= */
 
-  const loginSection =
-    document.getElementById("loginSection");
+  const loginBox =
+    document.getElementById("loginBox");
 
-  const adminSection =
-    document.getElementById("adminSection");
-
-  const adminEmail =
-    document.getElementById("adminEmail");
-
-  const adminPassword =
-    document.getElementById("adminPassword");
+  const adminArea =
+    document.getElementById("adminArea");
 
   const loginBtn =
     document.getElementById("loginBtn");
@@ -421,243 +277,150 @@
   const refreshBtn =
     document.getElementById("refreshBtn");
 
+  const emailInput =
+    document.getElementById("email");
+
+  const passwordInput =
+    document.getElementById("password");
+
   const loginMessage =
     document.getElementById("loginMessage");
 
-  const ordersMessage =
-    document.getElementById("ordersMessage");
+  const message =
+    document.getElementById("message");
 
-  const ordersList =
-    document.getElementById("ordersList");
-
-  const adminEmailDisplay =
-    document.getElementById("adminEmailDisplay");
+  const ordersContainer =
+    document.getElementById("ordersContainer");
 
 
-  // =========================================
-  // Show Message
-  // =========================================
+  /* =========================
+     LOGIN
+  ========================= */
 
-  function showMessage(
-    element,
-    text,
-    type
-  ) {
+  loginBtn.addEventListener("click", async () => {
 
-    element.textContent = text;
+    const email = emailInput.value.trim();
 
-    element.className =
-      "message " + type;
+    const password = passwordInput.value;
 
-    element.style.display =
-      "block";
+    if (!email || !password) {
 
-  }
+      loginMessage.textContent =
+        "Email and Password দিন।";
 
+      loginMessage.className = "error";
 
-  // =========================================
-  // Admin Login
-  // =========================================
+      return;
+    }
 
-  loginBtn.addEventListener(
-    "click",
-    async function() {
+    try {
 
-      const email =
-        adminEmail.value.trim();
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      const password =
-        adminPassword.value;
+      loginMessage.textContent =
+        "";
 
+    } catch (error) {
 
-      if (!email || !password) {
+      loginMessage.textContent =
+        "Login failed: " + error.message;
 
-        showMessage(
-          loginMessage,
-          "Admin Email এবং Password দিন.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      loginBtn.disabled = true;
-
-      loginBtn.textContent =
-        "Logging in...";
-
-
-      try {
-
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Login Error:",
-          error
-        );
-
-        showMessage(
-          loginMessage,
-          "Login failed. Email অথবা Password ঠিক আছে কি না দেখুন.",
-          "error"
-        );
-
-      }
-
-
-      loginBtn.disabled = false;
-
-      loginBtn.textContent =
-        "Login";
+      loginMessage.className = "error";
 
     }
-  );
+
+  });
 
 
-  // =========================================
-  // Authentication State
-  // =========================================
+  /* =========================
+     LOGOUT
+  ========================= */
 
-  onAuthStateChanged(
-    auth,
-    async function(user) {
+  logoutBtn.addEventListener("click", async () => {
 
-      if (!user) {
+    await signOut(auth);
 
-        loginSection
-          .classList
-          .remove("hidden");
-
-        adminSection
-          .classList
-          .add("hidden");
-
-        return;
-
-      }
+  });
 
 
-      try {
+  /* =========================
+     AUTH CHECK
+  ========================= */
 
-        const adminRef =
-          doc(
-            db,
-            "admins",
-            user.uid
-          );
+  onAuthStateChanged(auth, async (user) => {
 
+    if (!user) {
 
-        const adminSnapshot =
-          await getDoc(adminRef);
+      loginBox.style.display = "block";
 
+      adminArea.style.display = "none";
 
-        if (!adminSnapshot.exists()) {
-
-          await signOut(auth);
-
-          showMessage(
-            loginMessage,
-            "এই account Admin হিসেবে অনুমোদিত নয়.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        loginSection
-          .classList
-          .add("hidden");
-
-        adminSection
-          .classList
-          .remove("hidden");
-
-
-        adminEmailDisplay.textContent =
-          "Admin: " + user.email;
-
-
-        await loadOrders();
-
-
-      } catch (error) {
-
-        console.error(
-          "Admin Verification Error:",
-          error
-        );
-
-        showMessage(
-          loginMessage,
-          "Admin verification failed.",
-          "error"
-        );
-
-      }
-
+      return;
     }
-  );
-
-
-  // =========================================
-  // Logout
-  // =========================================
-
-  logoutBtn.addEventListener(
-    "click",
-    async function() {
-
-      try {
-
-        await signOut(auth);
-
-      } catch (error) {
-
-        console.error(error);
-
-      }
-
-    }
-  );
-
-
-  // =========================================
-  // Load Orders
-  // =========================================
-
-  async function loadOrders() {
-
-    ordersList.innerHTML =
-      "Loading orders...";
 
 
     try {
 
-      const ordersRef =
-        collection(
-          db,
-          "orders"
-        );
+      const adminRef =
+        doc(db, "admins", user.uid);
 
+      const adminSnapshot =
+        await getDoc(adminRef);
+
+
+      if (!adminSnapshot.exists()) {
+
+        await signOut(auth);
+
+        loginMessage.textContent =
+          "এই account Admin নয়।";
+
+        loginMessage.className = "error";
+
+        return;
+      }
+
+
+      loginBox.style.display = "none";
+
+      adminArea.style.display = "block";
+
+      loadOrders();
+
+    } catch (error) {
+
+      console.error(error);
+
+      message.textContent =
+        "Admin verification failed.";
+
+      message.className = "error";
+
+    }
+
+  });
+
+
+  /* =========================
+     LOAD ORDERS
+  ========================= */
+
+  async function loadOrders() {
+
+    ordersContainer.innerHTML =
+      "Loading orders...";
+
+    try {
 
       const q =
         query(
-          ordersRef,
-          orderBy(
-            "createdAt",
-            "desc"
-          )
+          collection(db, "orders"),
+          orderBy("createdAt", "desc")
         );
-
 
       const snapshot =
         await getDocs(q);
@@ -665,1002 +428,600 @@
 
       if (snapshot.empty) {
 
-        ordersList.innerHTML = `
-          <div class="card empty">
-            <h3>No Orders Found</h3>
-            <p>এখনও কোনো customer order নেই।</p>
-          </div>
-        `;
+        ordersContainer.innerHTML =
+          "<p>No orders found.</p>";
 
         return;
-
       }
 
 
-      ordersList.innerHTML =
-        "";
+      ordersContainer.innerHTML = "";
 
 
-      snapshot.forEach(
-        function(orderDoc) {
+      snapshot.forEach((orderDoc) => {
 
-          const order =
-            orderDoc.data();
+        const order =
+          orderDoc.data();
+
+        createOrderCard(
+          orderDoc.id,
+          order
+        );
+
+      });
+
+    } catch (error) {
+
+      console.error(error);
+
+      ordersContainer.innerHTML =
+        "<p class='error'>Orders load failed.</p>";
+
+    }
+
+  }
 
 
-          const card =
-            document.createElement(
-              "div"
-            );
+  /* =========================
+     CREATE ORDER CARD
+  ========================= */
+
+  function createOrderCard(
+    documentId,
+    order
+  ) {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "order";
 
 
-          card.className =
-            "order-card";
+    let medicinesHTML = "";
 
 
-          // =================================
-          // Medicines
-          // =================================
+    if (Array.isArray(order.medicines)) {
 
-          let medicinesHTML =
-            "";
+      order.medicines.forEach(
+        (medicine, index) => {
+
+          medicinesHTML += `
+            <div class="medicine">
+              <b>Medicine ${index + 1}</b><br>
+              Name:
+              ${escapeHTML(
+                medicine.name || ""
+              )}
+              <br>
+              Quantity:
+              ${escapeHTML(
+                String(medicine.quantity || "")
+              )}
+            </div>
+          `;
+
+        }
+      );
+
+    }
 
 
-          if (
-            Array.isArray(
-              order.medicines
-            )
-          ) {
+    const originalMRP =
+      order.originalMRP ?? "";
 
-            order.medicines.forEach(
-              function(medicine) {
+    const discountPercent =
+      order.discountPercent ?? "";
 
-                medicinesHTML += `
+    const discountAmount =
+      order.discountAmount ?? "";
 
-                  <div class="medicine">
+    const payableAmount =
+      order.payableAmount ?? "";
 
-                    💊
-                    ${escapeHTML(
-                      medicine.name || ""
-                    )}
+    const paymentAmount =
+      order.paymentAmount ?? "";
 
-                    — Quantity:
-                    ${escapeHTML(
-                      medicine.quantity || ""
-                    )}
 
-                  </div>
+    card.innerHTML = `
 
-                `;
+      <h3>
+        📦 Order ID:
+        ${escapeHTML(
+          order.orderId || documentId
+        )}
+      </h3>
+
+      <p>
+        <b>Customer:</b>
+        ${escapeHTML(
+          order.fullName || ""
+        )}
+      </p>
+
+      <p>
+        <b>Mobile:</b>
+        ${escapeHTML(
+          order.mobile || ""
+        )}
+      </p>
+
+      <p>
+        <b>Address:</b>
+        ${escapeHTML(
+          order.address || ""
+        )}
+      </p>
+
+      <h4>💊 Medicines</h4>
+
+      ${medicinesHTML}
+
+
+      <div class="amount-box">
+
+        <h4>💰 Payment Details</h4>
+
+
+        <label>
+          Original MRP
+        </label>
+
+        <input
+          type="number"
+          class="mrp"
+          value="${originalMRP}"
+          min="0"
+          step="0.01"
+          placeholder="Enter Original MRP"
+        >
+
+
+        <label>
+          Discount Percent (%)
+        </label>
+
+        <input
+          type="number"
+          class="discount-percent"
+          value="${discountPercent}"
+          min="0"
+          max="100"
+          step="0.01"
+          placeholder="Example: 10"
+        >
+
+
+        <label>
+          Discount Amount
+        </label>
+
+        <input
+          type="number"
+          class="discount-amount"
+          value="${discountAmount}"
+          readonly
+        >
+
+
+        <label>
+          Payable Amount
+        </label>
+
+        <input
+          type="number"
+          class="payable-amount"
+          value="${payableAmount}"
+          readonly
+        >
+
+
+        <label>
+          Customer Payment Amount
+        </label>
+
+        <input
+          type="number"
+          class="payment-amount"
+          value="${paymentAmount}"
+          readonly
+        >
+
+        <small>
+          Customer Payment Amount automatically equals Payable Amount.
+        </small>
+
+      </div>
+
+
+      <label>
+        Payment Status
+      </label>
+
+      <select class="payment-status">
+
+        <option value="Pending"
+          ${order.paymentStatus === "Pending" ? "selected" : ""}>
+          Pending
+        </option>
+
+        <option value="Paid"
+          ${order.paymentStatus === "Paid" ? "selected" : ""}>
+          Paid
+        </option>
+
+        <option value="Failed"
+          ${order.paymentStatus === "Failed" ? "selected" : ""}>
+          Failed
+        </option>
+
+      </select>
+
+
+      <label>
+        Order Status
+      </label>
+
+      <select class="order-status">
+
+        <option value="Pending"
+          ${order.status === "Pending" ? "selected" : ""}>
+          Pending
+        </option>
+
+        <option value="Confirmed"
+          ${order.status === "Confirmed" ? "selected" : ""}>
+          Confirmed
+        </option>
+
+        <option value="Out for Delivery"
+          ${order.status === "Out for Delivery" ? "selected" : ""}>
+          Out for Delivery
+        </option>
+
+        <option value="Delivered"
+          ${order.status === "Delivered" ? "selected" : ""}>
+          Delivered
+        </option>
+
+      </select>
+
+
+      <button class="save-btn">
+        💾 Save Order
+      </button>
+
+      <button class="delete-btn delete-order">
+        🗑️ Delete Order
+      </button>
+
+    `;
+
+
+    ordersContainer.appendChild(card);
+
+
+    /* =========================
+       INPUTS
+    ========================= */
+
+    const mrpInput =
+      card.querySelector(".mrp");
+
+    const discountPercentInput =
+      card.querySelector(".discount-percent");
+
+    const discountAmountInput =
+      card.querySelector(".discount-amount");
+
+    const payableInput =
+      card.querySelector(".payable-amount");
+
+    const paymentAmountInput =
+      card.querySelector(".payment-amount");
+
+
+    /* =========================
+       AUTOMATIC CALCULATION
+    ========================= */
+
+    function calculateAmount() {
+
+      const mrp =
+        Number(mrpInput.value);
+
+      const percent =
+        Number(
+          discountPercentInput.value
+        );
+
+
+      if (
+        mrpInput.value === "" ||
+        !Number.isFinite(mrp) ||
+        mrp < 0
+      ) {
+
+        discountAmountInput.value = "";
+
+        payableInput.value = "";
+
+        paymentAmountInput.value = "";
+
+        return;
+      }
+
+
+      if (
+        discountPercentInput.value === "" ||
+        !Number.isFinite(percent) ||
+        percent < 0 ||
+        percent > 100
+      ) {
+
+        discountAmountInput.value = "";
+
+        payableInput.value = "";
+
+        paymentAmountInput.value = "";
+
+        return;
+      }
+
+
+      const discount =
+        mrp * percent / 100;
+
+      const payable =
+        mrp - discount;
+
+
+      /* IMPORTANT:
+         Customer Payment Amount
+         = Payable Amount
+      */
+
+      const customerPayment =
+        payable;
+
+
+      discountAmountInput.value =
+        discount.toFixed(2);
+
+      payableInput.value =
+        payable.toFixed(2);
+
+      paymentAmountInput.value =
+        customerPayment.toFixed(2);
+
+    }
+
+
+    mrpInput.addEventListener(
+      "input",
+      calculateAmount
+    );
+
+    discountPercentInput.addEventListener(
+      "input",
+      calculateAmount
+    );
+
+
+    /* =========================
+       SAVE
+    ========================= */
+
+    card
+      .querySelector(".save-btn")
+      .addEventListener(
+        "click",
+        async () => {
+
+          try {
+
+            calculateAmount();
+
+
+            const mrp =
+              mrpInput.value;
+
+            const discountPercent =
+              discountPercentInput.value;
+
+            const discount =
+              discountAmountInput.value;
+
+            const payable =
+              payableInput.value;
+
+            const payment =
+              paymentAmountInput.value;
+
+
+            const paymentStatus =
+              card.querySelector(
+                ".payment-status"
+              ).value;
+
+
+            const status =
+              card.querySelector(
+                ".order-status"
+              ).value;
+
+
+            await updateDoc(
+              doc(
+                db,
+                "orders",
+                documentId
+              ),
+              {
+
+                originalMRP:
+                  mrp === ""
+                    ? null
+                    : Number(mrp),
+
+                discountPercent:
+                  discountPercent === ""
+                    ? null
+                    : Number(
+                        discountPercent
+                      ),
+
+                discountAmount:
+                  discount === ""
+                    ? null
+                    : Number(discount),
+
+                payableAmount:
+                  payable === ""
+                    ? null
+                    : Number(payable),
+
+                /* AUTOMATIC PAYMENT */
+
+                paymentAmount:
+                  payment === ""
+                    ? null
+                    : Number(payment),
+
+                paymentStatus:
+                  paymentStatus,
+
+                status:
+                  status
 
               }
             );
 
-          }
 
+            message.textContent =
+              "✅ Order updated successfully.";
 
-          // =================================
-          // Existing Values
-          // =================================
+            message.className =
+              "success";
 
-          const currentMRP =
-            order.originalMRP ?? "";
 
+            setTimeout(() => {
 
-          const currentDiscountPercent =
-            order.discountPercent ?? 10;
+              message.textContent = "";
 
+            }, 3000);
 
-          const currentDiscount =
-            order.discountAmount ?? "";
 
+          } catch (error) {
 
-          const currentPayable =
-            order.payableAmount ?? "";
+            console.error(error);
 
+            message.textContent =
+              "❌ Update failed: " +
+              error.message;
 
-          // =================================
-          // Order Card
-          // =================================
-
-          card.innerHTML = `
-
-            <div class="order-header">
-
-              <div>
-
-                <div class="order-id">
-
-                  ${escapeHTML(
-                    order.orderId ||
-                    "No Order ID"
-                  )}
-
-                </div>
-
-
-                <div>
-
-                  👤 Customer:
-                  ${escapeHTML(
-                    order.customerName || ""
-                  )}
-
-                </div>
-
-
-                <div>
-
-                  📱 Mobile:
-                  ${escapeHTML(
-                    order.customerPhone || ""
-                  )}
-
-                </div>
-
-
-                <div>
-
-                  📧 Email:
-                  ${escapeHTML(
-                    order.customerEmail || ""
-                  )}
-
-                </div>
-
-              </div>
-
-
-              <div>
-
-                <span class="status">
-
-                  ${escapeHTML(
-                    order.status ||
-                    "Pending"
-                  )}
-
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <span class="field-title">
-
-              💊 Medicines
-
-            </span>
-
-
-            ${medicinesHTML}
-
-
-            <span class="field-title">
-
-              🚚 Delivery Address
-
-            </span>
-
-
-            <div>
-
-              ${escapeHTML(
-                order.address || ""
-              )}
-
-            </div>
-
-
-            <!-- =========================
-                 ORIGINAL MRP
-            ========================== -->
-
-            <span class="field-title">
-
-              💰 Original MRP
-
-            </span>
-
-
-            <input
-              type="number"
-              class="mrp-input"
-              value="${currentMRP}"
-              placeholder="Original MRP"
-              min="0"
-              step="0.01"
-            >
-
-
-            <!-- =========================
-                 DISCOUNT PERCENT
-            ========================== -->
-
-            <span class="field-title">
-
-              🏷️ Discount Percent (%)
-
-            </span>
-
-
-            <div class="discount-info">
-
-              Discount Percent দিন।
-              Discount Amount এবং Payable Amount automatic হিসাব হবে।
-
-            </div>
-
-
-            <input
-              type="number"
-              class="discount-percent-input"
-              value="${currentDiscountPercent}"
-              placeholder="Discount Percent"
-              min="0"
-              max="100"
-              step="0.01"
-            >
-
-
-            <!-- =========================
-                 DISCOUNT AMOUNT
-            ========================== -->
-
-            <span class="field-title">
-
-              🏷️ Discount Amount
-
-            </span>
-
-
-            <input
-              type="number"
-              class="discount-input"
-              value="${currentDiscount}"
-              placeholder="Automatic Discount Amount"
-              min="0"
-              step="0.01"
-              readonly
-            >
-
-
-            <!-- =========================
-                 PAYABLE
-            ========================== -->
-
-            <span class="field-title">
-
-              💵 Payable Amount
-
-            </span>
-
-
-            <input
-              type="number"
-              class="payable-input"
-              value="${currentPayable}"
-              placeholder="Automatic Payable Amount"
-              min="0"
-              step="0.01"
-              readonly
-            >
-
-
-            <!-- =========================
-                 CUSTOMER PAYMENT
-            ========================== -->
-
-            <span class="field-title">
-
-              💳 Customer Payment Amount
-
-            </span>
-
-
-            <div class="payment-info">
-
-              Customer Payment Amount = Payable Amount (Automatic)
-
-            </div>
-
-
-            <input
-              type="number"
-              class="payment-input"
-              value="${
-                order.paymentAmount ?? ""
-              }"
-              placeholder="Automatic Customer Payment Amount"
-              min="0"
-              step="0.01"
-              readonly
-            >
-
-
-            <!-- =========================
-                 PAYMENT STATUS
-            ========================== -->
-
-            <span class="field-title">
-
-              💳 Payment Status
-
-            </span>
-
-
-            <select
-              class="payment-status-input"
-            >
-
-              <option
-                value="Pending"
-                ${
-                  order.paymentStatus ===
-                  "Pending" ||
-                  !order.paymentStatus
-                    ? "selected"
-                    : ""
-                }
-              >
-                Pending
-              </option>
-
-
-              <option
-                value="Paid"
-                ${
-                  order.paymentStatus ===
-                  "Paid"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Paid
-              </option>
-
-            </select>
-
-
-            <!-- =========================
-                 ORDER STATUS
-            ========================== -->
-
-            <span class="field-title">
-
-              🚚 Order Status
-
-            </span>
-
-
-            <select
-              class="status-input"
-            >
-
-              <option
-                value="Pending"
-                ${
-                  order.status ===
-                  "Pending" ||
-                  !order.status
-                    ? "selected"
-                    : ""
-                }
-              >
-                Pending
-              </option>
-
-
-              <option
-                value="Confirmed"
-                ${
-                  order.status ===
-                  "Confirmed"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Confirmed
-              </option>
-
-
-              <option
-                value="Out for Delivery"
-                ${
-                  order.status ===
-                  "Out for Delivery"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Out for Delivery
-              </option>
-
-
-              <option
-                value="Delivered"
-                ${
-                  order.status ===
-                  "Delivered"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Delivered
-              </option>
-
-            </select>
-
-
-            <br>
-
-
-            <button
-              class="btn-green save-btn"
-            >
-              💾 Save Changes
-            </button>
-
-
-            <button
-              class="btn-red delete-btn"
-            >
-              🗑️ Delete Order
-            </button>
-
-          `;
-
-
-          // =================================
-          // Inputs
-          // =================================
-
-          const mrpInput =
-            card.querySelector(
-              ".mrp-input"
-            );
-
-
-          const discountPercentInput =
-            card.querySelector(
-              ".discount-percent-input"
-            );
-
-
-          const discountInput =
-            card.querySelector(
-              ".discount-input"
-            );
-
-
-          const payableInput =
-            card.querySelector(
-              ".payable-input"
-            );
-
-
-          const paymentInput =
-            card.querySelector(
-              ".payment-input"
-            );
-
-
-          // =================================
-          // Automatic Calculation
-          // =================================
-
-          function calculateAmount() {
-
-            const mrp =
-              Number(
-                mrpInput.value
-              );
-
-
-            const percent =
-              Number(
-                discountPercentInput.value
-              );
-
-
-            // Invalid MRP
-
-            if (
-              mrpInput.value === "" ||
-              isNaN(mrp) ||
-              mrp < 0
-            ) {
-
-              discountInput.value =
-                "";
-
-              payableInput.value =
-                "";
-
-              paymentInput.value =
-                "";
-
-              return;
-
-            }
-
-
-            // Invalid Discount Percent
-
-            if (
-              discountPercentInput.value === "" ||
-              isNaN(percent) ||
-              percent < 0 ||
-              percent > 100
-            ) {
-
-              discountInput.value =
-                "";
-
-              payableInput.value =
-                "";
-
-              paymentInput.value =
-                "";
-
-              return;
-
-            }
-
-
-            // =================================
-            // Discount Amount
-            // =================================
-
-            const discount =
-              mrp * percent / 100;
-
-
-            // =================================
-            // Payable Amount
-            // =================================
-
-            const payable =
-              mrp - discount;
-
-
-            // =================================
-            // Customer Payment Amount
-            // =================================
-
-            const customerPayment =
-              payable;
-
-
-            discountInput.value =
-              discount.toFixed(2);
-
-
-            payableInput.value =
-              payable.toFixed(2);
-
-
-            paymentInput.value =
-              customerPayment.toFixed(2);
+            message.className =
+              "error";
 
           }
-
-
-          // MRP change
-
-          mrpInput.addEventListener(
-            "input",
-            calculateAmount
-          );
-
-
-          // Discount Percent change
-
-          discountPercentInput.addEventListener(
-            "input",
-            calculateAmount
-          );
-
-
-          // Calculate existing order
-
-          if (
-            mrpInput.value !== "" &&
-            discountPercentInput.value !== ""
-          ) {
-
-            calculateAmount();
-
-          }
-
-
-          // =================================
-          // Save Button
-          // =================================
-
-          const saveBtn =
-            card.querySelector(
-              ".save-btn"
-            );
-
-
-          saveBtn.addEventListener(
-            "click",
-            async function() {
-
-              await saveOrder(
-                orderDoc.id,
-                card
-              );
-
-            }
-          );
-
-
-          // =================================
-          // Delete Button
-          // =================================
-
-          const deleteBtn =
-            card.querySelector(
-              ".delete-btn"
-            );
-
-
-          deleteBtn.addEventListener(
-            "click",
-            async function() {
-
-              await deleteOrder(
-                orderDoc.id
-              );
-
-            }
-          );
-
-
-          ordersList.appendChild(
-            card
-          );
 
         }
       );
 
 
-    } catch (error) {
+    /* =========================
+       DELETE
+    ========================= */
 
-      console.error(
-        "Load Orders Error:",
-        error
-      );
-
-
-      ordersList.innerHTML =
-        "";
-
-
-      showMessage(
-        ordersMessage,
-        "Orders load করা যাচ্ছে না.",
-        "error"
-      );
-
-    }
-
-  }
-
-
-  // =========================================
-  // Save Order
-  // =========================================
-
-  async function saveOrder(
-    documentId,
     card
-  ) {
+      .querySelector(".delete-order")
+      .addEventListener(
+        "click",
+        async () => {
 
-    try {
-
-      const mrp =
-        card.querySelector(
-          ".mrp-input"
-        ).value;
-
-
-      const discountPercent =
-        card.querySelector(
-          ".discount-percent-input"
-        ).value;
+          const confirmDelete =
+            confirm(
+              "এই order delete করতে চান?"
+            );
 
 
-      const discount =
-        card.querySelector(
-          ".discount-input"
-        ).value;
+          if (!confirmDelete) {
+            return;
+          }
 
 
-      const payable =
-        card.querySelector(
-          ".payable-input"
-        ).value;
+          try {
+
+            await deleteDoc(
+              doc(
+                db,
+                "orders",
+                documentId
+              )
+            );
 
 
-      const payment =
-        card.querySelector(
-          ".payment-input"
-        ).value;
+            card.remove();
 
 
-      const paymentStatus =
-        card.querySelector(
-          ".payment-status-input"
-        ).value;
+            message.textContent =
+              "✅ Order deleted.";
+
+            message.className =
+              "success";
 
 
-      const status =
-        card.querySelector(
-          ".status-input"
-        ).value;
+          } catch (error) {
 
+            console.error(error);
 
-      // =================================
-      // MRP Validation
-      // =================================
+            message.textContent =
+              "❌ Delete failed.";
 
-      if (
-        mrp !== "" &&
-        (
-          isNaN(Number(mrp)) ||
-          Number(mrp) < 0
-        )
-      ) {
+            message.className =
+              "error";
 
-        showMessage(
-          ordersMessage,
-          "Original MRP সঠিকভাবে দিন.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      // =================================
-      // Discount Validation
-      // =================================
-
-      if (
-        discountPercent !== "" &&
-        (
-          isNaN(Number(discountPercent)) ||
-          Number(discountPercent) < 0 ||
-          Number(discountPercent) > 100
-        )
-      ) {
-
-        showMessage(
-          ordersMessage,
-          "Discount Percent 0 থেকে 100 এর মধ্যে দিন.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      // =================================
-      // Payment = Payable
-      // =================================
-
-      const finalPayment =
-        payable === ""
-          ? null
-          : Number(payable);
-
-
-      // =================================
-      // Save to Firestore
-      // =================================
-
-      await updateDoc(
-
-        doc(
-          db,
-          "orders",
-          documentId
-        ),
-
-        {
-
-          originalMRP:
-            mrp === ""
-              ? null
-              : Number(mrp),
-
-
-          discountPercent:
-            discountPercent === ""
-              ? null
-              : Number(discountPercent),
-
-
-          discountAmount:
-            discount === ""
-              ? null
-              : Number(discount),
-
-
-          payableAmount:
-            payable === ""
-              ? null
-              : Number(payable),
-
-
-          paymentAmount:
-            finalPayment,
-
-
-          paymentStatus:
-            paymentStatus,
-
-
-          status:
-            status
+          }
 
         }
-
       );
 
 
-      showMessage(
-        ordersMessage,
-        "Order successfully updated. Payment Amount automatically Payable Amount-এর সমান হয়েছে.",
-        "success"
-      );
+    /* Calculate existing values */
 
+    if (
+      mrpInput.value !== "" &&
+      discountPercentInput.value !== ""
+    ) {
 
-      await loadOrders();
-
-
-    } catch (error) {
-
-      console.error(
-        "Save Order Error:",
-        error
-      );
-
-
-      showMessage(
-        ordersMessage,
-        "Order update করা যায়নি.",
-        "error"
-      );
+      calculateAmount();
 
     }
 
   }
 
 
-  // =========================================
-  // Delete Order
-  // =========================================
-
-  async function deleteOrder(
-    documentId
-  ) {
-
-    const confirmDelete =
-      confirm(
-        "আপনি কি এই order delete করতে চান?"
-      );
-
-
-    if (!confirmDelete) {
-
-      return;
-
-    }
-
-
-    try {
-
-      await deleteDoc(
-        doc(
-          db,
-          "orders",
-          documentId
-        )
-      );
-
-
-      showMessage(
-        ordersMessage,
-        "Order deleted.",
-        "success"
-      );
-
-
-      await loadOrders();
-
-
-    } catch (error) {
-
-      console.error(
-        "Delete Order Error:",
-        error
-      );
-
-
-      showMessage(
-        ordersMessage,
-        "Order delete করা যায়নি.",
-        "error"
-      );
-
-    }
-
-  }
-
-
-  // =========================================
-  // Refresh
-  // =========================================
+  /* =========================
+     REFRESH
+  ========================= */
 
   refreshBtn.addEventListener(
     "click",
-    function() {
-
-      loadOrders();
-
-    }
+    loadOrders
   );
 
 
-  // =========================================
-  // HTML Security
-  // =========================================
+  /* =========================
+     HTML SECURITY
+  ========================= */
 
   function escapeHTML(value) {
 
-    if (
-      value === null ||
-      value === undefined
-    ) {
-
-      return "";
-
-    }
-
-
     return String(value)
-
-      .replaceAll(
-        "&",
-        "&amp;"
-      )
-
-      .replaceAll(
-        "<",
-        "&lt;"
-      )
-
-      .replaceAll(
-        ">",
-        "&gt;"
-      )
-
-      .replaceAll(
-        '"',
-        "&quot;"
-      )
-
-      .replaceAll(
-        "'",
-        "&#039;"
-      );
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
   }
 
@@ -1668,4 +1029,3 @@
 
 </body>
 </html>
-```
