@@ -315,6 +315,22 @@
   }
 
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyDw2kaA5y5unNlo7QDLLQ25ZbZHYiwtUoA",
+    authDomain: "online-medicine-delivery-74346.firebaseapp.com",
+    projectId: "online-medicine-delivery-74346",
+    storageBucket: "online-medicine-delivery-74346.firebasestorage.app",
+    messagingSenderId: "1061955108881",
+    appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
+    measurementId: "G-LMHDFF01QC"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  console.log("Firebase connected successfully");
+</script>
 </body>
 </html>
