@@ -7,7 +7,7 @@
   <title>Online Medicine Delivery</title>
 
   <meta name="description"
-        content="Online Medicine Delivery - Order medicines online from your mobile.">
+        content="Online Medicine Delivery - Order medicines online and get them delivered to your doorstep.">
 
   <style>
     * {
@@ -15,6 +15,10 @@
       padding: 0;
       box-sizing: border-box;
       font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -41,18 +45,30 @@
     }
 
     .logo {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: bold;
     }
 
     nav {
       display: flex;
-      gap: 18px;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     nav a {
       color: white;
       text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .offer {
+      background: #ff8a00;
+      color: white;
+      text-align: center;
+      padding: 13px;
+      font-size: 18px;
       font-weight: bold;
     }
 
@@ -70,28 +86,29 @@
 
     .hero p {
       font-size: 18px;
-      margin-bottom: 25px;
+      max-width: 650px;
+      margin: 0 auto 25px;
+      line-height: 1.6;
     }
 
     .btn {
       display: inline-block;
       background: #087c59;
       color: white;
-      padding: 13px 25px;
+      padding: 13px 24px;
+      border: none;
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      border: none;
       cursor: pointer;
     }
 
-    .offer {
-      background: #ff8a00;
-      color: white;
-      text-align: center;
-      padding: 14px;
-      font-size: 20px;
-      font-weight: bold;
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn.secondary {
+      background: #555;
     }
 
     section {
@@ -126,23 +143,109 @@
       margin-bottom: 8px;
     }
 
-    .login-box {
-      max-width: 500px;
+    .category p {
+      color: #666;
+    }
+
+    .card {
+      max-width: 520px;
       margin: auto;
       background: white;
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .full-btn {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    #recaptcha-container {
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .user-box {
+      background: #eaf7f2;
+      border: 1px solid #b8e3d3;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .status {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 7px;
+      display: none;
       text-align: center;
     }
 
-    .login-box p {
-      margin-bottom: 15px;
-      color: #555;
+    .status.success {
+      display: block;
+      background: #e8f7ed;
+      color: #176b35;
     }
 
-    .login-box .btn {
-      margin-top: 10px;
+    .status.error {
+      display: block;
+      background: #fdecec;
+      color: #a32121;
+    }
+
+    .order-card {
+      background: white;
+      padding: 18px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 9px rgba(0,0,0,0.08);
+    }
+
+    .order-card h3 {
+      color: #087c59;
+      margin-bottom: 10px;
+    }
+
+    .order-card p {
+      margin: 6px 0;
+      color: #444;
+    }
+
+    .empty {
+      text-align: center;
+      color: #666;
+      padding: 20px;
     }
 
     footer {
@@ -151,20 +254,29 @@
       text-align: center;
       padding: 25px;
       margin-top: 30px;
+      line-height: 1.8;
     }
 
     @media (max-width: 700px) {
+
       .nav {
         flex-direction: column;
       }
 
       nav {
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 10px;
+      }
+
+      .hero {
+        padding: 45px 18px;
       }
 
       .hero h1 {
         font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 16px;
       }
 
       .categories {
@@ -173,12 +285,25 @@
     }
 
     @media (max-width: 450px) {
+
+      .logo {
+        font-size: 18px;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+
       .categories {
         grid-template-columns: 1fr;
       }
 
-      .logo {
-        font-size: 19px;
+      section {
+        padding: 35px 15px;
+      }
+
+      section h2 {
+        font-size: 26px;
       }
     }
   </style>
@@ -187,6 +312,7 @@
 <body>
 
 <header>
+
   <div class="nav">
 
     <div class="logo">
@@ -198,10 +324,12 @@
       <a href="#shop">Shop</a>
       <a href="#offers">Offers</a>
       <a href="#login">Login</a>
+      <a href="#orders">My Orders</a>
       <a href="#contact">Contact</a>
     </nav>
 
   </div>
+
 </header>
 
 <div class="offer" id="offers">
@@ -213,7 +341,8 @@
   <h1>Online Medicine Delivery</h1>
 
   <p>
-    Order your medicines online and get them delivered to your doorstep.
+    Order medicines online and get them delivered
+    to your doorstep.
   </p>
 
   <a href="#login" class="btn">
@@ -230,12 +359,12 @@
 
     <div class="category">
       <h3>💊 Pain Relief</h3>
-      <p>Browse pain relief products</p>
+      <p>Pain relief products</p>
     </div>
 
     <div class="category">
       <h3>🌡️ Fever & Cold</h3>
-      <p>Browse fever and cold products</p>
+      <p>Fever and cold products</p>
     </div>
 
     <div class="category">
@@ -262,36 +391,208 @@
 
 </section>
 
+<!-- LOGIN -->
+
 <section id="login">
 
   <h2>Customer Login</h2>
 
-  <div class="login-box">
+  <div class="card">
 
-    <p>
-      Login with your mobile number to place orders
-      and view your previous order history.
-    </p>
+    <div id="loggedOut">
 
-    <button class="btn" onclick="startLogin()">
-      Login with Mobile Number
-    </button>
+      <div class="form-group">
+        <label>Mobile Number</label>
+
+        <input
+          type="tel"
+          id="phoneNumber"
+          maxlength="10"
+          placeholder="Enter 10-digit mobile number">
+      </div>
+
+      <div id="recaptcha-container"></div>
+
+      <button
+        class="btn full-btn"
+        id="sendOtpBtn">
+        Send OTP
+      </button>
+
+      <div
+        class="form-group hidden"
+        id="otpBox">
+
+        <label>Enter OTP</label>
+
+        <input
+          type="text"
+          id="otp"
+          maxlength="6"
+          placeholder="Enter 6-digit OTP">
+
+        <button
+          class="btn full-btn"
+          id="verifyOtpBtn">
+          Verify OTP
+        </button>
+
+      </div>
+
+    </div>
+
+    <div id="loggedIn" class="hidden">
+
+      <div class="user-box">
+
+        <strong>Login Successful ✅</strong>
+
+        <p id="userPhone"></p>
+
+      </div>
+
+      <button
+        class="btn"
+        onclick="goToOrder()">
+        Place New Order
+      </button>
+
+      <button
+        class="btn secondary"
+        onclick="logoutUser()">
+        Logout
+      </button>
+
+    </div>
+
+    <div id="loginMessage" class="status"></div>
 
   </div>
 
 </section>
 
+<!-- PROFILE -->
+
+<section id="profile" class="hidden">
+
+  <h2>Customer Profile</h2>
+
+  <div class="card">
+
+    <div class="form-group">
+      <label>Full Name</label>
+
+      <input
+        type="text"
+        id="customerName"
+        placeholder="Enter your name">
+    </div>
+
+    <div class="form-group">
+      <label>Delivery Address</label>
+
+      <textarea
+        id="customerAddress"
+        placeholder="Enter delivery address"></textarea>
+    </div>
+
+    <button
+      class="btn full-btn"
+      id="saveProfileBtn">
+      Save Profile
+    </button>
+
+    <div id="profileMessage" class="status"></div>
+
+  </div>
+
+</section>
+
+<!-- ORDER -->
+
+<section id="order" class="hidden">
+
+  <h2>Place Your Order</h2>
+
+  <div class="card">
+
+    <div class="form-group">
+
+      <label>Medicine / Product</label>
+
+      <input
+        type="text"
+        id="medicineName"
+        placeholder="Enter medicine name">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Quantity</label>
+
+      <input
+        type="number"
+        id="quantity"
+        min="1"
+        value="1">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Delivery Address</label>
+
+      <textarea
+        id="orderAddress"
+        placeholder="Enter delivery address"></textarea>
+
+    </div>
+
+    <button
+      class="btn full-btn"
+      id="placeOrderBtn">
+      Place Order
+    </button>
+
+    <div id="orderMessage" class="status"></div>
+
+  </div>
+
+</section>
+
+<!-- ORDER HISTORY -->
+
+<section id="orders">
+
+  <h2>My Order History</h2>
+
+  <div id="ordersLoginMessage" class="empty">
+    Please login to view your order history.
+  </div>
+
+  <div
+    id="orderHistory"
+    class="hidden">
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+
 <section id="contact">
 
   <h2>Contact Us</h2>
 
-  <div class="login-box">
+  <div class="card">
 
-    <p>
+    <p style="text-align:center; margin-bottom:18px;">
       Need help with your medicine order?
     </p>
 
-    <button class="btn" onclick="contactUs()">
+    <button
+      class="btn full-btn"
+      onclick="contactUs()">
       Contact Us
     </button>
 
@@ -300,37 +601,867 @@
 </section>
 
 <footer>
+
   <p>© 2026 Online Medicine Delivery</p>
+
   <p>Healthcare at your doorstep.</p>
+
 </footer>
 
-<script>
 
-  function startLogin() {
-    alert("Customer mobile OTP login will be connected in the next step.");
-  }
-
-  function contactUs() {
-    alert("Contact system will be connected later.");
-  }
-
-</script>
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+  import {
+    getAuth,
+    RecaptchaVerifier,
+    signInWithPhoneNumber,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    where,
+    orderBy,
+    getDocs,
+    doc,
+    setDoc,
+    getDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+  /* =========================
+     FIREBASE CONFIG
+  ========================= */
 
   const firebaseConfig = {
-    apiKey: "AIzaSyDw2kaA5y5unNlo7QDLLQ25ZbZHYiwtUoA",
-    authDomain: "online-medicine-delivery-74346.firebaseapp.com",
-    projectId: "online-medicine-delivery-74346",
-    storageBucket: "online-medicine-delivery-74346.firebasestorage.app",
-    messagingSenderId: "1061955108881",
-    appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
-    measurementId: "G-LMHDFF01QC"
+
+    apiKey:
+      "AIzaSyDw2kaA5y5unNlo7QDLLQ25ZbZHYiwtUoA",
+
+    authDomain:
+      "online-medicine-delivery-74346.firebaseapp.com",
+
+    projectId:
+      "online-medicine-delivery-74346",
+
+    storageBucket:
+      "online-medicine-delivery-74346.firebasestorage.app",
+
+    messagingSenderId:
+      "1061955108881",
+
+    appId:
+      "1:1061955108881:web:64f36ad79b5c612a2171b0",
+
+    measurementId:
+      "G-LMHDFF01QC"
   };
 
-  const app = initializeApp(firebaseConfig);
 
-  console.log("Firebase connected successfully");
+  /* =========================
+     INITIALIZE FIREBASE
+  ========================= */
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const auth =
+    getAuth(app);
+
+  const db =
+    getFirestore(app);
+
+
+  let confirmationResult = null;
+
+
+  /* =========================
+     MESSAGE FUNCTION
+  ========================= */
+
+  function showMessage(
+    elementId,
+    message,
+    type
+  ) {
+
+    const element =
+      document.getElementById(elementId);
+
+    element.textContent = message;
+
+    element.className =
+      "status " + type;
+  }
+
+
+  /* =========================
+     RECAPTCHA
+  ========================= */
+
+  function setupRecaptcha() {
+
+    if (window.recaptchaVerifier) {
+      return;
+    }
+
+    window.recaptchaVerifier =
+      new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+          size: "normal"
+        }
+      );
+
+    window.recaptchaVerifier.render();
+  }
+
+
+  /* =========================
+     SEND OTP
+  ========================= */
+
+  document
+    .getElementById("sendOtpBtn")
+    .addEventListener(
+      "click",
+      async function () {
+
+        const phone =
+          document
+            .getElementById("phoneNumber")
+            .value
+            .trim();
+
+        if (!/^[0-9]{10}$/.test(phone)) {
+
+          showMessage(
+            "loginMessage",
+            "Please enter a valid 10-digit mobile number.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        try {
+
+          setupRecaptcha();
+
+          const fullPhone =
+            "+91" + phone;
+
+          confirmationResult =
+            await signInWithPhoneNumber(
+              auth,
+              fullPhone,
+              window.recaptchaVerifier
+            );
+
+
+          document
+            .getElementById("otpBox")
+            .classList
+            .remove("hidden");
+
+
+          showMessage(
+            "loginMessage",
+            "OTP sent successfully.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            "loginMessage",
+            error.message,
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================
+     VERIFY OTP
+  ========================= */
+
+  document
+    .getElementById("verifyOtpBtn")
+    .addEventListener(
+      "click",
+      async function () {
+
+        const otp =
+          document
+            .getElementById("otp")
+            .value
+            .trim();
+
+
+        if (!/^[0-9]{6}$/.test(otp)) {
+
+          showMessage(
+            "loginMessage",
+            "Please enter the 6-digit OTP.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        if (!confirmationResult) {
+
+          showMessage(
+            "loginMessage",
+            "Please request OTP first.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        try {
+
+          await confirmationResult.confirm(otp);
+
+          showMessage(
+            "loginMessage",
+            "Login successful.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            "loginMessage",
+            "Invalid OTP. Please try again.",
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================
+     AUTH STATE
+  ========================= */
+
+  onAuthStateChanged(
+    auth,
+    async function (user) {
+
+      if (user) {
+
+        document
+          .getElementById("loggedOut")
+          .classList
+          .add("hidden");
+
+        document
+          .getElementById("loggedIn")
+          .classList
+          .remove("hidden");
+
+        document
+          .getElementById("profile")
+          .classList
+          .remove("hidden");
+
+        document
+          .getElementById("userPhone")
+          .textContent =
+          "Mobile: " + user.phoneNumber;
+
+
+        await loadCustomerProfile(user);
+
+        await loadOrderHistory(user);
+
+      } else {
+
+        document
+          .getElementById("loggedOut")
+          .classList
+          .remove("hidden");
+
+        document
+          .getElementById("loggedIn")
+          .classList
+          .add("hidden");
+
+        document
+          .getElementById("profile")
+          .classList
+          .add("hidden");
+
+        document
+          .getElementById("order")
+          .classList
+          .add("hidden");
+
+        document
+          .getElementById("orderHistory")
+          .classList
+          .add("hidden");
+
+        document
+          .getElementById("ordersLoginMessage")
+          .classList
+          .remove("hidden");
+
+      }
+
+    }
+  );
+
+
+  /* =========================
+     SAVE CUSTOMER PROFILE
+  ========================= */
+
+  document
+    .getElementById("saveProfileBtn")
+    .addEventListener(
+      "click",
+      async function () {
+
+        const user =
+          auth.currentUser;
+
+        if (!user) {
+
+          showMessage(
+            "profileMessage",
+            "Please login first.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        const name =
+          document
+            .getElementById("customerName")
+            .value
+            .trim();
+
+        const address =
+          document
+            .getElementById("customerAddress")
+            .value
+            .trim();
+
+
+        if (!name || !address) {
+
+          showMessage(
+            "profileMessage",
+            "Please enter your name and address.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        try {
+
+          await setDoc(
+            doc(db, "customers", user.uid),
+            {
+              uid: user.uid,
+              phone: user.phoneNumber,
+              name: name,
+              address: address,
+              updatedAt: serverTimestamp()
+            },
+            {
+              merge: true
+            }
+          );
+
+
+          document
+            .getElementById("orderAddress")
+            .value = address;
+
+
+          showMessage(
+            "profileMessage",
+            "Profile saved successfully.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            "profileMessage",
+            error.message,
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================
+     LOAD PROFILE
+  ========================= */
+
+  async function loadCustomerProfile(user) {
+
+    try {
+
+      const profileRef =
+        doc(
+          db,
+          "customers",
+          user.uid
+        );
+
+      const profileSnap =
+        await getDoc(profileRef);
+
+
+      if (profileSnap.exists()) {
+
+        const data =
+          profileSnap.data();
+
+
+        document
+          .getElementById("customerName")
+          .value =
+          data.name || "";
+
+
+        document
+          .getElementById("customerAddress")
+          .value =
+          data.address || "";
+
+
+        document
+          .getElementById("orderAddress")
+          .value =
+          data.address || "";
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+
+
+  /* =========================
+     PLACE ORDER
+  ========================= */
+
+  document
+    .getElementById("placeOrderBtn")
+    .addEventListener(
+      "click",
+      async function () {
+
+        const user =
+          auth.currentUser;
+
+        if (!user) {
+
+          showMessage(
+            "orderMessage",
+            "Please login first.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        const medicine =
+          document
+            .getElementById("medicineName")
+            .value
+            .trim();
+
+        const quantity =
+          Number(
+            document
+              .getElementById("quantity")
+              .value
+          );
+
+        const address =
+          document
+            .getElementById("orderAddress")
+            .value
+            .trim();
+
+
+        if (!medicine) {
+
+          showMessage(
+            "orderMessage",
+            "Please enter medicine name.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        if (!quantity || quantity < 1) {
+
+          showMessage(
+            "orderMessage",
+            "Please enter a valid quantity.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        if (!address) {
+
+          showMessage(
+            "orderMessage",
+            "Please enter delivery address.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        try {
+
+          const orderId =
+            "ORD" +
+            Date.now()
+              .toString()
+              .slice(-8);
+
+
+          await addDoc(
+            collection(db, "orders"),
+            {
+
+              orderId: orderId,
+
+              customerUid:
+                user.uid,
+
+              customerPhone:
+                user.phoneNumber,
+
+              medicine:
+                medicine,
+
+              quantity:
+                quantity,
+
+              address:
+                address,
+
+              status:
+                "Pending",
+
+              createdAt:
+                serverTimestamp()
+
+            }
+          );
+
+
+          showMessage(
+            "orderMessage",
+            "Order placed successfully! Order ID: " +
+              orderId,
+            "success"
+          );
+
+
+          document
+            .getElementById("medicineName")
+            .value = "";
+
+
+          document
+            .getElementById("quantity")
+            .value = 1;
+
+
+          await loadOrderHistory(user);
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            "orderMessage",
+            error.message,
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+  /* =========================
+     LOAD ORDER HISTORY
+  ========================= */
+
+  async function loadOrderHistory(user) {
+
+    const history =
+      document
+        .getElementById("orderHistory");
+
+    const loginMessage =
+      document
+        .getElementById("ordersLoginMessage");
+
+
+    try {
+
+      const ordersQuery =
+        query(
+          collection(db, "orders"),
+          where(
+            "customerUid",
+            "==",
+            user.uid
+          ),
+          orderBy(
+            "createdAt",
+            "desc"
+          )
+        );
+
+
+      const snapshot =
+        await getDocs(ordersQuery);
+
+
+      history.innerHTML = "";
+
+      loginMessage
+        .classList
+        .add("hidden");
+
+      history
+        .classList
+        .remove("hidden");
+
+
+      if (snapshot.empty) {
+
+        history.innerHTML =
+          '<div class="empty">No orders found.</div>';
+
+        return;
+      }
+
+
+      snapshot.forEach(
+        function (docSnap) {
+
+          const order =
+            docSnap.data();
+
+
+          const card =
+            document.createElement("div");
+
+          card.className =
+            "order-card";
+
+
+          let dateText =
+            "Date unavailable";
+
+
+          if (order.createdAt) {
+
+            dateText =
+              order.createdAt
+                .toDate()
+                .toLocaleString();
+
+          }
+
+
+          card.innerHTML = `
+
+            <h3>
+              Order ID: ${escapeHtml(order.orderId || "")}
+            </h3>
+
+            <p>
+              <strong>Medicine:</strong>
+              ${escapeHtml(order.medicine || "")}
+            </p>
+
+            <p>
+              <strong>Quantity:</strong>
+              ${escapeHtml(String(order.quantity || ""))}
+            </p>
+
+            <p>
+              <strong>Status:</strong>
+              ${escapeHtml(order.status || "Pending")}
+            </p>
+
+            <p>
+              <strong>Address:</strong>
+              ${escapeHtml(order.address || "")}
+            </p>
+
+            <p>
+              <strong>Date:</strong>
+              ${escapeHtml(dateText)}
+            </p>
+
+          `;
+
+
+          history.appendChild(card);
+
+        }
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      history.innerHTML =
+        '<div class="empty">Could not load order history.</div>';
+
+      history
+        .classList
+        .remove("hidden");
+
+      loginMessage
+        .classList
+        .add("hidden");
+
+    }
+
+  }
+
+
+  /* =========================
+     ESCAPE HTML
+  ========================= */
+
+  function escapeHtml(value) {
+
+    return value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* =========================
+     LOGOUT
+  ========================= */
+
+  window.logoutUser =
+    async function () {
+
+      try {
+
+        await signOut(auth);
+
+        window.location.hash =
+          "login";
+
+      } catch (error) {
+
+        console.error(error);
+
+      }
+
+    };
+
+
+  /* =========================
+     GO TO ORDER
+  ========================= */
+
+  window.goToOrder =
+    function () {
+
+      document
+        .getElementById("order")
+        .classList
+        .remove("hidden");
+
+      document
+        .getElementById("order")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    };
+
+
+  /* =========================
+     CONTACT
+  ========================= */
+
+  window.contactUs =
+    function () {
+
+      alert(
+        "Customer support will be connected here."
+      );
+
+    };
+
+
 </script>
+
 </body>
 </html>
