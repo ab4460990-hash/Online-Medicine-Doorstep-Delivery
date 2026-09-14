@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -170,6 +171,13 @@
       margin-top: 5px;
       font-size: 13px;
       color: #087c59;
+      font-weight: bold;
+    }
+
+    .payment-info {
+      margin-top: 5px;
+      font-size: 13px;
+      color: #0d6efd;
       font-weight: bold;
     }
 
@@ -565,8 +573,6 @@
         }
 
 
-        // Admin verified
-
         loginSection
           .classList
           .add("hidden");
@@ -953,15 +959,23 @@
             </span>
 
 
+            <div class="payment-info">
+
+              Customer Payment Amount = Payable Amount (Automatic)
+
+            </div>
+
+
             <input
               type="number"
               class="payment-input"
               value="${
                 order.paymentAmount ?? ""
               }"
-              placeholder="Customer Payment Amount"
+              placeholder="Automatic Customer Payment Amount"
               min="0"
               step="0.01"
+              readonly
             >
 
 
@@ -1126,6 +1140,12 @@
             );
 
 
+          const paymentInput =
+            card.querySelector(
+              ".payment-input"
+            );
+
+
           // =================================
           // Automatic Calculation
           // =================================
@@ -1158,6 +1178,9 @@
               payableInput.value =
                 "";
 
+              paymentInput.value =
+                "";
+
               return;
 
             }
@@ -1176,6 +1199,9 @@
                 "";
 
               payableInput.value =
+                "";
+
+              paymentInput.value =
                 "";
 
               return;
@@ -1199,12 +1225,24 @@
               mrp - discount;
 
 
+            // =================================
+            // Customer Payment Amount
+            // =================================
+
+            const customerPayment =
+              payable;
+
+
             discountInput.value =
               discount.toFixed(2);
 
 
             payableInput.value =
               payable.toFixed(2);
+
+
+            paymentInput.value =
+              customerPayment.toFixed(2);
 
           }
 
@@ -1414,6 +1452,16 @@
 
 
       // =================================
+      // Payment = Payable
+      // =================================
+
+      const finalPayment =
+        payable === ""
+          ? null
+          : Number(payable);
+
+
+      // =================================
       // Save to Firestore
       // =================================
 
@@ -1452,9 +1500,7 @@
 
 
           paymentAmount:
-            payment === ""
-              ? null
-              : Number(payment),
+            finalPayment,
 
 
           paymentStatus:
@@ -1471,7 +1517,7 @@
 
       showMessage(
         ordersMessage,
-        "Order successfully updated. Discount Percent অনুযায়ী automatic হিসাব save হয়েছে.",
+        "Order successfully updated. Payment Amount automatically Payable Amount-এর সমান হয়েছে.",
         "success"
       );
 
@@ -1622,3 +1668,4 @@
 
 </body>
 </html>
+```
