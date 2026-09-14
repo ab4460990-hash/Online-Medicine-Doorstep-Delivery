@@ -2,1325 +2,1660 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Online Medicine Delivery</title>
+<title>Online Medicine Delivery</title>
 
-  <meta name="description"
-        content="Online Medicine Delivery - Order medicines online from your mobile.">
+<meta name="description"
+content="Online Medicine Delivery - Order medicines online from your mobile.">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
 
-    body {
-      background: #f5f8f7;
-      color: #222;
-    }
+body{
+  background:#f5f8f7;
+  color:#222;
+}
 
-    header {
-      background: #087c59;
-      color: white;
-      padding: 15px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+header{
+  background:#087c59;
+  color:white;
+  padding:15px 20px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-    .nav {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
+.nav{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
 
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
 
-    nav {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+nav{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    .hero {
-      background: white;
-      text-align: center;
-      padding: 60px 20px;
-    }
+.hero{
+  background:white;
+  text-align:center;
+  padding:60px 20px;
+}
 
-    .hero h1 {
-      color: #087c59;
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
+.hero h1{
+  color:#087c59;
+  font-size:38px;
+  margin-bottom:15px;
+}
 
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
+.hero p{
+  font-size:18px;
+  margin-bottom:25px;
+}
 
-    .btn {
-      display: inline-block;
-      background: #087c59;
-      color: white;
-      padding: 13px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
+.btn{
+  display:inline-block;
+  background:#087c59;
+  color:white;
+  padding:13px 25px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  border:none;
+  cursor:pointer;
+}
 
-    .btn:hover {
-      opacity: 0.9;
-    }
+.btn:hover{
+  opacity:.9;
+}
 
-    .btn-danger {
-      background: #d62828;
-    }
+.btn-whatsapp{
+  background:#25D366;
+}
 
-    .offer {
-      background: #ff8a00;
-      color: white;
-      text-align: center;
-      padding: 14px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+.btn-danger{
+  background:#d62828;
+}
 
-    section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 45px 20px;
-    }
+.offer{
+  background:#ff8a00;
+  color:white;
+  text-align:center;
+  padding:14px;
+  font-size:20px;
+  font-weight:bold;
+}
 
-    section h2 {
-      text-align: center;
-      color: #087c59;
-      margin-bottom: 30px;
-      font-size: 30px;
-    }
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:45px 20px;
+}
 
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
+section h2{
+  text-align:center;
+  color:#087c59;
+  margin-bottom:30px;
+  font-size:30px;
+}
 
-    .category {
-      background: white;
-      padding: 25px;
-      text-align: center;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
+.categories{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
 
-    .category h3 {
-      color: #087c59;
-      margin-bottom: 8px;
-    }
+.category{
+  background:white;
+  padding:25px;
+  text-align:center;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
 
-    .box {
-      max-width: 550px;
-      margin: auto;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
+.category h3{
+  color:#087c59;
+  margin-bottom:8px;
+}
 
-    .box p {
-      margin-bottom: 15px;
-      color: #555;
-    }
+.box{
+  max-width:550px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
 
-    .input {
-      width: 100%;
-      padding: 13px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-    }
+.box p{
+  margin-bottom:15px;
+  color:#555;
+}
 
-    textarea.input {
-      min-height: 100px;
-      resize: vertical;
-    }
+.input{
+  width:100%;
+  padding:13px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px;
+}
 
-    .message {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 8px;
-      display: none;
-      font-weight: bold;
-    }
+textarea.input{
+  min-height:100px;
+  resize:vertical;
+}
 
-    .success {
-      background: #d9f5e9;
-      color: #087c59;
-    }
+.file-input{
+  width:100%;
+  padding:12px;
+  margin:8px 0 5px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  background:#fff;
+}
 
-    .error {
-      background: #ffe0e0;
-      color: #b00020;
-    }
+.file-info{
+  font-size:14px;
+  color:#555;
+  margin-bottom:12px;
+}
 
-    .user-panel,
-    .order-panel,
-    .history-panel {
-      display: none;
-    }
+.message{
+  margin-top:15px;
+  padding:12px;
+  border-radius:8px;
+  display:none;
+  font-weight:bold;
+}
 
-    .order-card {
-      background: #f7faf9;
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-    }
+.success{
+  background:#d9f5e9;
+  color:#087c59;
+}
 
-    .order-card strong {
-      color: #087c59;
-    }
+.error{
+  background:#ffe0e0;
+  color:#b00020;
+}
 
-    .status {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 20px;
-      background: #fff0d6;
-      color: #9a5b00;
-      font-weight: bold;
-      margin-top: 8px;
-    }
+.user-panel,
+.order-panel,
+.history-panel{
+  display:none;
+}
 
-    .small-text {
-      font-size: 14px;
-      color: #666;
-    }
+.order-card{
+  background:#f7faf9;
+  border:1px solid #ddd;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:12px;
+}
 
-    .login-buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
+.order-card strong{
+  color:#087c59;
+}
 
-    .login-buttons button {
-      flex: 1;
-    }
+.status{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:20px;
+  background:#fff0d6;
+  color:#9a5b00;
+  font-weight:bold;
+  margin-top:8px;
+}
 
-    footer {
-      background: #087c59;
-      color: white;
-      text-align: center;
-      padding: 25px;
-      margin-top: 30px;
-    }
+.login-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
 
-    @media (max-width: 700px) {
-      .nav {
-        flex-direction: column;
-      }
+.login-buttons button{
+  flex:1;
+}
 
-      .hero h1 {
-        font-size: 30px;
-      }
+.whatsapp-box{
+  margin-top:20px;
+  padding:18px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:#f8fffb;
+}
 
-      .categories {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+.whatsapp-box h3{
+  color:#087c59;
+  margin-bottom:8px;
+}
 
-    @media (max-width: 450px) {
-      .categories {
-        grid-template-columns: 1fr;
-      }
+footer{
+  background:#087c59;
+  color:white;
+  text-align:center;
+  padding:25px;
+  margin-top:30px;
+}
 
-      .logo {
-        font-size: 19px;
-      }
+@media(max-width:700px){
 
-      .login-buttons {
-        flex-direction: column;
-      }
-    }
-  </style>
+  .nav{
+    flex-direction:column;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:450px){
+
+  .categories{
+    grid-template-columns:1fr;
+  }
+
+  .logo{
+    font-size:19px;
+  }
+
+  .login-buttons{
+    flex-direction:column;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="nav">
 
-    <div class="logo">
-      Online Medicine Delivery
-    </div>
+<div class="nav">
 
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#shop">Shop</a>
-      <a href="#offers">Offers</a>
-      <a href="#login">Login</a>
-      <a href="#orders">My Orders</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<div class="logo">
+Online Medicine Delivery
+</div>
 
-  </div>
+<nav>
+<a href="#home">Home</a>
+<a href="#shop">Shop</a>
+<a href="#offers">Offers</a>
+<a href="#login">Login</a>
+<a href="#orders">My Orders</a>
+<a href="#contact">Contact</a>
+</nav>
+
+</div>
+
 </header>
 
 <div class="offer" id="offers">
-  🎉 GET 10% OFF ON YOUR ORDER
+🎉 GET 10% OFF ON YOUR ORDER
 </div>
 
 <section class="hero" id="home">
 
-  <h1>Online Medicine Delivery</h1>
+<h1>Online Medicine Delivery</h1>
 
-  <p>
-    Order your medicines online and get them delivered to your doorstep.
-  </p>
+<p>
+Order your medicines online and get them delivered to your doorstep.
+</p>
 
-  <a href="#login" class="btn">
-    Login & Order Now
-  </a>
+<a href="#login" class="btn">
+Login & Order Now
+</a>
 
 </section>
 
 <section id="shop">
 
-  <h2>Medicine Categories</h2>
+<h2>Medicine Categories</h2>
 
-  <div class="categories">
+<div class="categories">
 
-    <div class="category">
-      <h3>💊 Pain Relief</h3>
-      <p>Browse pain relief products</p>
-    </div>
+<div class="category">
+<h3>💊 Pain Relief</h3>
+<p>Browse pain relief products</p>
+</div>
 
-    <div class="category">
-      <h3>🌡️ Fever & Cold</h3>
-      <p>Browse fever and cold products</p>
-    </div>
+<div class="category">
+<h3>🌡️ Fever & Cold</h3>
+<p>Browse fever and cold products</p>
+</div>
 
-    <div class="category">
-      <h3>🩺 Diabetes Care</h3>
-      <p>Diabetes care products</p>
-    </div>
+<div class="category">
+<h3>🩺 Diabetes Care</h3>
+<p>Diabetes care products</p>
+</div>
 
-    <div class="category">
-      <h3>❤️ Heart Care</h3>
-      <p>Heart care products</p>
-    </div>
+<div class="category">
+<h3>❤️ Heart Care</h3>
+<p>Heart care products</p>
+</div>
 
-    <div class="category">
-      <h3>🧴 Skin Care</h3>
-      <p>Skin care products</p>
-    </div>
+<div class="category">
+<h3>🧴 Skin Care</h3>
+<p>Skin care products</p>
+</div>
 
-    <div class="category">
-      <h3>👶 Baby Care</h3>
-      <p>Baby care products</p>
-    </div>
+<div class="category">
+<h3>👶 Baby Care</h3>
+<p>Baby care products</p>
+</div>
 
-  </div>
+</div>
 
 </section>
 
-<!-- LOGIN SECTION -->
+
+<!-- LOGIN -->
+
 <section id="login">
 
-  <h2>Customer Login</h2>
+<h2>Customer Login</h2>
 
-  <div class="box">
+<div class="box">
 
-    <p>
-      Create an account or login to place orders and view your previous orders.
-    </p>
+<p>
+Create an account or login to place orders and view previous orders.
+</p>
 
-    <input
-      type="email"
-      id="email"
-      class="input"
-      placeholder="Enter your email"
-    >
+<input
+type="email"
+id="email"
+class="input"
+placeholder="Enter your email">
 
-    <input
-      type="password"
-      id="password"
-      class="input"
-      placeholder="Enter password"
-    >
+<input
+type="password"
+id="password"
+class="input"
+placeholder="Enter password">
 
-    <div class="login-buttons">
+<div class="login-buttons">
 
-      <button class="btn" id="loginBtn">
-        Login
-      </button>
+<button class="btn" id="loginBtn">
+Login
+</button>
 
-      <button class="btn" id="signupBtn">
-        Create Account
-      </button>
+<button class="btn" id="signupBtn">
+Create Account
+</button>
 
-    </div>
+</div>
 
-    <div id="loginMessage" class="message"></div>
+<div id="loginMessage" class="message"></div>
 
-  </div>
+</div>
 
 </section>
 
-<!-- CUSTOMER PROFILE -->
+
+<!-- PROFILE -->
+
 <section id="profile" class="user-panel">
 
-  <h2>My Account</h2>
+<h2>My Account</h2>
 
-  <div class="box">
+<div class="box">
 
-    <p>
-      <strong>Logged in:</strong>
-      <span id="userEmail"></span>
-    </p>
+<p>
+<strong>Logged in:</strong>
+<span id="userEmail"></span>
+</p>
 
-    <input
-      type="text"
-      id="customerName"
-      class="input"
-      placeholder="Full Name"
-    >
+<input
+type="text"
+id="customerName"
+class="input"
+placeholder="Full Name">
 
-    <input
-      type="text"
-      id="customerMobile"
-      class="input"
-      placeholder="Mobile Number"
-    >
+<input
+type="text"
+id="customerMobile"
+class="input"
+placeholder="Mobile Number">
 
-    <textarea
-      id="customerAddress"
-      class="input"
-      placeholder="Delivery Address"
-    ></textarea>
+<textarea
+id="customerAddress"
+class="input"
+placeholder="Delivery Address"></textarea>
 
-    <button class="btn" id="saveProfileBtn">
-      Save Profile
-    </button>
+<button class="btn" id="saveProfileBtn">
+Save Profile
+</button>
 
-    <button
-      class="btn btn-danger"
-      id="logoutBtn"
-      style="margin-top:10px;"
-    >
-      Logout
-    </button>
+<button
+class="btn btn-danger"
+id="logoutBtn"
+style="margin-top:10px;">
+Logout
+</button>
 
-    <div id="profileMessage" class="message"></div>
+<div id="profileMessage" class="message"></div>
 
-  </div>
+</div>
 
 </section>
 
-<!-- ORDER SECTION -->
+
+<!-- ORDER -->
+
 <section id="order" class="order-panel">
 
-  <h2>Place New Order</h2>
+<h2>Place New Order</h2>
 
-  <div class="box">
+<div class="box">
 
-    <input
-      type="text"
-      id="medicine"
-      class="input"
-      placeholder="Medicine / Product Name"
-    >
+<input
+type="text"
+id="medicine"
+class="input"
+placeholder="Medicine / Product Name">
 
-    <input
-      type="number"
-      id="quantity"
-      class="input"
-      placeholder="Quantity"
-      min="1"
-      value="1"
-    >
+<input
+type="number"
+id="quantity"
+class="input"
+placeholder="Quantity"
+min="1"
+value="1">
 
-    <textarea
-      id="orderAddress"
-      class="input"
-      placeholder="Delivery Address"
-    ></textarea>
+<textarea
+id="orderAddress"
+class="input"
+placeholder="Delivery Address"></textarea>
 
-    <button class="btn" id="placeOrderBtn">
-      Place Order
-    </button>
 
-    <div id="orderMessage" class="message"></div>
+<!-- PRESCRIPTION -->
 
-  </div>
+<div class="whatsapp-box">
+
+<h3>📄 Prescription Upload</h3>
+
+<p>
+If your medicine requires a prescription, select your prescription file below.
+</p>
+
+<input
+type="file"
+id="prescriptionFile"
+class="file-input"
+accept=".jpg,.jpeg,.png,.pdf">
+
+<div id="fileInfo" class="file-info">
+No prescription selected.
+</div>
+
+<button
+type="button"
+class="btn btn-whatsapp"
+id="whatsappPrescriptionBtn">
+📱 Send Prescription on WhatsApp
+</button>
+
+</div>
+
+
+<br>
+
+<button class="btn" id="placeOrderBtn">
+Place Order
+</button>
+
+<div id="orderMessage" class="message"></div>
+
+</div>
 
 </section>
+
 
 <!-- ORDER HISTORY -->
+
 <section id="orders" class="history-panel">
 
-  <h2>My Order History</h2>
+<h2>My Order History</h2>
 
-  <div class="box">
+<div class="box">
 
-    <div id="orderHistory">
-      Loading orders...
-    </div>
+<div id="orderHistory">
+Loading orders...
+</div>
 
-  </div>
+</div>
 
 </section>
+
 
 <!-- CONTACT -->
+
 <section id="contact">
 
-  <h2>Contact Us</h2>
+<h2>Contact Us</h2>
 
-  <div class="box">
+<div class="box">
 
-    <p>
-      Need help with your medicine order?
-    </p>
+<p>
+Need help with your medicine order?
+</p>
 
-    <button class="btn" onclick="contactUs()">
-      Contact Us
-    </button>
+<button class="btn btn-whatsapp" id="contactWhatsAppBtn">
+📱 Contact on WhatsApp
+</button>
 
-  </div>
+</div>
 
 </section>
 
+
 <footer>
-  <p>© 2026 Online Medicine Delivery</p>
-  <p>Healthcare at your doorstep.</p>
+
+<p>
+© 2026 Online Medicine Delivery
+</p>
+
+<p>
+Healthcare at your doorstep.
+</p>
+
 </footer>
 
 
 <script type="module">
 
-  import { initializeApp }
-    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {
+initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-  import {
-    getFirestore,
-    doc,
-    setDoc,
-    getDoc,
-    collection,
-    addDoc,
-    query,
-    where,
-    getDocs,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc,
+collection,
+addDoc,
+query,
+where,
+getDocs,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-  /* =========================
-     FIREBASE CONFIG
-  ========================= */
+/* FIREBASE CONFIG */
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDw2kaA5y5unNlo7QDLLQ25ZbZHYiwtUoA",
-    authDomain: "online-medicine-delivery-74346.firebaseapp.com",
-    projectId: "online-medicine-delivery-74346",
-    storageBucket: "online-medicine-delivery-74346.firebasestorage.app",
-    messagingSenderId: "1061955108881",
-    appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
-    measurementId: "G-LMHDFF01QC"
-  };
+const firebaseConfig = {
 
+apiKey:
+"AIzaSyDw2kaA5y5unNlo7QDLLQ25ZbZHYiwtUoA",
 
-  /* =========================
-     FIREBASE INITIALIZE
-  ========================= */
+authDomain:
+"online-medicine-delivery-74346.firebaseapp.com",
 
-  const app = initializeApp(firebaseConfig);
+projectId:
+"online-medicine-delivery-74346",
 
-  const auth = getAuth(app);
+storageBucket:
+"online-medicine-delivery-74346.firebasestorage.app",
 
-  const db = getFirestore(app);
+messagingSenderId:
+"1061955108881",
 
-  console.log("Firebase connected successfully");
+appId:
+"1:1061955108881:web:64f36ad79b5c612a2171b0",
 
+measurementId:
+"G-LMHDFF01QC"
 
-  /* =========================
-     ELEMENTS
-  ========================= */
+};
 
-  const emailInput =
-    document.getElementById("email");
 
-  const passwordInput =
-    document.getElementById("password");
+/* INITIALIZE */
 
-  const loginBtn =
-    document.getElementById("loginBtn");
+const app =
+initializeApp(firebaseConfig);
 
-  const signupBtn =
-    document.getElementById("signupBtn");
+const auth =
+getAuth(app);
 
-  const loginMessage =
-    document.getElementById("loginMessage");
+const db =
+getFirestore(app);
 
-  const profileSection =
-    document.getElementById("profile");
+console.log(
+"Firebase connected successfully"
+);
 
-  const orderSection =
-    document.getElementById("order");
 
-  const ordersSection =
-    document.getElementById("orders");
+/* ELEMENTS */
 
-  const userEmail =
-    document.getElementById("userEmail");
+const emailInput =
+document.getElementById("email");
 
-  const customerName =
-    document.getElementById("customerName");
+const passwordInput =
+document.getElementById("password");
 
-  const customerMobile =
-    document.getElementById("customerMobile");
+const loginBtn =
+document.getElementById("loginBtn");
 
-  const customerAddress =
-    document.getElementById("customerAddress");
+const signupBtn =
+document.getElementById("signupBtn");
 
-  const saveProfileBtn =
-    document.getElementById("saveProfileBtn");
+const loginMessage =
+document.getElementById("loginMessage");
 
-  const logoutBtn =
-    document.getElementById("logoutBtn");
+const profileSection =
+document.getElementById("profile");
 
-  const profileMessage =
-    document.getElementById("profileMessage");
+const orderSection =
+document.getElementById("order");
 
-  const medicineInput =
-    document.getElementById("medicine");
+const ordersSection =
+document.getElementById("orders");
 
-  const quantityInput =
-    document.getElementById("quantity");
+const userEmail =
+document.getElementById("userEmail");
 
-  const orderAddress =
-    document.getElementById("orderAddress");
+const customerName =
+document.getElementById("customerName");
 
-  const placeOrderBtn =
-    document.getElementById("placeOrderBtn");
+const customerMobile =
+document.getElementById("customerMobile");
 
-  const orderMessage =
-    document.getElementById("orderMessage");
+const customerAddress =
+document.getElementById("customerAddress");
 
-  const orderHistory =
-    document.getElementById("orderHistory");
+const saveProfileBtn =
+document.getElementById("saveProfileBtn");
 
+const logoutBtn =
+document.getElementById("logoutBtn");
 
-  /* =========================
-     MESSAGE FUNCTION
-  ========================= */
+const profileMessage =
+document.getElementById("profileMessage");
 
-  function showMessage(element, message, type) {
+const medicineInput =
+document.getElementById("medicine");
 
-    element.textContent = message;
+const quantityInput =
+document.getElementById("quantity");
 
-    element.className = "message " + type;
+const orderAddress =
+document.getElementById("orderAddress");
 
-    element.style.display = "block";
-  }
+const placeOrderBtn =
+document.getElementById("placeOrderBtn");
 
+const orderMessage =
+document.getElementById("orderMessage");
 
-  /* =========================
-     CREATE ACCOUNT
-  ========================= */
+const orderHistory =
+document.getElementById("orderHistory");
 
-  signupBtn.addEventListener("click", async () => {
+const prescriptionFile =
+document.getElementById("prescriptionFile");
 
-    const email =
-      emailInput.value.trim();
+const fileInfo =
+document.getElementById("fileInfo");
 
-    const password =
-      passwordInput.value.trim();
+const whatsappPrescriptionBtn =
+document.getElementById("whatsappPrescriptionBtn");
 
+const contactWhatsAppBtn =
+document.getElementById("contactWhatsAppBtn");
 
-    if (!email || !password) {
 
-      showMessage(
-        loginMessage,
-        "Please enter email and password.",
-        "error"
-      );
+/* MESSAGE */
 
-      return;
-    }
+function showMessage(
+element,
+message,
+type
+){
 
+element.textContent =
+message;
 
-    if (password.length < 6) {
+element.className =
+"message " + type;
 
-      showMessage(
-        loginMessage,
-        "Password must be at least 6 characters.",
-        "error"
-      );
+element.style.display =
+"block";
 
-      return;
-    }
+}
 
 
-    try {
+/* CREATE ACCOUNT */
 
-      signupBtn.disabled = true;
+signupBtn.addEventListener(
+"click",
+async () => {
 
-      const result =
-        await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+const email =
+emailInput.value.trim();
 
+const password =
+passwordInput.value.trim();
 
-      await setDoc(
-        doc(db, "customers", result.user.uid),
-        {
-          email: email,
-          createdAt: serverTimestamp()
-        },
-        { merge: true }
-      );
 
+if(!email || !password){
 
-      showMessage(
-        loginMessage,
-        "Account created successfully!",
-        "success"
-      );
+showMessage(
+loginMessage,
+"Please enter email and password.",
+"error"
+);
 
-    } catch (error) {
+return;
+}
 
-      console.error(error);
 
-      let message =
-        "Could not create account.";
+if(password.length < 6){
 
-      if (error.code === "auth/email-already-in-use") {
-        message =
-          "This email is already registered. Please login.";
-      }
+showMessage(
+loginMessage,
+"Password must be at least 6 characters.",
+"error"
+);
 
-      if (error.code === "auth/invalid-email") {
-        message =
-          "Please enter a valid email address.";
-      }
+return;
+}
 
-      if (error.code === "auth/weak-password") {
-        message =
-          "Password is too weak.";
-      }
 
-      showMessage(
-        loginMessage,
-        message,
-        "error"
-      );
+try{
 
-    } finally {
+signupBtn.disabled =
+true;
 
-      signupBtn.disabled = false;
+const result =
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
 
-    }
 
-  });
+await setDoc(
+doc(
+db,
+"customers",
+result.user.uid
+),
+{
+email:email,
+createdAt:
+serverTimestamp()
+},
+{
+merge:true
+}
+);
 
 
-  /* =========================
-     LOGIN
-  ========================= */
+showMessage(
+loginMessage,
+"Account created successfully!",
+"success"
+);
 
-  loginBtn.addEventListener("click", async () => {
 
-    const email =
-      emailInput.value.trim();
+}catch(error){
 
-    const password =
-      passwordInput.value.trim();
+console.error(error);
 
+let message =
+"Could not create account.";
 
-    if (!email || !password) {
 
-      showMessage(
-        loginMessage,
-        "Please enter email and password.",
-        "error"
-      );
+if(
+error.code ===
+"auth/email-already-in-use"
+){
 
-      return;
-    }
+message =
+"This email is already registered. Please login.";
 
+}
 
-    try {
 
-      loginBtn.disabled = true;
+if(
+error.code ===
+"auth/invalid-email"
+){
 
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+message =
+"Please enter a valid email address.";
 
+}
 
-      showMessage(
-        loginMessage,
-        "Login successful!",
-        "success"
-      );
 
+if(
+error.code ===
+"auth/weak-password"
+){
 
-    } catch (error) {
+message =
+"Password is too weak.";
 
-      console.error(error);
+}
 
-      let message =
-        "Login failed.";
 
-      if (
-        error.code === "auth/invalid-credential" ||
-        error.code === "auth/wrong-password" ||
-        error.code === "auth/user-not-found"
-      ) {
+showMessage(
+loginMessage,
+message,
+"error"
+);
 
-        message =
-          "Email or password is incorrect.";
 
-      }
+}finally{
 
-      if (error.code === "auth/invalid-email") {
+signupBtn.disabled =
+false;
 
-        message =
-          "Please enter a valid email address.";
+}
 
-      }
+}
+);
 
-      showMessage(
-        loginMessage,
-        message,
-        "error"
-      );
 
-    } finally {
+/* LOGIN */
 
-      loginBtn.disabled = false;
+loginBtn.addEventListener(
+"click",
+async () => {
 
-    }
+const email =
+emailInput.value.trim();
 
-  });
+const password =
+passwordInput.value.trim();
 
 
-  /* =========================
-     AUTH STATE
-  ========================= */
+if(!email || !password){
 
-  onAuthStateChanged(auth, async (user) => {
+showMessage(
+loginMessage,
+"Please enter email and password.",
+"error"
+);
 
-    if (user) {
+return;
+}
 
-      console.log("Customer logged in:", user.email);
 
-      userEmail.textContent =
-        user.email;
+try{
 
+loginBtn.disabled =
+true;
 
-      profileSection.style.display =
-        "block";
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
 
-      orderSection.style.display =
-        "block";
 
-      ordersSection.style.display =
-        "block";
+showMessage(
+loginMessage,
+"Login successful!",
+"success"
+);
 
 
-      emailInput.value = "";
+}catch(error){
 
-      passwordInput.value = "";
+console.error(error);
 
+let message =
+"Login failed.";
 
-      await loadCustomerProfile(user);
 
-      await loadOrderHistory(user);
+if(
+error.code ===
+"auth/invalid-credential" ||
+error.code ===
+"auth/wrong-password" ||
+error.code ===
+"auth/user-not-found"
+){
 
-      profileSection.scrollIntoView({
-        behavior: "smooth"
-      });
+message =
+"Email or password is incorrect.";
 
+}
 
-    } else {
 
-      console.log("Customer logged out");
+if(
+error.code ===
+"auth/invalid-email"
+){
 
+message =
+"Please enter a valid email address.";
 
-      profileSection.style.display =
-        "none";
+}
 
-      orderSection.style.display =
-        "none";
 
-      ordersSection.style.display =
-        "none";
+showMessage(
+loginMessage,
+message,
+"error"
+);
 
-    }
 
-  });
+}finally{
 
+loginBtn.disabled =
+false;
 
-  /* =========================
-     LOAD CUSTOMER PROFILE
-  ========================= */
+}
 
-  async function loadCustomerProfile(user) {
+}
+);
 
-    try {
 
-      const customerRef =
-        doc(db, "customers", user.uid);
+/* AUTH STATE */
 
-      const customerSnap =
-        await getDoc(customerRef);
+onAuthStateChanged(
+auth,
+async(user)=>{
 
+if(user){
 
-      if (customerSnap.exists()) {
+userEmail.textContent =
+user.email;
 
-        const data =
-          customerSnap.data();
+profileSection.style.display =
+"block";
 
+orderSection.style.display =
+"block";
 
-        customerName.value =
-          data.name || "";
+ordersSection.style.display =
+"block";
 
-        customerMobile.value =
-          data.mobile || "";
+emailInput.value = "";
 
-        customerAddress.value =
-          data.address || "";
+passwordInput.value = "";
 
-        orderAddress.value =
-          data.address || "";
 
-      }
+await loadCustomerProfile(user);
 
-    } catch (error) {
+await loadOrderHistory(user);
 
-      console.error(
-        "Profile loading error:",
-        error
-      );
 
-    }
+}else{
 
-  }
+profileSection.style.display =
+"none";
 
+orderSection.style.display =
+"none";
 
-  /* =========================
-     SAVE CUSTOMER PROFILE
-  ========================= */
+ordersSection.style.display =
+"none";
 
-  saveProfileBtn.addEventListener(
-    "click",
-    async () => {
+}
 
-      const user =
-        auth.currentUser;
+}
+);
 
-      if (!user) {
 
-        showMessage(
-          profileMessage,
-          "Please login first.",
-          "error"
-        );
+/* LOAD PROFILE */
 
-        return;
-      }
+async function loadCustomerProfile(user){
 
+try{
 
-      const name =
-        customerName.value.trim();
+const customerRef =
+doc(
+db,
+"customers",
+user.uid
+);
 
-      const mobile =
-        customerMobile.value.trim();
+const customerSnap =
+await getDoc(customerRef);
 
-      const address =
-        customerAddress.value.trim();
 
+if(customerSnap.exists()){
 
-      if (!name || !mobile || !address) {
+const data =
+customerSnap.data();
 
-        showMessage(
-          profileMessage,
-          "Please fill all profile details.",
-          "error"
-        );
+customerName.value =
+data.name || "";
 
-        return;
-      }
+customerMobile.value =
+data.mobile || "";
 
+customerAddress.value =
+data.address || "";
 
-      try {
+orderAddress.value =
+data.address || "";
 
-        await setDoc(
-          doc(db, "customers", user.uid),
-          {
-            email: user.email,
-            name: name,
-            mobile: mobile,
-            address: address,
-            updatedAt: serverTimestamp()
-          },
-          { merge: true }
-        );
+}
 
+}catch(error){
 
-        orderAddress.value =
-          address;
+console.error(
+"Profile loading error:",
+error
+);
 
+}
 
-        showMessage(
-          profileMessage,
-          "Profile saved successfully!",
-          "success"
-        );
+}
 
-      } catch (error) {
 
-        console.error(error);
+/* SAVE PROFILE */
 
-        showMessage(
-          profileMessage,
-          "Could not save profile.",
-          "error"
-        );
+saveProfileBtn.addEventListener(
+"click",
+async()=>{
 
-      }
+const user =
+auth.currentUser;
 
-    }
-  );
+if(!user){
 
+showMessage(
+profileMessage,
+"Please login first.",
+"error"
+);
 
-  /* =========================
-     PLACE ORDER
-  ========================= */
+return;
+}
 
-  placeOrderBtn.addEventListener(
-    "click",
-    async () => {
 
-      const user =
-        auth.currentUser;
+const name =
+customerName.value.trim();
 
-      if (!user) {
+const mobile =
+customerMobile.value.trim();
 
-        showMessage(
-          orderMessage,
-          "Please login first.",
-          "error"
-        );
+const address =
+customerAddress.value.trim();
 
-        return;
-      }
 
+if(!name || !mobile || !address){
 
-      const medicine =
-        medicineInput.value.trim();
+showMessage(
+profileMessage,
+"Please fill all profile details.",
+"error"
+);
 
-      const quantity =
-        Number(quantityInput.value);
+return;
+}
 
-      const address =
-        orderAddress.value.trim();
 
+try{
 
-      if (!medicine || !quantity || !address) {
+await setDoc(
+doc(
+db,
+"customers",
+user.uid
+),
+{
+email:user.email,
+name:name,
+mobile:mobile,
+address:address,
+updatedAt:
+serverTimestamp()
+},
+{
+merge:true
+}
+);
 
-        showMessage(
-          orderMessage,
-          "Please fill medicine, quantity and address.",
-          "error"
-        );
 
-        return;
-      }
+orderAddress.value =
+address;
 
 
-      try {
+showMessage(
+profileMessage,
+"Profile saved successfully!",
+"success"
+);
 
-        placeOrderBtn.disabled = true;
 
+}catch(error){
 
-        const orderId =
-          "ORD-" +
-          Date.now();
+console.error(error);
 
+showMessage(
+profileMessage,
+"Could not save profile.",
+"error"
+);
 
-        await addDoc(
-          collection(db, "orders"),
-          {
-            orderId: orderId,
-            customerUid: user.uid,
-            customerEmail: user.email,
-            customerPhone:
-              customerMobile.value.trim(),
-            medicine: medicine,
-            quantity: quantity,
-            address: address,
-            status: "Pending",
-            createdAt: serverTimestamp()
-          }
-        );
+}
 
+}
+);
 
-        showMessage(
-          orderMessage,
-          "Order placed successfully! Order ID: " + orderId,
-          "success"
-        );
 
+/* PLACE ORDER */
 
-        medicineInput.value = "";
+placeOrderBtn.addEventListener(
+"click",
+async()=>{
 
-        quantityInput.value = 1;
+const user =
+auth.currentUser;
 
+if(!user){
 
-        await loadOrderHistory(user);
+showMessage(
+orderMessage,
+"Please login first.",
+"error"
+);
 
+return;
+}
 
-      } catch (error) {
 
-        console.error(error);
+const medicine =
+medicineInput.value.trim();
 
-        showMessage(
-          orderMessage,
-          "Could not place order. Please try again.",
-          "error"
-        );
+const quantity =
+Number(quantityInput.value);
 
-      } finally {
+const address =
+orderAddress.value.trim();
 
-        placeOrderBtn.disabled = false;
 
-      }
+if(
+!medicine ||
+!quantity ||
+!address
+){
 
-    }
-  );
+showMessage(
+orderMessage,
+"Please fill medicine, quantity and address.",
+"error"
+);
 
+return;
+}
 
-  /* =========================
-     LOAD ORDER HISTORY
-  ========================= */
 
-  async function loadOrderHistory(user) {
+try{
 
-    orderHistory.innerHTML =
-      "Loading orders...";
+placeOrderBtn.disabled =
+true;
 
 
-    try {
+const orderId =
+"ORD-" +
+Date.now();
 
-      const ordersRef =
-        collection(db, "orders");
 
+await addDoc(
+collection(
+db,
+"orders"
+),
+{
 
-      const ordersQuery =
-        query(
-          ordersRef,
-          where(
-            "customerUid",
-            "==",
-            user.uid
-          )
-        );
+orderId:
+orderId,
 
+customerUid:
+user.uid,
 
-      const snapshot =
-        await getDocs(ordersQuery);
+customerEmail:
+user.email,
 
+customerPhone:
+customerMobile.value.trim(),
 
-      if (snapshot.empty) {
+medicine:
+medicine,
 
-        orderHistory.innerHTML =
-          "<p>No orders found.</p>";
+quantity:
+quantity,
 
-        return;
-      }
+address:
+address,
 
+status:
+"Pending",
 
-      const orders = [];
+prescriptionSelected:
+prescriptionFile.files.length > 0,
 
+prescriptionFileName:
+prescriptionFile.files.length > 0
+?
+prescriptionFile.files[0].name
+:
+"",
 
-      snapshot.forEach((docSnap) => {
+createdAt:
+serverTimestamp()
 
-        orders.push({
-          id: docSnap.id,
-          ...docSnap.data()
-        });
+}
+);
 
-      });
 
+showMessage(
+orderMessage,
+"Order placed successfully! Order ID: " + orderId,
+"success"
+);
 
-      /* Newest orders first */
 
-      orders.sort((a, b) => {
+medicineInput.value = "";
 
-        const timeA =
-          a.createdAt?.seconds || 0;
+quantityInput.value = 1;
 
-        const timeB =
-          b.createdAt?.seconds || 0;
 
-        return timeB - timeA;
+await loadOrderHistory(user);
 
-      });
 
+}catch(error){
 
-      orderHistory.innerHTML = "";
+console.error(error);
 
+showMessage(
+orderMessage,
+"Could not place order. Please try again.",
+"error"
+);
 
-      orders.forEach((order) => {
 
-        const card =
-          document.createElement("div");
+}finally{
 
-        card.className =
-          "order-card";
+placeOrderBtn.disabled =
+false;
 
+}
 
-        card.innerHTML = `
+}
+);
 
-          <p>
-            <strong>Order ID:</strong>
-            ${escapeHtml(order.orderId || "N/A")}
-          </p>
 
-          <p>
-            <strong>Medicine:</strong>
-            ${escapeHtml(order.medicine || "N/A")}
-          </p>
+/* ORDER HISTORY */
 
-          <p>
-            <strong>Quantity:</strong>
-            ${escapeHtml(String(order.quantity || ""))}
-          </p>
+async function loadOrderHistory(user){
 
-          <p>
-            <strong>Address:</strong>
-            ${escapeHtml(order.address || "N/A")}
-          </p>
+orderHistory.innerHTML =
+"Loading orders...";
 
-          <span class="status">
-            ${escapeHtml(order.status || "Pending")}
-          </span>
 
-        `;
+try{
 
+const ordersRef =
+collection(
+db,
+"orders"
+);
 
-        orderHistory.appendChild(card);
 
-      });
+const ordersQuery =
+query(
+ordersRef,
+where(
+"customerUid",
+"==",
+user.uid
+)
+);
 
 
-    } catch (error) {
+const snapshot =
+await getDocs(
+ordersQuery
+);
 
-      console.error(
-        "Order history error:",
-        error
-      );
 
+if(snapshot.empty){
 
-      orderHistory.innerHTML =
-        "<p style='color:red;'>Could not load order history.</p>";
+orderHistory.innerHTML =
+"<p>No orders found.</p>";
 
-    }
+return;
+}
 
-  }
 
+const orders = [];
 
-  /* =========================
-     ESCAPE HTML
-  ========================= */
 
-  function escapeHtml(value) {
+snapshot.forEach(
+(docSnap)=>{
 
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+orders.push({
+id:docSnap.id,
+...docSnap.data()
+});
 
-  }
+}
+);
 
 
-  /* =========================
-     LOGOUT
-  ========================= */
+orders.sort(
+(a,b)=>{
 
-  logoutBtn.addEventListener(
-    "click",
-    async () => {
+const timeA =
+a.createdAt?.seconds || 0;
 
-      try {
+const timeB =
+b.createdAt?.seconds || 0;
 
-        await signOut(auth);
+return timeB - timeA;
 
-        alert("Logged out successfully.");
+}
+);
 
-        window.location.hash =
-          "login";
 
-      } catch (error) {
+orderHistory.innerHTML =
+"";
 
-        console.error(error);
 
-        alert("Logout failed.");
+orders.forEach(
+(order)=>{
 
-      }
+const card =
+document.createElement("div");
 
-    }
-  );
+card.className =
+"order-card";
 
 
-  /* =========================
-     CONTACT
-  ========================= */
+card.innerHTML = `
 
-  window.contactUs = function() {
+<p>
+<strong>Order ID:</strong>
+${escapeHtml(order.orderId || "N/A")}
+</p>
 
-    alert(
-      "Contact system will be connected later."
-    );
+<p>
+<strong>Medicine:</strong>
+${escapeHtml(order.medicine || "N/A")}
+</p>
 
-  };
+<p>
+<strong>Quantity:</strong>
+${escapeHtml(String(order.quantity || ""))}
+</p>
 
+<p>
+<strong>Address:</strong>
+${escapeHtml(order.address || "N/A")}
+</p>
+
+<p>
+<strong>Prescription:</strong>
+${
+order.prescriptionFileName
+?
+escapeHtml(order.prescriptionFileName)
+:
+"Not selected"
+}
+</p>
+
+<span class="status">
+${escapeHtml(order.status || "Pending")}
+</span>
+
+`;
+
+
+orderHistory.appendChild(
+card
+);
+
+}
+);
+
+
+}catch(error){
+
+console.error(
+"Order history error:",
+error
+);
+
+orderHistory.innerHTML =
+"<p style='color:red;'>Could not load order history.</p>";
+
+}
+
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHtml(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* LOGOUT */
+
+logoutBtn.addEventListener(
+"click",
+async()=>{
+
+try{
+
+await signOut(auth);
+
+alert(
+"Logged out successfully."
+);
+
+window.location.hash =
+"login";
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Logout failed."
+);
+
+}
+
+}
+);
+
+
+/* PRESCRIPTION FILE */
+
+prescriptionFile.addEventListener(
+"change",
+()=>{
+
+const file =
+prescriptionFile.files[0];
+
+
+if(!file){
+
+fileInfo.textContent =
+"No prescription selected.";
+
+return;
+}
+
+
+const allowedTypes = [
+"image/jpeg",
+"image/png",
+"application/pdf"
+];
+
+
+if(
+!allowedTypes.includes(
+file.type
+)
+){
+
+fileInfo.textContent =
+"Please select JPG, PNG or PDF.";
+
+prescriptionFile.value =
+"";
+
+return;
+}
+
+
+fileInfo.textContent =
+"Selected: " +
+file.name;
+
+}
+);
+
+
+/* WHATSAPP PRESCRIPTION */
+
+whatsappPrescriptionBtn.addEventListener(
+"click",
+()=>{
+
+const file =
+prescriptionFile.files[0];
+
+
+if(!file){
+
+alert(
+"Please select your prescription first."
+);
+
+return;
+}
+
+
+const user =
+auth.currentUser;
+
+
+let customerText =
+"";
+
+
+if(user){
+
+customerText =
+"Customer: " +
+user.email +
+"\n";
+
+}
+
+
+const message =
+"Hello, I want to send my prescription for medicine delivery.\n\n" +
+customerText +
+"Prescription file: " +
+file.name +
+"\n\n" +
+"Please check the prescription.";
+
+
+const whatsappUrl =
+"https://wa.me/916009415805?text=" +
+encodeURIComponent(
+message
+);
+
+
+window.open(
+whatsappUrl,
+"_blank"
+);
+
+
+}
+);
+
+
+/* CONTACT WHATSAPP */
+
+contactWhatsAppBtn.addEventListener(
+"click",
+()=>{
+
+const message =
+"Hello, I need help with my medicine order.";
+
+
+const whatsappUrl =
+"https://wa.me/916009415805?text=" +
+encodeURIComponent(
+message
+);
+
+
+window.open(
+whatsappUrl,
+"_blank"
+);
+
+}
+);
 
 </script>
 
