@@ -1,1 +1,967 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Panel | Online Medicine Delivery</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f6;
+      color: #222;
+    }
+
+    header {
+      background: #087c59;
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    header p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1100px;
+      margin: 25px auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .login-box {
+      max-width: 450px;
+      margin: 50px auto;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #087c59;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    button {
+      border: none;
+      padding: 11px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px 3px;
+    }
+
+    .btn-green {
+      background: #087c59;
+      color: white;
+    }
+
+    .btn-red {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-blue {
+      background: #0d6efd;
+      color: white;
+    }
+
+    .message {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .success {
+      background: #d1e7dd;
+      color: #0f5132;
+    }
+
+    .error {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .order-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 15px;
+      background: #fff;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .order-id {
+      font-weight: bold;
+      color: #087c59;
+    }
+
+    .medicine {
+      background: #f7f7f7;
+      padding: 8px;
+      border-radius: 6px;
+      margin: 5px 0;
+    }
+
+    .field-title {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 20px;
+      background: #fff3cd;
+      color: #664d03;
+      display: inline-block;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 20px;
+      }
+
+      .container {
+        width: 94%;
+      }
+
+      .card {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>💊 Online Medicine Delivery</h1>
+  <p>Admin Panel</p>
+</header>
+
+
+<!-- LOGIN -->
+<div id="loginSection" class="container">
+
+  <div class="card login-box">
+
+    <h2>🔐 Admin Login</h2>
+
+    <input
+      type="email"
+      id="adminEmail"
+      placeholder="Admin Email"
+    >
+
+    <input
+      type="password"
+      id="adminPassword"
+      placeholder="Admin Password"
+    >
+
+    <button
+      class="btn-green"
+      id="loginBtn"
+    >
+      Login
+    </button>
+
+    <div
+      id="loginMessage"
+      class="message"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- ADMIN PANEL -->
+<div id="adminSection" class="container hidden">
+
+  <div class="top-bar">
+
+    <div>
+      <h2>📋 Customer Orders</h2>
+      <p id="adminEmailDisplay"></p>
+    </div>
+
+    <div>
+      <button
+        class="btn-blue"
+        id="refreshBtn"
+      >
+        🔄 Refresh
+      </button>
+
+      <button
+        class="btn-red"
+        id="logoutBtn"
+      >
+        Logout
+      </button>
+    </div>
+
+  </div>
+
+
+  <div
+    id="ordersMessage"
+    class="message"
+  ></div>
+
+
+  <div id="ordersList">
+    Loading orders...
+  </div>
+
+</div>
+
+
+<script type="module">
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    orderBy,
+    doc,
+    updateDoc,
+    deleteDoc
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+  // =========================
+  // Firebase Config
+  // =========================
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDw2kaA5y5unNlo7QDLLQ25ZbZHYiwtUoA",
+    authDomain: "online-medicine-delivery-74346.firebaseapp.com",
+    projectId: "online-medicine-delivery-74346",
+    storageBucket: "online-medicine-delivery-74346.firebasestorage.app",
+    messagingSenderId: "1061955108881",
+    appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
+    measurementId: "G-LMHDFF01QC"
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const db = getFirestore(app);
+
+
+  // =========================
+  // Elements
+  // =========================
+
+  const loginSection =
+    document.getElementById("loginSection");
+
+  const adminSection =
+    document.getElementById("adminSection");
+
+  const adminEmail =
+    document.getElementById("adminEmail");
+
+  const adminPassword =
+    document.getElementById("adminPassword");
+
+  const loginBtn =
+    document.getElementById("loginBtn");
+
+  const logoutBtn =
+    document.getElementById("logoutBtn");
+
+  const refreshBtn =
+    document.getElementById("refreshBtn");
+
+  const loginMessage =
+    document.getElementById("loginMessage");
+
+  const ordersMessage =
+    document.getElementById("ordersMessage");
+
+  const ordersList =
+    document.getElementById("ordersList");
+
+  const adminEmailDisplay =
+    document.getElementById("adminEmailDisplay");
+
+
+  // =========================
+  // Message
+  // =========================
+
+  function showMessage(element, text, type) {
+
+    element.textContent = text;
+
+    element.className =
+      "message " + type;
+
+    element.style.display = "block";
+  }
+
+
+  // =========================
+  // Admin Login
+  // =========================
+
+  loginBtn.addEventListener(
+    "click",
+    async function() {
+
+      const email =
+        adminEmail.value.trim();
+
+      const password =
+        adminPassword.value;
+
+      if (!email || !password) {
+
+        showMessage(
+          loginMessage,
+          "Email এবং Password দিন.",
+          "error"
+        );
+
+        return;
+      }
+
+      try {
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          loginMessage,
+          "Login failed. Email অথবা Password ঠিক আছে কি না দেখুন.",
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+  // =========================
+  // Auth State
+  // =========================
+
+  onAuthStateChanged(
+    auth,
+    async function(user) {
+
+      if (!user) {
+
+        loginSection.classList.remove("hidden");
+
+        adminSection.classList.add("hidden");
+
+        return;
+      }
+
+      try {
+
+        const adminDoc = await getDocs(
+          query(
+            collection(db, "admins")
+          )
+        );
+
+        let isAdmin = false;
+
+        adminDoc.forEach(function(item) {
+
+          if (item.id === user.uid) {
+            isAdmin = true;
+          }
+
+        });
+
+
+        if (!isAdmin) {
+
+          await signOut(auth);
+
+          showMessage(
+            loginMessage,
+            "এই account Admin নয়.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        loginSection.classList.add("hidden");
+
+        adminSection.classList.remove("hidden");
+
+        adminEmailDisplay.textContent =
+          "Admin: " + user.email;
+
+        loadOrders();
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          loginMessage,
+          "Admin verification failed.",
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+  // =========================
+  // Logout
+  // =========================
+
+  logoutBtn.addEventListener(
+    "click",
+    async function() {
+
+      await signOut(auth);
+
+    }
+  );
+
+
+  // =========================
+  // Load Orders
+  // =========================
+
+  async function loadOrders() {
+
+    ordersList.innerHTML =
+      "Loading orders...";
+
+    try {
+
+      const q = query(
+        collection(db, "orders"),
+        orderBy("createdAt", "desc")
+      );
+
+      const snapshot =
+        await getDocs(q);
+
+      if (snapshot.empty) {
+
+        ordersList.innerHTML =
+          "<p>No orders found.</p>";
+
+        return;
+      }
+
+
+      ordersList.innerHTML = "";
+
+
+      snapshot.forEach(function(orderDoc) {
+
+        const order =
+          orderDoc.data();
+
+        const card =
+          document.createElement("div");
+
+        card.className =
+          "order-card";
+
+
+        let medicinesHTML = "";
+
+
+        if (
+          Array.isArray(order.medicines)
+        ) {
+
+          order.medicines.forEach(
+            function(medicine) {
+
+              medicinesHTML += `
+                <div class="medicine">
+                  💊 ${escapeHTML(medicine.name)}
+                  — Quantity: ${medicine.quantity}
+                </div>
+              `;
+
+            }
+          );
+
+        }
+
+
+        card.innerHTML = `
+
+          <div class="order-header">
+
+            <div>
+              <div class="order-id">
+                ${escapeHTML(order.orderId || "No Order ID")}
+              </div>
+
+              <div>
+                Customer:
+                ${escapeHTML(order.customerName || "")}
+              </div>
+
+              <div>
+                Mobile:
+                ${escapeHTML(order.customerPhone || "")}
+              </div>
+            </div>
+
+            <div>
+              <span class="status">
+                ${escapeHTML(order.status || "Pending")}
+              </span>
+            </div>
+
+          </div>
+
+
+          <span class="field-title">
+            💊 Medicines
+          </span>
+
+          ${medicinesHTML}
+
+
+          <span class="field-title">
+            🚚 Delivery Address
+          </span>
+
+          <div>
+            ${escapeHTML(order.address || "")}
+          </div>
+
+
+          <span class="field-title">
+            💰 Original MRP
+          </span>
+
+          <input
+            type="number"
+            class="mrp-input"
+            value="${order.originalMRP ?? ""}"
+            placeholder="Original MRP"
+          >
+
+
+          <span class="field-title">
+            🏷️ Discount Amount
+          </span>
+
+          <input
+            type="number"
+            class="discount-input"
+            value="${order.discountAmount ?? ""}"
+            placeholder="Discount Amount"
+          >
+
+
+          <span class="field-title">
+            💵 Payable Amount
+          </span>
+
+          <input
+            type="number"
+            class="payable-input"
+            value="${order.payableAmount ?? ""}"
+            placeholder="Payable Amount"
+          >
+
+
+          <span class="field-title">
+            💳 Customer Payment Amount
+          </span>
+
+          <input
+            type="number"
+            class="payment-input"
+            value="${order.paymentAmount ?? ""}"
+            placeholder="Customer Payment Amount"
+          >
+
+
+          <span class="field-title">
+            💳 Payment Status
+          </span>
+
+          <select class="payment-status-input">
+
+            <option value="Pending"
+              ${order.paymentStatus === "Pending" ? "selected" : ""}>
+              Pending
+            </option>
+
+            <option value="Paid"
+              ${order.paymentStatus === "Paid" ? "selected" : ""}>
+              Paid
+            </option>
+
+          </select>
+
+
+          <span class="field-title">
+            🚚 Order Status
+          </span>
+
+          <select class="status-input">
+
+            <option value="Pending"
+              ${order.status === "Pending" ? "selected" : ""}>
+              Pending
+            </option>
+
+            <option value="Confirmed"
+              ${order.status === "Confirmed" ? "selected" : ""}>
+              Confirmed
+            </option>
+
+            <option value="Out for Delivery"
+              ${order.status === "Out for Delivery" ? "selected" : ""}>
+              Out for Delivery
+            </option>
+
+            <option value="Delivered"
+              ${order.status === "Delivered" ? "selected" : ""}>
+              Delivered
+            </option>
+
+          </select>
+
+
+          <br>
+
+          <button
+            class="btn-green save-btn"
+          >
+            💾 Save Changes
+          </button>
+
+          <button
+            class="btn-red delete-btn"
+          >
+            🗑️ Delete Order
+          </button>
+
+        `;
+
+
+        const saveBtn =
+          card.querySelector(".save-btn");
+
+        const deleteBtn =
+          card.querySelector(".delete-btn");
+
+
+        saveBtn.addEventListener(
+          "click",
+          async function() {
+
+            await saveOrder(
+              orderDoc.id,
+              card
+            );
+
+          }
+        );
+
+
+        deleteBtn.addEventListener(
+          "click",
+          async function() {
+
+            await deleteOrder(
+              orderDoc.id
+            );
+
+          }
+        );
+
+
+        ordersList.appendChild(card);
+
+      });
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      ordersList.innerHTML = "";
+
+      showMessage(
+        ordersMessage,
+        "Orders load করা যাচ্ছে না.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  // =========================
+  // Save Order
+  // =========================
+
+  async function saveOrder(
+    documentId,
+    card
+  ) {
+
+    try {
+
+      const mrp =
+        card.querySelector(
+          ".mrp-input"
+        ).value;
+
+      const discount =
+        card.querySelector(
+          ".discount-input"
+        ).value;
+
+      const payable =
+        card.querySelector(
+          ".payable-input"
+        ).value;
+
+      const payment =
+        card.querySelector(
+          ".payment-input"
+        ).value;
+
+      const paymentStatus =
+        card.querySelector(
+          ".payment-status-input"
+        ).value;
+
+      const status =
+        card.querySelector(
+          ".status-input"
+        ).value;
+
+
+      await updateDoc(
+        doc(db, "orders", documentId),
+        {
+          originalMRP:
+            mrp === "" ? null : Number(mrp),
+
+          discountAmount:
+            discount === "" ? null : Number(discount),
+
+          payableAmount:
+            payable === "" ? null : Number(payable),
+
+          paymentAmount:
+            payment === "" ? null : Number(payment),
+
+          paymentStatus:
+            paymentStatus,
+
+          status:
+            status
+        }
+      );
+
+
+      showMessage(
+        ordersMessage,
+        "Order successfully updated.",
+        "success"
+      );
+
+
+      loadOrders();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        ordersMessage,
+        "Order update করা যায়নি.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  // =========================
+  // Delete Order
+  // =========================
+
+  async function deleteOrder(
+    documentId
+  ) {
+
+    const confirmDelete =
+      confirm(
+        "আপনি কি এই order delete করতে চান?"
+      );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+
+    try {
+
+      await deleteDoc(
+        doc(db, "orders", documentId)
+      );
+
+
+      showMessage(
+        ordersMessage,
+        "Order deleted.",
+        "success"
+      );
+
+
+      loadOrders();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        ordersMessage,
+        "Order delete করা যায়নি.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  // =========================
+  // Refresh
+  // =========================
+
+  refreshBtn.addEventListener(
+    "click",
+    function() {
+
+      loadOrders();
+
+    }
+  );
+
+
+  // =========================
+  // HTML Escape
+  // =========================
+
+  function escapeHTML(value) {
+
+    if (value === null ||
+        value === undefined) {
+      return "";
+    }
+
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+</script>
+
+</body>
+</html>
