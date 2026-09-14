@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -339,16 +338,16 @@ textarea.input{
   flex:1;
 }
 
+.hidden{
+  display:none !important;
+}
+
 footer{
   background:#087c59;
   color:white;
   text-align:center;
   padding:25px;
   margin-top:30px;
-}
-
-.hidden{
-  display:none !important;
 }
 
 @media(max-width:700px){
@@ -389,13 +388,11 @@ footer{
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
-
 <div class="nav">
 
 <div class="logo">
@@ -414,7 +411,6 @@ Online Medicine Delivery
 </nav>
 
 </div>
-
 </header>
 
 <div class="offer" id="offers">
@@ -508,12 +504,14 @@ placeholder="Enter password">
 <button
 class="btn"
 id="loginBtn">
-Login </button>
+Login
+</button>
 
 <button
 class="btn"
 id="signupBtn">
-Create Account </button>
+Create Account
+</button>
 
 </div>
 
@@ -561,13 +559,15 @@ placeholder="Delivery Address"></textarea>
 <button
 class="btn"
 id="saveProfileBtn">
-Save Profile </button>
+Save Profile
+</button>
 
 <button
 class="btn btn-danger"
 id="logoutBtn"
 style="margin-top:10px;">
-Logout </button>
+Logout
+</button>
 
 <div
 id="profileMessage"
@@ -616,6 +616,19 @@ placeholder="Quantity"
 min="1"
 value="1">
 
+<select
+class="input medicine-unit">
+
+<option value="Tablet">
+Tablet
+</option>
+
+<option value="Strip">
+Strip
+</option>
+
+</select>
+
 </div>
 
 </div>
@@ -626,7 +639,8 @@ value="1">
 type="button"
 class="btn btn-secondary"
 id="addMedicineBtn">
-➕ Add Another Medicine </button>
+➕ Add Another Medicine
+</button>
 
 </div>
 
@@ -661,7 +675,8 @@ No prescription selected.
 type="button"
 class="btn btn-whatsapp"
 id="whatsappPrescriptionBtn">
-📱 Send Prescription on WhatsApp </button>
+📱 Send Prescription on WhatsApp
+</button>
 
 </div>
 
@@ -670,7 +685,8 @@ id="whatsappPrescriptionBtn">
 <button
 class="btn"
 id="placeOrderBtn">
-Place Order </button>
+Place Order
+</button>
 
 <div
 id="orderMessage"
@@ -722,7 +738,8 @@ placeholder="Example: ORD-123456789">
 <button
 class="btn"
 id="trackOrderBtn">
-Track Order </button>
+Track Order
+</button>
 
 <div
 id="trackMessage"
@@ -753,7 +770,8 @@ Need help with your medicine order?
 <button
 class="btn btn-whatsapp"
 id="contactWhatsAppBtn">
-📱 Contact on WhatsApp </button>
+📱 Contact on WhatsApp
+</button>
 
 </div>
 
@@ -1381,6 +1399,19 @@ placeholder="Quantity"
 min="1"
 value="1">
 
+<select
+class="input medicine-unit">
+
+<option value="Tablet">
+Tablet
+</option>
+
+<option value="Strip">
+Strip
+</option>
+
+</select>
+
 `;
 
 medicineList.appendChild(row);
@@ -1480,6 +1511,12 @@ row.querySelector(
 ).value
 );
 
+const unit =
+row.querySelector(
+".medicine-unit"
+).value;
+
+
 if(!name){
 
 return {
@@ -1505,7 +1542,9 @@ medicines.push({
 
 name:name,
 
-quantity:quantity
+quantity:quantity,
+
+unit:unit
 
 });
 
@@ -1655,6 +1694,7 @@ orderMessage,
 "success"
 );
 
+
 medicineList.innerHTML = `
 
 <div class="medicine-row">
@@ -1678,6 +1718,19 @@ class="input medicine-quantity"
 placeholder="Quantity"
 min="1"
 value="1">
+
+<select
+class="input medicine-unit">
+
+<option value="Tablet">
+Tablet
+</option>
+
+<option value="Strip">
+Strip
+</option>
+
+</select>
 
 </div>
 
@@ -1817,6 +1870,7 @@ ${escapeHtml(item.name || "N/A")}
 ${escapeHtml(
 String(item.quantity || "")
 )}
+${escapeHtml(item.unit || "Tablet")}
 </p>
 
 `;
@@ -2135,6 +2189,7 @@ item.name || "N/A"
 ${escapeHtml(
 String(item.quantity || "")
 )}
+${escapeHtml(item.unit || "Tablet")}
 </p>
 
 </div>
