@@ -1,1 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Online Medicine Delivery</title>
+
+  <meta name="description"
+        content="Online Medicine Delivery - Order medicines online from your mobile.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f8f7;
+      color: #222;
+    }
+
+    header {
+      background: #087c59;
+      color: white;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero h1 {
+      color: #087c59;
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #087c59;
+      color: white;
+      padding: 13px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .offer {
+      background: #ff8a00;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 45px 20px;
+    }
+
+    section h2 {
+      text-align: center;
+      color: #087c59;
+      margin-bottom: 30px;
+      font-size: 30px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .category {
+      background: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .category h3 {
+      color: #087c59;
+      margin-bottom: 8px;
+    }
+
+    .login-box {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .login-box p {
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .login-box .btn {
+      margin-top: 10px;
+    }
+
+    footer {
+      background: #087c59;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 450px) {
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .logo {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <div class="logo">
+      Online Medicine Delivery
+    </div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#offers">Offers</a>
+      <a href="#login">Login</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+  </div>
+</header>
+
+<div class="offer" id="offers">
+  🎉 GET 10% OFF ON YOUR ORDER
+</div>
+
+<section class="hero" id="home">
+
+  <h1>Online Medicine Delivery</h1>
+
+  <p>
+    Order your medicines online and get them delivered to your doorstep.
+  </p>
+
+  <a href="#login" class="btn">
+    Login & Order Now
+  </a>
+
+</section>
+
+<section id="shop">
+
+  <h2>Medicine Categories</h2>
+
+  <div class="categories">
+
+    <div class="category">
+      <h3>💊 Pain Relief</h3>
+      <p>Browse pain relief products</p>
+    </div>
+
+    <div class="category">
+      <h3>🌡️ Fever & Cold</h3>
+      <p>Browse fever and cold products</p>
+    </div>
+
+    <div class="category">
+      <h3>🩺 Diabetes Care</h3>
+      <p>Diabetes care products</p>
+    </div>
+
+    <div class="category">
+      <h3>❤️ Heart Care</h3>
+      <p>Heart care products</p>
+    </div>
+
+    <div class="category">
+      <h3>🧴 Skin Care</h3>
+      <p>Skin care products</p>
+    </div>
+
+    <div class="category">
+      <h3>👶 Baby Care</h3>
+      <p>Baby care products</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="login">
+
+  <h2>Customer Login</h2>
+
+  <div class="login-box">
+
+    <p>
+      Login with your mobile number to place orders
+      and view your previous order history.
+    </p>
+
+    <button class="btn" onclick="startLogin()">
+      Login with Mobile Number
+    </button>
+
+  </div>
+
+</section>
+
+<section id="contact">
+
+  <h2>Contact Us</h2>
+
+  <div class="login-box">
+
+    <p>
+      Need help with your medicine order?
+    </p>
+
+    <button class="btn" onclick="contactUs()">
+      Contact Us
+    </button>
+
+  </div>
+
+</section>
+
+<footer>
+  <p>© 2026 Online Medicine Delivery</p>
+  <p>Healthcare at your doorstep.</p>
+</footer>
+
+<script>
+
+  function startLogin() {
+    alert("Customer mobile OTP login will be connected in the next step.");
+  }
+
+  function contactUs() {
+    alert("Contact system will be connected later.");
+  }
+
+</script>
+
+</body>
+</html>
