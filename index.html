@@ -184,6 +184,34 @@ footer{background:#087c59;color:white;text-align:center;padding:25px;margin-top:
 
 <textarea id="orderAddress" class="input" placeholder="Delivery Address"></textarea>
 
+<div style="margin:15px 0;">
+  <label for="estimatedDeliveryTime" style="display:block;color:#087c59;font-weight:bold;margin-bottom:8px;">
+    🚚 Estimated Delivery Time
+  </label>
+  <select id="estimatedDeliveryTime" class="input">
+    <option value="30–60 minutes" selected>30–60 minutes</option>
+    <option value="1–2 hours">1–2 hours</option>
+    <option value="2–4 hours">2–4 hours</option>
+    <option value="Today">Today</option>
+  </select>
+  <p style="font-size:14px;color:#555;margin-top:5px;">
+    This is an estimated time and may change depending on order and delivery conditions.
+  </p>
+</div>
+
+<div style="margin:15px 0;">
+  <label for="paymentMethod" style="display:block;color:#087c59;font-weight:bold;margin-bottom:8px;">
+    💳 Payment Method
+  </label>
+  <select id="paymentMethod" class="input">
+    <option value="Cash on Delivery" selected>Cash on Delivery (COD)</option>
+  </select>
+  <p style="font-size:14px;color:#555;margin-top:5px;">
+    Pay in cash when your medicine is delivered.
+  </p>
+</div>
+
+
 <div class="whatsapp-box">
 <h3>📄 Prescription Upload</h3>
 <p>If your medicine requires a prescription, select your prescription file below.</p>
@@ -282,6 +310,8 @@ const profileMessage=document.getElementById("profileMessage");
 const medicineList=document.getElementById("medicineList");
 const addMedicineBtn=document.getElementById("addMedicineBtn");
 const orderAddress=document.getElementById("orderAddress");
+const estimatedDeliveryTime=document.getElementById("estimatedDeliveryTime");
+const paymentMethod=document.getElementById("paymentMethod");
 const placeOrderBtn=document.getElementById("placeOrderBtn");
 const orderMessage=document.getElementById("orderMessage");
 const orderHistory=document.getElementById("orderHistory");
@@ -548,6 +578,7 @@ placeOrderBtn.addEventListener("click",async()=>{
       customerPhone:customerMobile.value.trim(),
       medicines:medicines,
       address:address,
+      paymentMethod:paymentMethod.value,
       status:"Pending",
       originalMRP:null,
       discountAmount:null,
@@ -626,6 +657,7 @@ async function loadOrderHistory(user){
       <p><strong>Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
       ${medicinesHtml}
       <p><strong>Address:</strong> ${escapeHtml(order.address||"N/A")}</p>
+      <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
       <p><strong>Prescription:</strong>
         ${order.prescriptionFileName?escapeHtml(order.prescriptionFileName):"Not selected"}
       </p>
@@ -746,6 +778,7 @@ trackOrderBtn.addEventListener("click",async()=>{
       <p><strong>🆔 Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
       ${medicinesHtml}
       <p><strong>🚚 Delivery Address:</strong> ${escapeHtml(order.address||"N/A")}</p>
+      <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
       <p><strong>📄 Prescription:</strong>
         ${order.prescriptionFileName?escapeHtml(order.prescriptionFileName):"Not selected"}
       </p>
