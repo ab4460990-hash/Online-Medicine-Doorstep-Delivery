@@ -1,114 +1,71 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <meta name="theme-color" content="#087c59">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Medicine Delivery">
-
 <title>Online Medicine Doorstep Delivery | Narsingarh</title>
-<meta name="description" content="Online Medicine Doorstep Delivery in Narsingarh. Order medicines online from your mobile and request convenient doorstep delivery. Get 10% OFF on your order.">
-<meta name="robots" content="index, follow">
-<meta name="googlebot" content="index, follow">
-<meta name="keywords" content="online medicine delivery, medicine doorstep delivery, medicines in Narsingarh, online medicine Narsingarh, medicine delivery Narsingarh">
-<link rel="canonical" href="https://ab4460990-hash.github.io/Online-Medicine-Doorstep-Delivery/">
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Online Medicine Doorstep Delivery | Narsingarh">
-<meta property="og:description" content="Order medicines online and request doorstep delivery in Narsingarh. Get 10% OFF on your order.">
-<meta property="og:url" content="https://ab4460990-hash.github.io/Online-Medicine-Doorstep-Delivery/">
-<meta property="og:site_name" content="Online Medicine Doorstep Delivery">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Online Medicine Doorstep Delivery | Narsingarh">
-<meta name="twitter:description" content="Order medicines online and request doorstep delivery in Narsingarh.">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Online Medicine Doorstep Delivery",
-  "url": "https://ab4460990-hash.github.io/Online-Medicine-Doorstep-Delivery/",
-  "description": "Online medicine doorstep delivery service in Narsingarh."
-}
-</script>
-
+<meta name="description" content="Online Medicine Doorstep Delivery in Narsingarh. Order medicines online and request doorstep delivery. Get 10% OFF.">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#f5f8f7;color:#222}
-header{background:#087c59;color:white;padding:15px 20px;position:sticky;top:0;z-index:1000}
+header{background:#087c59;color:#fff;padding:15px 20px;position:sticky;top:0;z-index:10}
 .nav{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-size:22px;font-weight:bold}
-nav{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
-nav a{color:white;text-decoration:none;font-weight:bold}
-.hero{background:white;text-align:center;padding:60px 20px}
-.hero h1{color:#087c59;font-size:38px;margin-bottom:15px}
-.hero p{font-size:18px;margin-bottom:25px}
-.btn{display:inline-block;background:#087c59;color:white;padding:13px 25px;border-radius:8px;text-decoration:none;font-weight:bold;border:none;cursor:pointer}
-.btn:hover{opacity:.9}
-.btn-whatsapp{background:#25D366}.btn-danger{background:#d62828}.btn-secondary{background:#555}
-.btn-small{padding:9px 14px;font-size:14px}
-.offer{background:#ff8a00;color:white;text-align:center;padding:14px;font-size:20px;font-weight:bold}
-section{max-width:1100px;margin:auto;padding:45px 20px}
-section h2{text-align:center;color:#087c59;margin-bottom:30px;font-size:30px}
+.logo{font-size:21px;font-weight:700}
+nav{display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
+nav a{color:#fff;text-decoration:none;font-weight:700}
+.offer{background:#ff8a00;color:#fff;text-align:center;padding:13px;font-weight:700;font-size:19px}
+.hero{background:#fff;text-align:center;padding:55px 20px}
+.hero h1{color:#087c59;font-size:36px;margin-bottom:15px}
+.hero p{font-size:18px;margin-bottom:22px}
+section{max-width:1100px;margin:auto;padding:42px 20px}
+section h2{text-align:center;color:#087c59;margin-bottom:25px}
 .categories{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.category{background:white;padding:25px;text-align:center;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.category,.box,.order-card{background:#fff;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.category{padding:24px;text-align:center}
 .category h3{color:#087c59;margin-bottom:8px}
-.box{max-width:650px;margin:auto;background:white;padding:25px;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
-.box p{margin-bottom:15px;color:#555}
-.input{width:100%;padding:13px;margin:8px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
-textarea.input{min-height:100px;resize:vertical}
-.file-input{width:100%;padding:12px;margin:8px 0 5px;border:1px solid #ccc;border-radius:8px;background:#fff}
-.file-info{font-size:14px;color:#555;margin-bottom:12px}
-.message{margin-top:15px;padding:12px;border-radius:8px;display:none;font-weight:bold}
-.success{background:#d9f5e9;color:#087c59}.error{background:#ffe0e0;color:#b00020}
-.user-panel,.order-panel,.history-panel,.track-panel{display:none}
-.medicine-row{background:#f7faf9;border:1px solid #ddd;padding:15px;border-radius:10px;margin-bottom:12px}
-.medicine-row-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
-.medicine-number{color:#087c59;font-weight:bold}
-.remove-medicine{background:#d62828;color:white;border:none;border-radius:6px;padding:7px 10px;cursor:pointer;font-weight:bold}
-.add-medicine-box{margin:15px 0}
-.order-card{background:#f7faf9;border:1px solid #ddd;padding:18px;border-radius:10px;margin-bottom:15px}
-.order-card strong{color:#087c59}.order-card p{margin-bottom:8px}
-.status{display:inline-block;padding:6px 12px;border-radius:20px;background:#fff0d6;color:#9a5b00;font-weight:bold;margin-top:8px}
-.amount-box{background:white;border:1px solid #ddd;border-radius:10px;padding:15px;margin-top:15px}
-.amount-row{display:flex;justify-content:space-between;gap:15px;padding:7px 0;border-bottom:1px solid #eee}
-.amount-row:last-child{border-bottom:none}.amount-total{font-size:18px;font-weight:bold;color:#087c59}
-.track-result{margin-top:20px}
-.whatsapp-box{margin-top:20px;padding:18px;border:1px solid #ddd;border-radius:10px;background:#f8fffb}
-.whatsapp-box h3{color:#087c59;margin-bottom:8px}
-.login-buttons{display:flex;gap:10px;margin-top:10px}.login-buttons button{flex:1}
-footer{background:#087c59;color:white;text-align:center;padding:25px;margin-top:30px}
-.hidden{display:none!important}
-@media(max-width:700px){.nav{flex-direction:column}.hero h1{font-size:30px}.categories{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:450px){.categories{grid-template-columns:1fr}.logo{font-size:19px}.login-buttons{flex-direction:column}.amount-row{flex-direction:column;gap:3px}}
+.box{max-width:700px;margin:auto;padding:24px}
+.input{width:100%;padding:13px;margin:7px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+textarea.input{min-height:105px;resize:vertical}
+.btn{display:inline-block;background:#087c59;color:#fff;padding:12px 20px;border:0;border-radius:8px;font-weight:700;cursor:pointer}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btn-whatsapp{background:#25D366}
+.btn-secondary{background:#555}
+.btn-danger{background:#d62828}
+.message{display:none;margin-top:14px;padding:12px;border-radius:8px;font-weight:700}
+.success{background:#d9f5e9;color:#087c59}
+.error{background:#ffe0e0;color:#b00020}
+.medicine-row{background:#f7faf9;border:1px solid #ddd;padding:15px;border-radius:10px;margin:10px 0}
+.medicine-row-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.medicine-number{color:#087c59;font-weight:700}
+.remove-medicine{background:#d62828;color:#fff;border:0;border-radius:6px;padding:7px 10px;cursor:pointer}
+.whatsapp-box{margin-top:18px;padding:16px;border:1px solid #ddd;border-radius:10px;background:#f8fffb}
+.file-input{width:100%;padding:10px;margin:7px 0;border:1px solid #ccc;border-radius:8px;background:#fff}
+.file-info{font-size:13px;color:#555;margin-bottom:10px}
+.order-card{padding:18px;margin:14px 0}
+.order-card p{margin:7px 0}
+.order-card strong{color:#087c59}
+.status{display:inline-block;padding:6px 12px;border-radius:20px;background:#fff0d6;color:#9a5b00;font-weight:700;margin-top:5px}
+.amount-box{background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px;margin-top:15px}
+.amount-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee}
+.amount-row:last-child{border-bottom:0}
+.amount-total{font-size:18px;font-weight:700;color:#087c59}
+.note{font-size:13px;color:#666;margin:5px 0 12px}
+footer{background:#087c59;color:#fff;text-align:center;padding:25px;margin-top:30px}
+@media(max-width:700px){.nav{flex-direction:column}.categories{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:29px}}
+@media(max-width:450px){.categories{grid-template-columns:1fr}.logo{font-size:18px}.amount-row{flex-direction:column;gap:3px}}
 </style>
-
 </head>
-
 <body>
-<header>
-<div class="nav">
+<header><div class="nav">
 <div class="logo">Online Medicine Doorstep Delivery</div>
 <nav>
-<a href="#home">Home</a>
-<a href="#shop">Shop</a>
-<a href="#offers">Offers</a>
-<a href="#order">Order</a>
-<a href="#orders">My Orders</a>
-<a href="#track">Track Order</a>
-<a href="#contact">Contact</a>
+<a href="#home">Home</a><a href="#shop">Shop</a><a href="#offers">Offers</a><a href="#order">Order</a><a href="#orders">My Orders</a><a href="#track">Track</a><a href="#contact">Contact</a>
 </nav>
-</div>
-</header>
+</div></header>
 
 <div class="offer" id="offers">🎉 GET 10% OFF ON YOUR ORDER</div>
 
@@ -127,132 +84,245 @@ footer{background:#087c59;color:white;text-align:center;padding:25px;margin-top:
 <div class="category"><h3>❤️ Heart Care</h3><p>Tell us the medicine you need.</p></div>
 <div class="category"><h3>🧴 Skin Care</h3><p>Tell us the medicine you need.</p></div>
 <div class="category"><h3>👶 Baby Care</h3><p>Tell us the medicine you need.</p></div>
-</div>
-</section>
+</div></section>
 
-<section id="order" class="order-panel" style="display:block;">
+<section id="order">
 <h2>Place New Order</h2>
 <div class="box">
-<p>Enter your details and the medicines you need. You can add more than one medicine to the same order.</p>
-<input type="text" id="customerName" class="input" placeholder="Full Name">
-<input type="tel" id="customerMobile" class="input" placeholder="10-digit Mobile Number" maxlength="10">
+<p class="note">No customer login is required. Add one or more medicines.</p>
+<input id="customerName" class="input" type="text" placeholder="Full Name">
+<input id="customerMobile" class="input" type="tel" maxlength="10" placeholder="10-digit Mobile Number">
 <textarea id="orderAddress" class="input" placeholder="Delivery Address"></textarea>
+
 <div id="medicineList">
 <div class="medicine-row">
 <div class="medicine-row-header"><span class="medicine-number">Medicine 1</span></div>
-<input type="text" class="input medicine-name" placeholder="Medicine / Product Name">
-<input type="number" class="input medicine-quantity" placeholder="Quantity" min="1" value="1">
-<select class="input medicine-unit" aria-label="Medicine unit">
-<option value="Tablet" selected>Tablet</option><option value="Strip">Strip</option>
-</select>
-</div></div>
-<div class="add-medicine-box"><button type="button" class="btn btn-secondary" id="addMedicineBtn">➕ Add Another Medicine</button></div>
-<div style="margin:15px 0;">
-<label for="estimatedDeliveryTime" style="display:block;color:#087c59;font-weight:bold;margin-bottom:8px;">🚚 Estimated Delivery Time</label>
+<input class="input medicine-name" type="text" placeholder="Medicine / Product Name">
+<input class="input medicine-quantity" type="number" min="1" value="1" placeholder="Quantity">
+<select class="input medicine-unit"><option>Tablet</option><option>Strip</option><option>Bottle</option><option>Tube</option><option>Box</option><option>Other</option></select>
+</div>
+</div>
+<button class="btn btn-secondary" id="addMedicineBtn" type="button">➕ Add Another Medicine</button>
+
+<label style="display:block;color:#087c59;font-weight:700;margin-top:18px">🚚 Estimated Delivery Time</label>
 <select id="estimatedDeliveryTime" class="input">
-<option value="30–60 minutes" selected>30–60 minutes</option><option value="1–2 hours">1–2 hours</option><option value="2–4 hours">2–4 hours</option><option value="Today">Today</option>
+<option value="30–60 minutes">30–60 minutes</option>
+<option value="1–2 hours">1–2 hours</option>
+<option value="2–4 hours">2–4 hours</option>
+<option value="Today">Today</option>
+<option value="Tomorrow">Tomorrow</option>
 </select>
-<p style="font-size:14px;color:#555;margin-top:5px;">This is an estimated time and may change depending on order and delivery conditions.</p>
-</div>
-<div style="margin:15px 0;">
-<label for="paymentMethod" style="display:block;color:#087c59;font-weight:bold;margin-bottom:8px;">💳 Payment Method</label>
-<select id="paymentMethod" class="input"><option value="Cash on Delivery" selected>Cash on Delivery (COD)</option></select>
-<p style="font-size:14px;color:#555;margin-top:5px;">Pay in cash when your medicine is delivered.</p>
-</div>
+
+<label style="display:block;color:#087c59;font-weight:700;margin-top:12px">💳 Payment Method</label>
+<select id="paymentMethod" class="input"><option value="Cash on Delivery">Cash on Delivery (COD)</option></select>
+
 <div class="whatsapp-box">
-<h3>📄 Prescription Upload</h3><p>If your medicine requires a prescription, select your prescription file below.</p>
-<input type="file" id="prescriptionFile" class="file-input" accept=".jpg,.jpeg,.png,.pdf">
+<h3 style="color:#087c59">📄 Prescription</h3>
+<p class="note">If needed, select JPG, PNG or PDF. The file name is saved with the order; use WhatsApp to send the actual prescription.</p>
+<input id="prescriptionFile" class="file-input" type="file" accept=".jpg,.jpeg,.png,.pdf">
 <div id="fileInfo" class="file-info">No prescription selected.</div>
-<button type="button" class="btn btn-whatsapp" id="whatsappPrescriptionBtn">📱 Send Prescription on WhatsApp</button>
+<button class="btn btn-whatsapp" id="whatsappPrescriptionBtn" type="button">📱 Send Prescription on WhatsApp</button>
 </div>
-<br><button class="btn" id="placeOrderBtn">Place Order</button>
+<br>
+<button class="btn" id="placeOrderBtn" type="button">Place Order</button>
 <div id="orderMessage" class="message"></div>
 </div></section>
-<section id="orders" class="history-panel" style="display:block;">
-<h2>Order History</h2><div class="box">
-<p>Login is not required. Enter your mobile number and Order ID to check your order.</p>
-<input type="tel" id="historyMobile" class="input" placeholder="10-digit Mobile Number" maxlength="10">
-<input type="text" id="historyOrderId" class="input" placeholder="Order ID (Example: ORD-123456789)">
-<button class="btn" id="checkHistoryBtn">🔎 Check Order History</button>
-<div id="historyMessage" class="message"></div><div id="orderHistory" style="margin-top:20px;"></div>
+
+<section id="orders">
+<h2>📋 My Orders / Order History</h2>
+<div class="box">
+<p class="note">Enter the same Mobile Number and Order ID. No login is required.</p>
+<input id="historyMobile" class="input" type="tel" maxlength="10" placeholder="10-digit Mobile Number">
+<input id="historyOrderId" class="input" type="text" placeholder="Order ID">
+<button class="btn" id="checkHistoryBtn" type="button">🔎 Check Order</button>
+<div id="historyMessage" class="message"></div>
+<div id="orderHistory"></div>
 </div></section>
-<section id="track" class="track-panel" style="display:block;">
-<h2>🔎 Track Your Order</h2><div class="box">
-<p>Use the same Mobile Number + Order ID to check your order.</p>
-<input type="tel" id="trackMobile" class="input" placeholder="10-digit Mobile Number" maxlength="10">
-<input type="text" id="trackOrderId" class="input" placeholder="Order ID (Example: ORD-123456789)">
-<button class="btn" id="trackOrderBtn">Track Order</button>
-<div id="trackMessage" class="message"></div><div id="trackResult" class="track-result"></div>
+
+<section id="track">
+<h2>🔎 Track Your Order</h2>
+<div class="box">
+<p class="note">Use Mobile Number + Order ID to see current status and estimated delivery.</p>
+<input id="trackMobile" class="input" type="tel" maxlength="10" placeholder="10-digit Mobile Number">
+<input id="trackOrderId" class="input" type="text" placeholder="Order ID">
+<button class="btn" id="trackOrderBtn" type="button">Track Order</button>
+<div id="trackMessage" class="message"></div>
+<div id="trackResult"></div>
 </div></section>
+
 <section id="contact">
 <h2>Contact Us</h2>
 <div class="box">
-<p>Need help with your medicine order?</p>
-<button class="btn btn-whatsapp" id="contactWhatsAppBtn">📱 Contact on WhatsApp</button>
-</div>
-</section>
+<p>Need help with your medicine order?</p><br>
+<button class="btn btn-whatsapp" id="contactWhatsAppBtn" type="button">📱 Contact on WhatsApp</button>
+</div></section>
 
-<footer>
-<p>© 2026 Online Medicine Delivery</p>
-<p>Healthcare at your doorstep.</p>
-</footer>
+<footer><p>© 2026 Online Medicine Delivery</p><p>Healthcare at your doorstep.</p></footer>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import {getFirestore,doc,setDoc,getDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-const firebaseConfig={authDomain:"online-medicine-delivery-74346.firebaseapp.com",projectId:"online-medicine-delivery-74346",storageBucket:"online-medicine-delivery-74346.firebasestorage.app",messagingSenderId:"1061955108881",appId:"1:1061955108881:web:64f36ad79b5c612a2171b0",measurementId:"G-LMHDFF01QC"};
+import {getFirestore,collection,query,where,getDocs,doc,setDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBfBAo9GW1bDu-IlFy_hha_uOdUmsRSiF8",
+  authDomain: "online-medicine-delivery-74346.firebaseapp.com",
+  projectId: "online-medicine-delivery-74346",
+  storageBucket: "online-medicine-delivery-74346.firebasestorage.app",
+  messagingSenderId: "1061955108881",
+  appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
+  measurementId: "G-LMHDFF01QC"
+};
 const app=initializeApp(firebaseConfig),db=getFirestore(app);
-
 const $=id=>document.getElementById(id);
 const customerName=$("customerName"),customerMobile=$("customerMobile"),orderAddress=$("orderAddress");
-const medicineList=$("medicineList"),addMedicineBtn=$("addMedicineBtn"),estimatedDeliveryTime=$("estimatedDeliveryTime"),paymentMethod=$("paymentMethod");
-const placeOrderBtn=$("placeOrderBtn"),orderMessage=$("orderMessage"),prescriptionFile=$("prescriptionFile"),fileInfo=$("fileInfo");
+const medicineList=$("medicineList"),addMedicineBtn=$("addMedicineBtn");
+const estimatedDeliveryTime=$("estimatedDeliveryTime"),paymentMethod=$("paymentMethod");
+const placeOrderBtn=$("placeOrderBtn"),orderMessage=$("orderMessage");
+const prescriptionFile=$("prescriptionFile"),fileInfo=$("fileInfo");
 const whatsappPrescriptionBtn=$("whatsappPrescriptionBtn"),contactWhatsAppBtn=$("contactWhatsAppBtn");
 const historyMobile=$("historyMobile"),historyOrderId=$("historyOrderId"),checkHistoryBtn=$("checkHistoryBtn"),historyMessage=$("historyMessage"),orderHistory=$("orderHistory");
 const trackMobile=$("trackMobile"),trackOrderId=$("trackOrderId"),trackOrderBtn=$("trackOrderBtn"),trackMessage=$("trackMessage"),trackResult=$("trackResult");
 
-function msg(el,s,t){el.textContent=s;el.className="message "+t;el.style.display="block";}
-function mobile(v){return String(v||"").replace(/\D/g,"");}
-function validMobile(v){return /^\d{10}$/.test(mobile(v));}
-function esc(v){return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
-function money(v){return v===null||v===undefined||v===""||Number.isNaN(Number(v))?"Not updated yet":"₹"+Number(v).toFixed(2);}
-function amount(o){return `<div class="amount-box"><div class="amount-row"><span>💰 Original MRP</span><strong>${money(o.originalMRP)}</strong></div><div class="amount-row"><span>🏷️ Discount Amount</span><strong>${money(o.discountAmount)}</strong></div><div class="amount-row amount-total"><span>💵 Payable Amount</span><strong>${money(o.payableAmount)}</strong></div><div class="amount-row"><span>💳 Customer Payment</span><strong>${money(o.paymentAmount)}</strong></div></div>`;}
-function medicines(arr){return Array.isArray(arr)?arr.map((m,i)=>`<div class="medicine-row"><p><strong>Medicine ${i+1}:</strong> ${esc(m.name||"N/A")}</p><p><strong>Quantity:</strong> ${esc(String(m.quantity||""))} ${esc(m.unit||"Tablet")}</p></div>`).join(""):"<p>No medicine details available.</p>";}
-function render(o,target){target.innerHTML=`<div class="order-card"><p><strong>🆔 Order ID:</strong> ${esc(o.orderId||"N/A")}</p>${medicines(o.medicines)}<p><strong>🚚 Estimated Delivery:</strong> ${esc(o.estimatedDeliveryTime||"Not updated yet")}</p><p><strong>💳 Payment Method:</strong> ${esc(o.paymentMethod||"Cash on Delivery")}</p><p><strong>🚚 Order Status:</strong></p><span class="status">${esc(o.status||"Pending")}</span>${amount(o)}<p style="margin-top:15px;"><strong>💳 Payment Status:</strong> ${esc(o.paymentStatus||"Pending")}</p></div>`;}
+function show(el,text,type){el.textContent=text;el.className="message "+type;el.style.display="block";}
+function cleanMobile(v){return String(v||"").replace(/\D/g,"");}
+function validMobile(v){return /^\d{10}$/.test(cleanMobile(v));}
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
+function money(v){return v===null||v===undefined||v===""?"Not updated yet":"₹"+Number(v).toFixed(2);}
 
-let count=1;
-function row(n,remove){return `<div class="medicine-row"><div class="medicine-row-header"><span class="medicine-number">Medicine ${n}</span>${remove?'<button type="button" class="remove-medicine">❌ Remove</button>':""}</div><input type="text" class="input medicine-name" placeholder="Medicine / Product Name"><input type="number" class="input medicine-quantity" placeholder="Quantity" min="1" value="1"><select class="input medicine-unit"><option value="Tablet" selected>Tablet</option><option value="Strip">Strip</option></select></div>`;}
-addMedicineBtn.onclick=()=>{count++;const d=document.createElement("div");d.innerHTML=row(count,true);medicineList.appendChild(d.firstElementChild);renumber();};
-medicineList.onclick=e=>{if(e.target.classList.contains("remove-medicine")){const r=medicineList.querySelectorAll(".medicine-row");if(r.length<=1)return alert("At least one medicine is required.");e.target.closest(".medicine-row").remove();renumber();}};
-function renumber(){medicineList.querySelectorAll(".medicine-row").forEach((r,i)=>r.querySelector(".medicine-number").textContent="Medicine "+(i+1));count=medicineList.querySelectorAll(".medicine-row").length;}
-function getMeds(){const a=[];for(const r of medicineList.querySelectorAll(".medicine-row")){const n=r.querySelector(".medicine-name").value.trim(),q=Number(r.querySelector(".medicine-quantity").value),u=r.querySelector(".medicine-unit").value;if(!n)return{error:"Please enter all medicine names."};if(!q||q<1)return{error:"Please enter a valid quantity for every medicine."};a.push({name:n,quantity:q,unit:u});}return{medicines:a};}
-function newId(){return "ORD-"+Date.now()+"-"+Math.random().toString(36).slice(2,8).toUpperCase();}
+function medicinesHTML(arr){
+  if(!Array.isArray(arr)||!arr.length)return "<p>No medicine details available.</p>";
+  return arr.map((m,i)=>`<div class="medicine-row"><p><strong>Medicine ${i+1}:</strong> ${esc(m.name||"N/A")}</p><p><strong>Quantity:</strong> ${esc(m.quantity)} ${esc(m.unit||"")}</p></div>`).join("");
+}
+function amountsHTML(o){
+  return `<div class="amount-box">
+  <div class="amount-row"><span>💰 Original MRP</span><strong>${money(o.originalMRP)}</strong></div>
+  <div class="amount-row"><span>🏷️ Discount Amount</span><strong>${money(o.discountAmount)}</strong></div>
+  <div class="amount-row amount-total"><span>💵 Payable Amount</span><strong>${money(o.payableAmount)}</strong></div>
+  <div class="amount-row"><span>💳 Customer Payment</span><strong>${money(o.paymentAmount)}</strong></div>
+  </div>`;
+}
+function renderOrder(o,target){
+  target.innerHTML=`<div class="order-card">
+  <p><strong>🆔 Order ID:</strong> ${esc(o.orderId||"N/A")}</p>
+  ${medicinesHTML(o.medicines)}
+  <p><strong>🚚 Estimated Delivery:</strong> ${esc(o.estimatedDeliveryTime||"Not updated yet")}</p>
+  <p><strong>💳 Payment Method:</strong> ${esc(o.paymentMethod||"Cash on Delivery")}</p>
+  <p><strong>📦 Order Status:</strong> <span class="status">${esc(o.status||"Pending")}</span></p>
+  ${amountsHTML(o)}
+  <p><strong>💳 Payment Status:</strong> ${esc(o.paymentStatus||"Pending")}</p>
+  </div>`;
+}
+
+let medicineCount=1;
+function medicineRow(n,canRemove){
+  return `<div class="medicine-row">
+  <div class="medicine-row-header"><span class="medicine-number">Medicine ${n}</span>${canRemove?'<button type="button" class="remove-medicine">❌ Remove</button>':""}</div>
+  <input class="input medicine-name" type="text" placeholder="Medicine / Product Name">
+  <input class="input medicine-quantity" type="number" min="1" value="1" placeholder="Quantity">
+  <select class="input medicine-unit"><option>Tablet</option><option>Strip</option><option>Bottle</option><option>Tube</option><option>Box</option><option>Other</option></select>
+  </div>`;
+}
+function renumber(){
+  const rows=medicineList.querySelectorAll(".medicine-row");
+  rows.forEach((r,i)=>r.querySelector(".medicine-number").textContent="Medicine "+(i+1));
+  medicineCount=rows.length;
+}
+addMedicineBtn.onclick=()=>{medicineCount++;medicineList.insertAdjacentHTML("beforeend",medicineRow(medicineCount,true));};
+medicineList.onclick=e=>{
+  if(e.target.classList.contains("remove-medicine")){
+    if(medicineList.querySelectorAll(".medicine-row").length<=1)return;
+    e.target.closest(".medicine-row").remove();renumber();
+  }
+};
+function getMedicines(){
+  const result=[];
+  for(const row of medicineList.querySelectorAll(".medicine-row")){
+    const name=row.querySelector(".medicine-name").value.trim();
+    const quantity=Number(row.querySelector(".medicine-quantity").value);
+    const unit=row.querySelector(".medicine-unit").value;
+    if(!name)return{error:"Please enter all medicine names."};
+    if(!Number.isFinite(quantity)||quantity<1)return{error:"Please enter a valid quantity."};
+    result.push({name,quantity,unit});
+  }
+  return{medicines:result};
+}
+function newOrderId(){return "ORD-"+Date.now()+"-"+Math.random().toString(36).slice(2,7).toUpperCase();}
 
 placeOrderBtn.onclick=async()=>{
- const n=customerName.value.trim(),m=mobile(customerMobile.value),a=orderAddress.value.trim(),g=getMeds();
- if(!n)return msg(orderMessage,"Please enter your full name.","error");
- if(!validMobile(m))return msg(orderMessage,"Please enter a valid 10-digit mobile number.","error");
- if(!a)return msg(orderMessage,"Please enter delivery address.","error");
- if(g.error)return msg(orderMessage,g.error,"error");
- try{
-  placeOrderBtn.disabled=true;const id=newId(),file=prescriptionFile.files[0];
-  await setDoc(doc(db,"publicOrders",id),{orderId:id,customerName:n,customerPhone:m,address:a,medicines:g.medicines,estimatedDeliveryTime:estimatedDeliveryTime.value,paymentMethod:paymentMethod.value,status:"Pending",originalMRP:null,discountAmount:null,discountPercent:10,payableAmount:null,paymentAmount:null,paymentStatus:"Pending",prescriptionSelected:!!file,prescriptionFileName:file?file.name:"",createdAt:serverTimestamp()});
-  msg(orderMessage,"Order placed successfully! Your Order ID is: "+id,"success");historyMobile.value=m;historyOrderId.value=id;trackMobile.value=m;trackOrderId.value=id;
-  medicineList.innerHTML=row(1,false);count=1;prescriptionFile.value="";fileInfo.textContent="No prescription selected.";
- }catch(e){console.error(e);msg(orderMessage,"Could not place order. Please try again.","error");}finally{placeOrderBtn.disabled=false;}
+  const name=customerName.value.trim(),phone=cleanMobile(customerMobile.value),address=orderAddress.value.trim();
+  const med=getMedicines();
+  if(!name)return show(orderMessage,"Please enter your full name.","error");
+  if(!validMobile(phone))return show(orderMessage,"Please enter a valid 10-digit mobile number.","error");
+  if(!address)return show(orderMessage,"Please enter delivery address.","error");
+  if(med.error)return show(orderMessage,med.error,"error");
+  placeOrderBtn.disabled=true;
+  try{
+    const id=newOrderId(),file=prescriptionFile.files[0];
+    const orderData={
+      orderId:id,
+      customerName:name,
+      customerPhone:phone,
+      address:address,
+      medicines:med.medicines,
+      estimatedDeliveryTime:estimatedDeliveryTime.value,
+      paymentMethod:paymentMethod.value,
+      status:"Pending",
+      originalMRP:null,
+      discountPercent:10,
+      discountAmount:null,
+      payableAmount:null,
+      paymentAmount:null,
+      paymentStatus:"Pending",
+      prescriptionSelected:!!file,
+      prescriptionFileName:file?file.name:"",
+      createdAt:serverTimestamp()
+    };
+    await setDoc(doc(db,"publicOrders",id),orderData);
+    show(orderMessage,"Order placed successfully! Order ID: "+id,"success");
+    historyMobile.value=phone;historyOrderId.value=id;trackMobile.value=phone;trackOrderId.value=id;
+    medicineList.innerHTML=medicineRow(1,false);medicineCount=1;
+    prescriptionFile.value="";fileInfo.textContent="No prescription selected.";
+  }catch(error){
+    console.error(error);show(orderMessage,"Could not place order: "+error.message,"error");
+  }finally{placeOrderBtn.disabled=false;}
 };
 
-async function lookup(m,id){const s=await getDoc(doc(db,"publicOrders",id));if(!s.exists())return null;const o=s.data();return mobile(o.customerPhone)===m?o:null;}
-checkHistoryBtn.onclick=async()=>{const m=mobile(historyMobile.value),id=historyOrderId.value.trim();orderHistory.innerHTML="";if(!validMobile(m))return msg(historyMessage,"Please enter a valid 10-digit mobile number.","error");if(!id)return msg(historyMessage,"Please enter your Order ID.","error");try{checkHistoryBtn.disabled=true;const o=await lookup(m,id);if(!o)return msg(historyMessage,"Order not found. Please check your Mobile Number and Order ID.","error");msg(historyMessage,"Order found successfully.","success");render(o,orderHistory);}catch(e){console.error(e);msg(historyMessage,"Could not check order. Please try again.","error");}finally{checkHistoryBtn.disabled=false;}};
-trackOrderBtn.onclick=async()=>{const m=mobile(trackMobile.value),id=trackOrderId.value.trim();trackResult.innerHTML="";if(!validMobile(m))return msg(trackMessage,"Please enter a valid 10-digit mobile number.","error");if(!id)return msg(trackMessage,"Please enter your Order ID.","error");try{trackOrderBtn.disabled=true;const o=await lookup(m,id);if(!o)return msg(trackMessage,"Order not found. Please check your Mobile Number and Order ID.","error");msg(trackMessage,"Order found successfully.","success");render(o,trackResult);}catch(e){console.error(e);msg(trackMessage,"Could not track order. Please try again.","error");}finally{trackOrderBtn.disabled=false;}};
+async function findOrder(phone,id){
+  const q=query(collection(db,"publicOrders"),where("orderId","==",id));
+  const snap=await getDocs(q);
+  if(snap.empty)return null;
+  let found=null;
+  snap.forEach(s=>{const o=s.data();if(cleanMobile(o.customerPhone)===phone)found=o;});
+  return found;
+}
+async function checkOrder(phone,id,messageEl,resultEl,button){
+  if(!validMobile(phone))return show(messageEl,"Please enter a valid 10-digit mobile number.","error");
+  if(!id)return show(messageEl,"Please enter your Order ID.","error");
+  button.disabled=true;resultEl.innerHTML="";
+  try{
+    const o=await findOrder(phone,id.trim());
+    if(!o)return show(messageEl,"Order not found. Please check your Mobile Number and Order ID.","error");
+    show(messageEl,"Order found successfully.","success");renderOrder(o,resultEl);
+  }catch(error){console.error(error);show(messageEl,"Could not check the order: "+error.message,"error");}
+  finally{button.disabled=false;}
+}
+checkHistoryBtn.onclick=()=>checkOrder(cleanMobile(historyMobile.value),historyOrderId.value,historyMessage,orderHistory,checkHistoryBtn);
+trackOrderBtn.onclick=()=>checkOrder(cleanMobile(trackMobile.value),trackOrderId.value,trackMessage,trackResult,trackOrderBtn);
 
-prescriptionFile.onchange=()=>{const f=prescriptionFile.files[0];if(!f){fileInfo.textContent="No prescription selected.";return;}if(!["image/jpeg","image/png","application/pdf"].includes(f.type)){fileInfo.textContent="Please select JPG, PNG or PDF.";prescriptionFile.value="";return;}fileInfo.textContent="Selected: "+f.name;};
-whatsappPrescriptionBtn.onclick=()=>{const f=prescriptionFile.files[0];if(!f)return alert("Please select your prescription first.");const text="Hello, I want to send my prescription for medicine delivery.\n\nCustomer: "+customerName.value.trim()+"\nMobile: "+mobile(customerMobile.value)+"\nPrescription file: "+f.name;window.open("https://wa.me/916009415805?text="+encodeURIComponent(text),"_blank");};
-contactWhatsAppBtn.onclick=()=>window.open("https://wa.me/916009415805?text="+encodeURIComponent("Hello, I need help with my medicine order."),"_blank");
-
-if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(console.error));
+prescriptionFile.onchange=()=>{
+  const f=prescriptionFile.files[0];
+  if(!f){fileInfo.textContent="No prescription selected.";return;}
+  const ok=["image/jpeg","image/png","application/pdf"].includes(f.type);
+  if(!ok){prescriptionFile.value="";fileInfo.textContent="Please select JPG, PNG or PDF.";return;}
+  if(f.size>50*1024*1024){prescriptionFile.value="";fileInfo.textContent="File must be 50 MB or smaller.";return;}
+  fileInfo.textContent="Selected: "+f.name;
+};
+whatsappPrescriptionBtn.onclick=()=>{
+  const f=prescriptionFile.files[0];
+  if(!f)return alert("Please select your prescription first.");
+  const text="💊 ONLINE MEDICINE DOORSTEP DELIVERY\n📄 Prescription file: "+f.name+"\n📞 Please verify my prescription and order.";
+  window.open("https://wa.me/916009415805?text="+encodeURIComponent(text),"_blank");
+};
+contactWhatsAppBtn.onclick=()=>window.open("https://wa.me/916009415805","_blank");
 </script>
-
 </body>
 </html>
