@@ -230,6 +230,16 @@ footer{background:#087c59;color:white;text-align:center;padding:25px;margin-top:
 <section id="orders" class="history-panel">
 <h2>My Order History</h2>
 <div class="box"><div id="orderHistory">Loading orders...</div></div>
+
+<div class="box" style="margin-top:20px;">
+<h3 style="color:#087c59;margin-bottom:10px;">🔎 View Order Without Login</h3>
+<p>Enter your Order ID and the mobile number used when placing the order.</p>
+<input type="text" id="guestHistoryOrderId" class="input" placeholder="Order ID (Example: ORD-123456789)">
+<input type="text" id="guestHistoryMobile" class="input" placeholder="10-digit Mobile Number" maxlength="10">
+<button class="btn" id="guestHistoryBtn">View My Order</button>
+<div id="guestHistoryMessage" class="message"></div>
+<div id="guestHistoryResult" class="track-result"></div>
+</div>
 </section>
 
 <section id="track" class="track-panel">
@@ -323,6 +333,11 @@ const trackOrderId=document.getElementById("trackOrderId");
 const trackOrderBtn=document.getElementById("trackOrderBtn");
 const trackMessage=document.getElementById("trackMessage");
 const trackResult=document.getElementById("trackResult");
+const guestHistoryOrderId=document.getElementById("guestHistoryOrderId");
+const guestHistoryMobile=document.getElementById("guestHistoryMobile");
+const guestHistoryBtn=document.getElementById("guestHistoryBtn");
+const guestHistoryMessage=document.getElementById("guestHistoryMessage");
+const guestHistoryResult=document.getElementById("guestHistoryResult");
 
 function showMessage(element,message,type){
   element.textContent=message;
@@ -579,6 +594,7 @@ placeOrderBtn.addEventListener("click",async()=>{
       medicines:medicines,
       address:address,
       paymentMethod:paymentMethod.value,
+      estimatedDeliveryTime:estimatedDeliveryTime.value,
       status:"Pending",
       originalMRP:null,
       discountAmount:null,
@@ -658,6 +674,7 @@ async function loadOrderHistory(user){
       ${medicinesHtml}
       <p><strong>Address:</strong> ${escapeHtml(order.address||"N/A")}</p>
       <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
+      ${order.estimatedDeliveryTime ? `<p><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime)}</p>` : ""}
       <p><strong>Prescription:</strong>
         ${order.prescriptionFileName?escapeHtml(order.prescriptionFileName):"Not selected"}
       </p>
@@ -713,6 +730,80 @@ function formatMoney(value){
   }
   return "₹"+Number(value).toFixed(2);
 }
+
+function renderOrderDetails(order){
+  let medicinesHtml="";
+  if(Array.isArray(order.medicines)){
+    order.medicines.forEach((item,index)=>{
+      medicinesHtml+=`
+      <div class="medicine-row">
+        <p><strong>Medicine ${index+1}:</strong> ${escapeHtml(item.name||"N/A")}</p>
+        <p><strong>Quantity:</strong> ${escapeHtml(String(item.quantity||""))} ${escapeHtml(item.unit||"Tablet")}</p>
+      </div>`;
+    });
+  }
+
+  return `
+    <div class="order-card">
+      <p><strong>🆔 Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
+      ${medicinesHtml}
+      <p><strong>🚚 Delivery Address:</strong> ${escapeHtml(order.address||"N/A")}</p>
+      <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
+      <p><strong>📄 Prescription:</strong> ${order.prescriptionFileName?escapeHtml(order.prescriptionFileName):"Not selected"}</p>
+      <p><strong>🚚 Order Status:</strong></p>
+      <span class="status">${escapeHtml(order.status||"Pending")}</span>
+      ${order.estimatedDeliveryTime ? `<p style="margin-top:12px;"><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime)}</p>` : ""}
+      ${createAmountHtml(order)}
+      <p style="margin-top:15px;"><strong>💳 Payment Status:</strong> ${escapeHtml(order.paymentStatus||"Pending")}</p>
+    </div>`;
+}
+
+
+guestHistoryBtn.addEventListener("click",async()=>{
+  const orderId=guestHistoryOrderId.value.trim();
+  const mobile=guestHistoryMobile.value.trim();
+  guestHistoryResult.innerHTML="";
+
+  if(!orderId||!mobile){
+    showMessage(guestHistoryMessage,"Please enter your Order ID and mobile number.","error");
+    return;
+  }
+
+  if(!/^\d{10}$/.test(mobile)){
+    showMessage(guestHistoryMessage,"Please enter a valid 10-digit mobile number.","error");
+    return;
+  }
+
+  try{
+    guestHistoryBtn.disabled=true;
+
+    const historyQuery=query(
+      collection(db,"orders"),
+      where("orderId","==",orderId),
+      where("customerPhone","==",mobile)
+    );
+
+    const snapshot=await getDocs(historyQuery);
+
+    if(snapshot.empty){
+      showMessage(guestHistoryMessage,"Order not found. Please check your Order ID and mobile number.","error");
+      return;
+    }
+
+    let order=null;
+    snapshot.forEach(docSnap=>{
+      order={id:docSnap.id,...docSnap.data()};
+    });
+
+    guestHistoryResult.innerHTML=renderOrderDetails(order);
+    showMessage(guestHistoryMessage,"Order found successfully.","success");
+  }catch(error){
+    console.error("Guest order history error:",error);
+    showMessage(guestHistoryMessage,"Could not load the order. Please try again.","error");
+  }finally{
+    guestHistoryBtn.disabled=false;
+  }
+});
 
 trackOrderBtn.addEventListener("click",async()=>{
   const user=auth.currentUser;
@@ -784,6 +875,7 @@ trackOrderBtn.addEventListener("click",async()=>{
       </p>
       <p><strong>🚚 Order Status:</strong></p>
       <span class="status">${escapeHtml(order.status||"Pending")}</span>
+      ${order.estimatedDeliveryTime ? `<p style="margin-top:12px;"><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime)}</p>` : ""}
       ${createAmountHtml(order)}
       <p style="margin-top:15px;">
         <strong>💳 Payment Status:</strong>
@@ -882,4 +974,3 @@ if("serviceWorker" in navigator){
 
 </body>
 </html>
-
