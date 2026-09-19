@@ -237,7 +237,7 @@ placeOrderBtn.onclick=async()=>{
  if(g.error)return msg(orderMessage,g.error,"error");
  try{
   placeOrderBtn.disabled=true;const id=newId(),file=prescriptionFile.files[0];
-  await setDoc(doc(db,"publicOrders",id),{orderId:id,customerName:n,customerPhone:m,medicines:g.medicines,estimatedDeliveryTime:estimatedDeliveryTime.value,paymentMethod:paymentMethod.value,status:"Pending",originalMRP:null,discountAmount:null,discountPercent:10,payableAmount:null,paymentAmount:null,paymentStatus:"Pending",prescriptionSelected:!!file,prescriptionFileName:file?file.name:"",createdAt:serverTimestamp()});
+  await setDoc(doc(db,"publicOrders",id),{orderId:id,customerName:n,customerPhone:m,address:a,medicines:g.medicines,estimatedDeliveryTime:estimatedDeliveryTime.value,paymentMethod:paymentMethod.value,status:"Pending",originalMRP:null,discountAmount:null,discountPercent:10,payableAmount:null,paymentAmount:null,paymentStatus:"Pending",prescriptionSelected:!!file,prescriptionFileName:file?file.name:"",createdAt:serverTimestamp()});
   msg(orderMessage,"Order placed successfully! Your Order ID is: "+id,"success");historyMobile.value=m;historyOrderId.value=id;trackMobile.value=m;trackOrderId.value=id;
   medicineList.innerHTML=row(1,false);count=1;prescriptionFile.value="";fileInfo.textContent="No prescription selected.";
  }catch(e){console.error(e);msg(orderMessage,"Could not place order. Please try again.","error");}finally{placeOrderBtn.disabled=false;}
