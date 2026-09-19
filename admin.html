@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>Online Medicine Doorstep Delivery - Admin Panel</title>
 
 <style>
@@ -19,7 +20,7 @@ body{
 
 header{
   background:#087c59;
-  color:white;
+  color:#fff;
   padding:20px 15px;
   text-align:center;
 }
@@ -41,7 +42,7 @@ header p{
 
 .card,
 .order-card{
-  background:white;
+  background:#fff;
   padding:20px;
   border-radius:12px;
   box-shadow:0 3px 14px rgba(0,0,0,.08);
@@ -53,8 +54,7 @@ header p{
 }
 
 input,
-select,
-textarea{
+select{
   width:100%;
   padding:12px;
   margin:6px 0 12px;
@@ -81,37 +81,33 @@ button:disabled{
 .save-btn,
 .confirm-btn{
   background:#087c59;
-  color:white;
+  color:#fff;
 }
 
 .out-btn{
   background:#f39c12;
-  color:white;
+  color:#fff;
 }
 
 .delivered-btn{
   background:#198754;
-  color:white;
+  color:#fff;
 }
 
-.delete-btn{
+.delete-btn,
+.logout-btn{
   background:#d62828;
-  color:white;
+  color:#fff;
 }
 
 .refresh-btn{
   background:#555;
-  color:white;
-}
-
-.logout-btn{
-  background:#d62828;
-  color:white;
+  color:#fff;
 }
 
 .whatsapp-btn{
   background:#25D366;
-  color:white;
+  color:#fff;
 }
 
 .top-buttons{
@@ -189,9 +185,10 @@ button:disabled{
   background:#fff3cd;
 }
 
-.small-note{
-  font-size:13px;
-  color:#666;
+.loading{
+  text-align:center;
+  padding:25px;
+  font-weight:bold;
 }
 
 .empty{
@@ -199,17 +196,12 @@ button:disabled{
   padding:30px;
 }
 
-.loading{
-  text-align:center;
-  padding:25px;
-  font-weight:bold;
-}
-
 .order-actions{
-  margin-top:12px;
+  margin-top:15px;
 }
 
 @media(max-width:650px){
+
   .grid,
   .top-buttons{
     grid-template-columns:1fr;
@@ -241,65 +233,71 @@ button:disabled{
 
 <div class="container">
 
-  <!-- LOGIN -->
-  <div id="loginSection" class="card">
+<!-- ================= LOGIN ================= -->
 
-    <h2>🔐 Admin Login</h2>
+<div id="loginSection" class="card">
 
-    <input
-      id="email"
-      type="email"
-      placeholder="Admin Email"
-      autocomplete="username"
-    >
+  <h2>🔐 Admin Login</h2>
 
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
+  <input
+    id="email"
+    type="email"
+    placeholder="Admin Email"
+    autocomplete="username"
+  >
 
-    <button id="loginBtn" class="login-btn">
-      Login
-    </button>
+  <input
+    id="password"
+    type="password"
+    placeholder="Password"
+    autocomplete="current-password"
+  >
 
-    <div id="loginMessage" class="message"></div>
+  <button id="loginBtn" class="login-btn">
+    🔐 Login
+  </button>
 
-  </div>
+  <div id="loginMessage" class="message"></div>
+
+</div>
 
 
-  <!-- ADMIN -->
-  <div id="adminSection" class="hidden">
+<!-- ================= ADMIN ================= -->
 
-    <div class="card">
+<div id="adminSection" class="hidden">
 
-      <h2>📦 Order Management</h2>
+  <div class="card">
 
-      <div class="top-buttons">
+    <h2>📦 Order Management</h2>
 
-        <button id="refreshBtn" class="refresh-btn">
-          🔄 Refresh Orders
-        </button>
+    <div class="top-buttons">
 
-        <button id="logoutBtn" class="logout-btn">
-          🚪 Logout
-        </button>
+      <button id="refreshBtn" class="refresh-btn">
+        🔄 Refresh Orders
+      </button>
 
-      </div>
-
-      <div id="adminMessage" class="message"></div>
+      <button id="logoutBtn" class="logout-btn">
+        🚪 Logout
+      </button>
 
     </div>
 
-    <div id="ordersContainer"></div>
+    <div id="adminMessage" class="message"></div>
 
   </div>
+
+  <div id="ordersContainer"></div>
+
+</div>
 
 </div>
 
 
 <script type="module">
+
+/* =====================================================
+   FIREBASE IMPORT
+===================================================== */
 
 import {
   initializeApp
@@ -309,7 +307,9 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
@@ -323,25 +323,38 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =========================================
+/* =====================================================
    FIREBASE CONFIG
-========================================= */
-
+===================================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBmB8riOCFLi670mu8NXAI2kwFj4973aas",
-  authDomain: "online-medicine-delivery-74346.firebaseapp.com",
-  projectId: "online-medicine-delivery-74346",
-  storageBucket: "online-medicine-delivery-74346.firebasestorage.app",
-  messagingSenderId: "1061955108881",
-  appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
-  measurementId: "G-LMHDFF01QC"
+
+  apiKey:
+    "AIzaSyBmB8riOCFLi670mu8NXAI2kwFj4973aas",
+
+  authDomain:
+    "online-medicine-delivery-74346.firebaseapp.com",
+
+  projectId:
+    "online-medicine-delivery-74346",
+
+  storageBucket:
+    "online-medicine-delivery-74346.firebasestorage.app",
+
+  messagingSenderId:
+    "1061955108881",
+
+  appId:
+    "1:1061955108881:web:64f36ad79b5c612a2171b0",
+
+  measurementId:
+    "G-LMHDFF01QC"
 };
 
 
-/* =========================================
+/* =====================================================
    FIREBASE START
-========================================= */
+===================================================== */
 
 const app = initializeApp(firebaseConfig);
 
@@ -350,9 +363,19 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-/* =========================================
+/* =====================================================
+   KEEP LOGIN
+===================================================== */
+
+await setPersistence(
+  auth,
+  browserLocalPersistence
+);
+
+
+/* =====================================================
    ELEMENTS
-========================================= */
+===================================================== */
 
 const loginSection =
   document.getElementById("loginSection");
@@ -385,9 +408,9 @@ const ordersContainer =
   document.getElementById("ordersContainer");
 
 
-/* =========================================
+/* =====================================================
    MESSAGE
-========================================= */
+===================================================== */
 
 function showMessage(element,text,type){
 
@@ -400,9 +423,16 @@ function showMessage(element,text,type){
 }
 
 
-/* =========================================
+function hideMessage(element){
+
+  element.style.display = "none";
+
+}
+
+
+/* =====================================================
    ESCAPE HTML
-========================================= */
+===================================================== */
 
 function esc(value){
 
@@ -415,25 +445,36 @@ function esc(value){
 }
 
 
-/* =========================================
+/* =====================================================
    DATE
-========================================= */
+===================================================== */
 
 function formatDate(value){
 
   try{
 
-    if(!value) return "Not available";
+    if(!value){
+
+      return "Not available";
+
+    }
 
     let date;
 
-    if(value.seconds){
+    if(
+      typeof value === "object" &&
+      value.seconds !== undefined
+    ){
 
-      date = new Date(value.seconds * 1000);
+      date =
+        new Date(
+          value.seconds * 1000
+        );
 
     }else{
 
-      date = new Date(value);
+      date =
+        new Date(value);
 
     }
 
@@ -445,26 +486,37 @@ function formatDate(value){
 
     return date.toLocaleString("en-IN");
 
-  }catch(e){
+  }catch(error){
 
     return "Not available";
 
   }
-
 }
 
 
-/* =========================================
+/* =====================================================
    LOGIN
-========================================= */
+===================================================== */
 
-loginBtn.addEventListener("click",async()=>{
+loginBtn.addEventListener(
+  "click",
+  loginAdmin
+);
 
-  const e = email.value.trim();
 
-  const p = password.value;
+async function loginAdmin(){
 
-  if(!e || !p){
+  const adminEmail =
+    email.value.trim();
+
+  const adminPassword =
+    password.value;
+
+
+  hideMessage(loginMessage);
+
+
+  if(!adminEmail || !adminPassword){
 
     showMessage(
       loginMessage,
@@ -475,16 +527,19 @@ loginBtn.addEventListener("click",async()=>{
     return;
   }
 
+
   loginBtn.disabled = true;
 
-  loginBtn.textContent = "Logging in...";
+  loginBtn.textContent =
+    "⏳ Logging in...";
+
 
   try{
 
     await signInWithEmailAndPassword(
       auth,
-      e,
-      p
+      adminEmail,
+      adminPassword
     );
 
   }catch(error){
@@ -501,144 +556,190 @@ loginBtn.addEventListener("click",async()=>{
 
     loginBtn.disabled = false;
 
-    loginBtn.textContent = "Login";
+    loginBtn.textContent =
+      "🔐 Login";
 
   }
 
-});
+}
 
 
-/* =========================================
-   ENTER KEY LOGIN
-========================================= */
+/* =====================================================
+   ENTER KEY
+===================================================== */
 
-password.addEventListener("keydown",(e)=>{
+password.addEventListener(
+  "keydown",
+  event => {
 
-  if(e.key === "Enter"){
+    if(event.key === "Enter"){
 
-    loginBtn.click();
+      loginAdmin();
+
+    }
 
   }
+);
 
-});
 
-
-/* =========================================
+/* =====================================================
    LOGOUT
-========================================= */
+===================================================== */
 
-logoutBtn.addEventListener("click",async()=>{
+logoutBtn.addEventListener(
+  "click",
+  async()=>{
 
-  try{
-
-    await signOut(auth);
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-});
-
-
-/* =========================================
-   AUTH STATE
-========================================= */
-
-onAuthStateChanged(auth,async(user)=>{
-
-  if(!user){
-
-    loginSection.classList.remove("hidden");
-
-    adminSection.classList.add("hidden");
-
-    return;
-  }
-
-
-  try{
-
-    const adminRef =
-      doc(db,"admins",user.uid);
-
-    const adminSnap =
-      await getDoc(adminRef);
-
-
-    if(!adminSnap.exists()){
+    try{
 
       await signOut(auth);
 
-      showMessage(
-        loginMessage,
-        "This account is not registered as an admin.",
-        "error"
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+onAuthStateChanged(
+  auth,
+  async(user)=>{
+
+    if(!user){
+
+      loginSection.classList.remove(
+        "hidden"
       );
+
+      adminSection.classList.add(
+        "hidden"
+      );
+
+      ordersContainer.innerHTML = "";
 
       return;
     }
 
 
-    loginSection.classList.add("hidden");
+    try{
 
-    adminSection.classList.remove("hidden");
+      /*
+       ADMIN DOCUMENT
+
+       admins
+         └── USER UID
+      */
+
+      const adminRef =
+        doc(
+          db,
+          "admins",
+          user.uid
+        );
 
 
-    await loadOrders();
+      const adminSnap =
+        await getDoc(adminRef);
 
-  }catch(error){
 
-    console.error(error);
+      if(!adminSnap.exists()){
 
-    showMessage(
-      loginMessage,
-      "Admin verification failed: " +
-      error.message,
-      "error"
-    );
+        await signOut(auth);
+
+        showMessage(
+          loginMessage,
+          "❌ This account is not registered as an admin.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      loginSection.classList.add(
+        "hidden"
+      );
+
+      adminSection.classList.remove(
+        "hidden"
+      );
+
+
+      await loadOrders();
+
+
+    }catch(error){
+
+      console.error(error);
+
+      showMessage(
+        loginMessage,
+        "❌ Admin verification failed: " +
+        error.message,
+        "error"
+      );
+
+    }
 
   }
+);
 
-});
 
+/* =====================================================
+   LOAD COLLECTION
+===================================================== */
 
-/* =========================================
-   GET COLLECTION
-========================================= */
-
-async function loadCollection(collectionName){
+async function loadCollection(
+  collectionName
+){
 
   const snapshot =
     await getDocs(
-      collection(db,collectionName)
+      collection(
+        db,
+        collectionName
+      )
     );
+
 
   const result = [];
 
-  snapshot.forEach((item)=>{
 
-    result.push({
+  snapshot.forEach(
+    item => {
 
-      documentId:item.id,
+      result.push({
 
-      collectionName:collectionName,
+        documentId:
+          item.id,
 
-      data:item.data()
+        collectionName:
+          collectionName,
 
-    });
+        data:
+          item.data()
 
-  });
+      });
+
+    }
+  );
+
 
   return result;
 
 }
 
 
-/* =========================================
+/* =====================================================
    LOAD ORDERS
-========================================= */
+===================================================== */
 
 async function loadOrders(){
 
@@ -649,69 +750,117 @@ async function loadOrders(){
   `;
 
 
+  hideMessage(adminMessage);
+
+
   try{
 
-    const publicOrders =
-      await loadCollection("publicOrders");
-
+    let publicOrders = [];
 
     let oldOrders = [];
 
+
+    /* PUBLIC ORDERS */
+
     try{
 
-      oldOrders =
-        await loadCollection("orders");
+      publicOrders =
+        await loadCollection(
+          "publicOrders"
+        );
 
     }catch(error){
 
       console.log(
-        "orders collection not available:",
+        "publicOrders:",
         error.message
       );
 
     }
 
 
-    const orderMap = new Map();
+    /* OLD ORDERS */
+
+    try{
+
+      oldOrders =
+        await loadCollection(
+          "orders"
+        );
+
+    }catch(error){
+
+      console.log(
+        "orders:",
+        error.message
+      );
+
+    }
 
 
-    [
+    const allOrders = [
       ...oldOrders,
       ...publicOrders
-    ].forEach((item)=>{
-
-      const orderId =
-        item.data.orderId ||
-        item.documentId;
+    ];
 
 
-      if(
-        !orderMap.has(orderId) ||
-        item.collectionName === "publicOrders"
-      ){
+    const orderMap =
+      new Map();
 
-        orderMap.set(orderId,item);
+
+    allOrders.forEach(
+      item => {
+
+        const orderId =
+          item.data.orderId ||
+          item.documentId;
+
+
+        /*
+         If same order exists in both
+         collections, publicOrders wins.
+        */
+
+        if(
+          !orderMap.has(orderId) ||
+          item.collectionName ===
+          "publicOrders"
+        ){
+
+          orderMap.set(
+            orderId,
+            item
+          );
+
+        }
 
       }
-
-    });
+    );
 
 
     const orders =
-      Array.from(orderMap.values());
+      Array.from(
+        orderMap.values()
+      );
 
 
-    orders.sort((a,b)=>{
+    /* SORT NEWEST FIRST */
 
-      const aTime =
-        a.data.createdAt?.seconds || 0;
+    orders.sort(
+      (a,b)=>{
 
-      const bTime =
-        b.data.createdAt?.seconds || 0;
+        const aTime =
+          a.data.createdAt?.seconds ||
+          0;
 
-      return bTime - aTime;
+        const bTime =
+          b.data.createdAt?.seconds ||
+          0;
 
-    });
+        return bTime - aTime;
+
+      }
+    );
 
 
     if(!orders.length){
@@ -735,23 +884,26 @@ async function loadOrders(){
       );
 
       return;
-
     }
 
 
     ordersContainer.innerHTML = "";
 
 
-    orders.forEach((item)=>{
+    orders.forEach(
+      item => {
 
-      createOrderCard(item);
+        createOrderCard(item);
 
-    });
+      }
+    );
 
 
     showMessage(
       adminMessage,
-      orders.length + " order(s) loaded successfully.",
+      "✅ " +
+      orders.length +
+      " order(s) loaded successfully.",
       "success"
     );
 
@@ -765,14 +917,16 @@ async function loadOrders(){
 
         <h3>❌ Could not load orders</h3>
 
-        <p>${esc(error.message)}</p>
+        <p>
+          ${esc(error.message)}
+        </p>
 
       </div>
     `;
 
     showMessage(
       adminMessage,
-      "Could not load orders: " +
+      "❌ Could not load orders: " +
       error.message,
       "error"
     );
@@ -782,13 +936,14 @@ async function loadOrders(){
 }
 
 
-/* =========================================
+/* =====================================================
    CREATE ORDER CARD
-========================================= */
+===================================================== */
 
 function createOrderCard(item){
 
-  const order = item.data;
+  const order =
+    item.data;
 
   const documentId =
     item.documentId;
@@ -856,10 +1011,15 @@ function createOrderCard(item){
     document.createElement("div");
 
 
-  card.className = "order-card";
+  card.className =
+    "order-card";
 
 
-  let medicines = "";
+  /* =====================================================
+     MEDICINES
+  ===================================================== */
+
+  let medicinesHTML = "";
 
 
   if(
@@ -867,40 +1027,64 @@ function createOrderCard(item){
     order.medicines.length
   ){
 
-    medicines =
-      order.medicines.map((medicine,index)=>{
+    medicinesHTML =
+      order.medicines.map(
+        (medicine,index)=>{
 
-        return `
-          <div class="medicine-item">
+          return `
+            <div class="medicine-item">
 
-            <b>💊 Medicine ${index+1}</b>
+              <b>💊 Medicine ${index + 1}</b>
 
-            <br>
+              <br><br>
 
-            <b>Name:</b>
-            ${esc(medicine.name || "N/A")}
+              <b>Name:</b>
+              ${esc(
+                medicine.name ||
+                medicine.medicineName ||
+                "N/A"
+              )}
 
-            <br>
+              <br>
 
-            <b>Quantity:</b>
-            ${esc(medicine.quantity || "")}
+              <b>Quantity:</b>
+              ${esc(
+                medicine.quantity ??
+                ""
+              )}
 
-            ${esc(medicine.unit || "")}
+              ${
+                medicine.unit
+                ?
+                `
+                <br>
+                <b>Unit:</b>
+                ${esc(medicine.unit)}
+                `
+                :
+                ""
+              }
 
-          </div>
-        `;
+            </div>
+          `;
 
-      }).join("");
+        }
+      ).join("");
 
   }else{
 
-    medicines =
-      `<div class="medicine-item">
+    medicinesHTML = `
+      <div class="medicine-item">
         No medicine information found.
-      </div>`;
+      </div>
+    `;
 
   }
 
+
+  /* =====================================================
+     CARD HTML
+  ===================================================== */
 
   card.innerHTML = `
 
@@ -935,7 +1119,11 @@ function createOrderCard(item){
 
     <div class="info">
       <strong>📅 Order Date:</strong>
-      ${esc(formatDate(order.createdAt))}
+      ${esc(
+        formatDate(
+          order.createdAt
+        )
+      )}
     </div>
 
 
@@ -943,7 +1131,7 @@ function createOrderCard(item){
       💊 Medicines
     </div>
 
-    ${medicines}
+    ${medicinesHTML}
 
 
     <div class="section-title">
@@ -1101,10 +1289,12 @@ function createOrderCard(item){
 
 
     <div class="status-box">
+
       Current Status:
       <span class="currentStatus">
         ${esc(status)}
       </span>
+
     </div>
 
 
@@ -1114,35 +1304,29 @@ function createOrderCard(item){
         ✅ Confirm Order
       </button>
 
-
       <button class="out-btn">
         🚚 Out for Delivery
       </button>
-
 
       <button class="delivered-btn">
         📦 Delivered
       </button>
 
-
       ${
         phone
         ?
-        `<button class="whatsapp-btn">
+        `
+        <button class="whatsapp-btn">
           💬 WhatsApp Customer
-        </button>`
+        </button>
+        `
         :
         ""
       }
 
-
-      <br>
-
-
       <button class="save-btn">
         💾 Save Order
       </button>
-
 
       <button class="delete-btn">
         🗑️ Delete Order
@@ -1156,62 +1340,73 @@ function createOrderCard(item){
   ordersContainer.appendChild(card);
 
 
-  /* =========================================
-     ELEMENTS
-  ========================================= */
+  /* =====================================================
+     GET ELEMENTS
+  ===================================================== */
 
   const estimatedInput =
-    card.querySelector(".estimated");
-
+    card.querySelector(
+      ".estimated"
+    );
 
   const mrpInput =
-    card.querySelector(".mrp");
-
+    card.querySelector(
+      ".mrp"
+    );
 
   const percentInput =
-    card.querySelector(".discountPercent");
-
+    card.querySelector(
+      ".discountPercent"
+    );
 
   const discountInput =
-    card.querySelector(".discountAmount");
-
+    card.querySelector(
+      ".discountAmount"
+    );
 
   const payableInput =
-    card.querySelector(".payable");
-
+    card.querySelector(
+      ".payable"
+    );
 
   const paymentInput =
-    card.querySelector(".paymentAmount");
-
+    card.querySelector(
+      ".paymentAmount"
+    );
 
   const paymentStatusInput =
-    card.querySelector(".paymentStatus");
-
+    card.querySelector(
+      ".paymentStatus"
+    );
 
   const statusInput =
-    card.querySelector(".orderStatus");
-
+    card.querySelector(
+      ".orderStatus"
+    );
 
   const currentStatus =
-    card.querySelector(".currentStatus");
+    card.querySelector(
+      ".currentStatus"
+    );
 
 
-  /* =========================================
+  /* =====================================================
      SET VALUES
-  ========================================= */
-
-  estimatedInput.value =
-    estimated;
-
+  ===================================================== */
 
   if(
-    !Array.from(
+    Array.from(
       estimatedInput.options
     ).some(
       option =>
-      option.value === estimatedInput.value
+      option.value === estimated
     )
   ){
+
+    estimatedInput.value =
+      estimated;
+
+  }else{
 
     estimatedInput.value =
       "30–60 minutes";
@@ -1219,26 +1414,62 @@ function createOrderCard(item){
   }
 
 
-  paymentStatusInput.value =
-    paymentStatus;
+  if(
+    Array.from(
+      paymentStatusInput.options
+    ).some(
+      option =>
+      option.value === paymentStatus
+    )
+  ){
+
+    paymentStatusInput.value =
+      paymentStatus;
+
+  }else{
+
+    paymentStatusInput.value =
+      "Pending";
+
+  }
 
 
-  statusInput.value =
-    status;
+  if(
+    Array.from(
+      statusInput.options
+    ).some(
+      option =>
+      option.value === status
+    )
+  ){
+
+    statusInput.value =
+      status;
+
+  }else{
+
+    statusInput.value =
+      "Pending";
+
+  }
 
 
-  /* =========================================
-     CALCULATE
-  ========================================= */
+  /* =====================================================
+     CALCULATE PAYMENT
+  ===================================================== */
 
   function calculate(){
 
     const mrp =
-      parseFloat(mrpInput.value);
+      parseFloat(
+        mrpInput.value
+      );
 
 
     let percent =
-      parseFloat(percentInput.value);
+      parseFloat(
+        percentInput.value
+      );
 
 
     if(!Number.isFinite(percent)){
@@ -1251,7 +1482,10 @@ function createOrderCard(item){
     percent =
       Math.max(
         0,
-        Math.min(100,percent)
+        Math.min(
+          100,
+          percent
+        )
       );
 
 
@@ -1260,11 +1494,14 @@ function createOrderCard(item){
       mrp < 0
     ){
 
-      discountInput.value = "";
+      discountInput.value =
+        "";
 
-      payableInput.value = "";
+      payableInput.value =
+        "";
 
-      paymentInput.value = "";
+      paymentInput.value =
+        "";
 
       return;
 
@@ -1319,9 +1556,9 @@ function createOrderCard(item){
   calculate();
 
 
-  /* =========================================
-     QUICK STATUS BUTTONS
-  ========================================= */
+  /* =====================================================
+     QUICK STATUS
+  ===================================================== */
 
   card.querySelector(
     ".confirm-btn"
@@ -1377,12 +1614,14 @@ function createOrderCard(item){
   );
 
 
-  /* =========================================
+  /* =====================================================
      WHATSAPP
-  ========================================= */
+  ===================================================== */
 
   const whatsappButton =
-    card.querySelector(".whatsapp-btn");
+    card.querySelector(
+      ".whatsapp-btn"
+    );
 
 
   if(whatsappButton){
@@ -1401,7 +1640,21 @@ function createOrderCard(item){
         ){
 
           cleanPhone =
-            "91" + cleanPhone;
+            "91" +
+            cleanPhone;
+
+        }
+
+
+        if(
+          cleanPhone.length < 12
+        ){
+
+          alert(
+            "Invalid customer mobile number."
+          );
+
+          return;
 
         }
 
@@ -1428,20 +1681,23 @@ function createOrderCard(item){
   }
 
 
-  /* =========================================
+  /* =====================================================
      SAVE ORDER
-  ========================================= */
+  ===================================================== */
 
   async function saveOrder(){
 
     const saveButton =
-      card.querySelector(".save-btn");
+      card.querySelector(
+        ".save-btn"
+      );
 
 
-    saveButton.disabled = true;
+    saveButton.disabled =
+      true;
 
     saveButton.textContent =
-      "Saving...";
+      "⏳ Saving...";
 
 
     try{
@@ -1451,7 +1707,9 @@ function createOrderCard(item){
         ?
         null
         :
-        Number(mrpInput.value);
+        Number(
+          mrpInput.value
+        );
 
 
       const percentValue =
@@ -1459,7 +1717,9 @@ function createOrderCard(item){
         ?
         null
         :
-        Number(percentInput.value);
+        Number(
+          percentInput.value
+        );
 
 
       const discountValue =
@@ -1467,7 +1727,9 @@ function createOrderCard(item){
         ?
         null
         :
-        Number(discountInput.value);
+        Number(
+          discountInput.value
+        );
 
 
       const payableValue =
@@ -1475,7 +1737,9 @@ function createOrderCard(item){
         ?
         null
         :
-        Number(payableInput.value);
+        Number(
+          payableInput.value
+        );
 
 
       const paymentValue =
@@ -1483,7 +1747,9 @@ function createOrderCard(item){
         ?
         null
         :
-        Number(paymentInput.value);
+        Number(
+          paymentInput.value
+        );
 
 
       await updateDoc(
@@ -1539,18 +1805,18 @@ function createOrderCard(item){
         "✅ Saved";
 
 
-      setTimeout(()=>{
-
-        saveButton.textContent =
-          "💾 Save Order";
-
-      },1500);
+      setTimeout(
+        ()=>{
+          saveButton.textContent =
+            "💾 Save Order";
+        },
+        1500
+      );
 
 
     }catch(error){
 
       console.error(error);
-
 
       showMessage(
         adminMessage,
@@ -1563,9 +1829,11 @@ function createOrderCard(item){
       saveButton.textContent =
         "💾 Save Order";
 
+
     }finally{
 
-      saveButton.disabled = false;
+      saveButton.disabled =
+        false;
 
     }
 
@@ -1580,9 +1848,9 @@ function createOrderCard(item){
   );
 
 
-  /* =========================================
-     DELETE
-  ========================================= */
+  /* =====================================================
+     DELETE ORDER
+  ===================================================== */
 
   card.querySelector(
     ".delete-btn"
@@ -1602,13 +1870,16 @@ function createOrderCard(item){
 
 
       const deleteButton =
-        card.querySelector(".delete-btn");
+        card.querySelector(
+          ".delete-btn"
+        );
 
 
-      deleteButton.disabled = true;
+      deleteButton.disabled =
+        true;
 
       deleteButton.textContent =
-        "Deleting...";
+        "⏳ Deleting...";
 
 
       try{
@@ -1645,7 +1916,8 @@ function createOrderCard(item){
         );
 
 
-        deleteButton.disabled = false;
+        deleteButton.disabled =
+          false;
 
         deleteButton.textContent =
           "🗑️ Delete Order";
@@ -1658,9 +1930,9 @@ function createOrderCard(item){
 }
 
 
-/* =========================================
-   FIREBASE ERROR MESSAGE
-========================================= */
+/* =====================================================
+   FIREBASE ERROR
+===================================================== */
 
 function getFirebaseError(error){
 
@@ -1671,41 +1943,62 @@ function getFirebaseError(error){
   switch(code){
 
     case "auth/invalid-credential":
+
       return "❌ Wrong email or password.";
 
+
     case "auth/invalid-email":
+
       return "❌ Invalid email address.";
 
+
     case "auth/user-not-found":
+
       return "❌ Admin account not found.";
 
+
     case "auth/wrong-password":
+
       return "❌ Wrong password.";
 
+
     case "auth/too-many-requests":
+
       return "❌ Too many attempts. Please try again later.";
 
+
     case "auth/network-request-failed":
+
       return "❌ Internet connection problem.";
 
+
+    case "auth/operation-not-allowed":
+
+      return "❌ Email/Password login is not enabled in Firebase Authentication.";
+
+
     default:
-      return error?.message ||
-        "Login failed.";
+
+      return (
+        error?.message ||
+        "❌ Login failed."
+      );
 
   }
 
 }
 
 
-/* =========================================
+/* =====================================================
    REFRESH
-========================================= */
+===================================================== */
 
 refreshBtn.addEventListener(
   "click",
   async()=>{
 
-    refreshBtn.disabled = true;
+    refreshBtn.disabled =
+      true;
 
     refreshBtn.textContent =
       "⏳ Loading...";
@@ -1717,7 +2010,8 @@ refreshBtn.addEventListener(
 
     }finally{
 
-      refreshBtn.disabled = false;
+      refreshBtn.disabled =
+        false;
 
       refreshBtn.textContent =
         "🔄 Refresh Orders";
