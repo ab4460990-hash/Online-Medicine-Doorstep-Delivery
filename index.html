@@ -130,117 +130,60 @@ footer{background:#087c59;color:white;text-align:center;padding:25px;margin-top:
 </div>
 </section>
 
-<section id="profile" class="user-panel">
-<h2>My Account</h2>
-<div class="box">
-<p><strong>Logged in:</strong> <span id="userEmail"></span></p>
-<input type="text" id="customerName" class="input" placeholder="Full Name">
-<input type="text" id="customerMobile" class="input" placeholder="Mobile Number">
-<textarea id="customerAddress" class="input" placeholder="Delivery Address"></textarea>
-<button class="btn" id="saveProfileBtn">Save Profile</button>
-<button class="btn btn-danger" id="logoutBtn" style="margin-top:10px;">Logout</button>
-<div id="profileMessage" class="message"></div>
-</div>
-</section>
-
-<section id="order" class="order-panel">
+<section id="order" class="order-panel" style="display:block;">
 <h2>Place New Order</h2>
 <div class="box">
-<p>Enter the medicines you need. You can add more than one medicine to the same order.</p>
-
+<p>Enter your details and the medicines you need. You can add more than one medicine to the same order.</p>
+<input type="text" id="customerName" class="input" placeholder="Full Name">
+<input type="tel" id="customerMobile" class="input" placeholder="10-digit Mobile Number" maxlength="10">
+<textarea id="orderAddress" class="input" placeholder="Delivery Address"></textarea>
 <div id="medicineList">
 <div class="medicine-row">
-<div class="medicine-row-header">
-<span class="medicine-number">Medicine 1</span>
-</div>
-
+<div class="medicine-row-header"><span class="medicine-number">Medicine 1</span></div>
 <input type="text" class="input medicine-name" placeholder="Medicine / Product Name">
-
 <input type="number" class="input medicine-quantity" placeholder="Quantity" min="1" value="1">
-
 <select class="input medicine-unit" aria-label="Medicine unit">
-<option value="Tablet" selected>Tablet</option>
-<option value="Strip">Strip</option>
+<option value="Tablet" selected>Tablet</option><option value="Strip">Strip</option>
 </select>
-</div>
-</div>
-
-<div class="add-medicine-box">
-<button type="button" class="btn btn-secondary" id="addMedicineBtn">➕ Add Another Medicine</button>
-</div>
-
-<textarea id="orderAddress" class="input" placeholder="Delivery Address"></textarea>
-
+</div></div>
+<div class="add-medicine-box"><button type="button" class="btn btn-secondary" id="addMedicineBtn">➕ Add Another Medicine</button></div>
 <div style="margin:15px 0;">
-  <label for="estimatedDeliveryTime" style="display:block;color:#087c59;font-weight:bold;margin-bottom:8px;">
-    🚚 Estimated Delivery Time
-  </label>
-  <select id="estimatedDeliveryTime" class="input">
-    <option value="30–60 minutes" selected>30–60 minutes</option>
-    <option value="1–2 hours">1–2 hours</option>
-    <option value="2–4 hours">2–4 hours</option>
-    <option value="Today">Today</option>
-  </select>
-  <p style="font-size:14px;color:#555;margin-top:5px;">
-    This is an estimated time and may change depending on order and delivery conditions.
-  </p>
+<label for="estimatedDeliveryTime" style="display:block;color:#087c59;font-weight:bold;margin-bottom:8px;">🚚 Estimated Delivery Time</label>
+<select id="estimatedDeliveryTime" class="input">
+<option value="30–60 minutes" selected>30–60 minutes</option><option value="1–2 hours">1–2 hours</option><option value="2–4 hours">2–4 hours</option><option value="Today">Today</option>
+</select>
+<p style="font-size:14px;color:#555;margin-top:5px;">This is an estimated time and may change depending on order and delivery conditions.</p>
 </div>
-
 <div style="margin:15px 0;">
-  <label for="paymentMethod" style="display:block;color:#087c59;font-weight:bold;margin-bottom:8px;">
-    💳 Payment Method
-  </label>
-  <select id="paymentMethod" class="input">
-    <option value="Cash on Delivery" selected>Cash on Delivery (COD)</option>
-  </select>
-  <p style="font-size:14px;color:#555;margin-top:5px;">
-    Pay in cash when your medicine is delivered.
-  </p>
+<label for="paymentMethod" style="display:block;color:#087c59;font-weight:bold;margin-bottom:8px;">💳 Payment Method</label>
+<select id="paymentMethod" class="input"><option value="Cash on Delivery" selected>Cash on Delivery (COD)</option></select>
+<p style="font-size:14px;color:#555;margin-top:5px;">Pay in cash when your medicine is delivered.</p>
 </div>
-
 <div class="whatsapp-box">
-<h3>📄 Prescription Upload</h3>
-<p>If your medicine requires a prescription, select your prescription file below.</p>
+<h3>📄 Prescription Upload</h3><p>If your medicine requires a prescription, select your prescription file below.</p>
 <input type="file" id="prescriptionFile" class="file-input" accept=".jpg,.jpeg,.png,.pdf">
 <div id="fileInfo" class="file-info">No prescription selected.</div>
 <button type="button" class="btn btn-whatsapp" id="whatsappPrescriptionBtn">📱 Send Prescription on WhatsApp</button>
 </div>
-
-<br>
-<button class="btn" id="placeOrderBtn">Place Order</button>
+<br><button class="btn" id="placeOrderBtn">Place Order</button>
 <div id="orderMessage" class="message"></div>
-</div>
-</section>
-
-<section id="orders" class="history-panel">
-<h2>Order History</h2>
-<div class="box" id="guestOrderBox">
-<p><strong>Check your order without login.</strong></p>
-<p>Enter your mobile number and Order ID to view your order status and details.</p>
-<input type="tel" id="guestMobile" class="input" placeholder="Enter 10-digit Mobile Number" inputmode="numeric" maxlength="10">
-<input type="text" id="guestOrderId" class="input" placeholder="Example: ORD-123456789">
-<button class="btn" id="guestOrderBtn">🔎 Check Order History</button>
-<div id="guestOrderMessage" class="message"></div>
-<div id="guestOrderResult" class="track-result"></div>
-</div>
-
-<div class="box" style="margin-top:20px;" id="loggedInHistoryBox">
-<h3 style="color:#087c59;margin-bottom:12px;">My Logged-in Order History</h3>
-<div id="orderHistory">Loading orders...</div>
-</div>
-</section>
-
-<section id="track" class="track-panel">
-<h2>🔎 Track Your Order</h2>
-<div class="box">
-<p>Enter your Order ID to check your order status and payment details.</p>
-<input type="text" id="trackOrderId" class="input" placeholder="Example: ORD-123456789">
+</div></section>
+<section id="orders" class="history-panel" style="display:block;">
+<h2>Order History</h2><div class="box">
+<p>Login is not required. Enter your mobile number and Order ID to check your order.</p>
+<input type="tel" id="historyMobile" class="input" placeholder="10-digit Mobile Number" maxlength="10">
+<input type="text" id="historyOrderId" class="input" placeholder="Order ID (Example: ORD-123456789)">
+<button class="btn" id="checkHistoryBtn">🔎 Check Order History</button>
+<div id="historyMessage" class="message"></div><div id="orderHistory" style="margin-top:20px;"></div>
+</div></section>
+<section id="track" class="track-panel" style="display:block;">
+<h2>🔎 Track Your Order</h2><div class="box">
+<p>Use the same Mobile Number + Order ID to check your order.</p>
+<input type="tel" id="trackMobile" class="input" placeholder="10-digit Mobile Number" maxlength="10">
+<input type="text" id="trackOrderId" class="input" placeholder="Order ID (Example: ORD-123456789)">
 <button class="btn" id="trackOrderBtn">Track Order</button>
-<div id="trackMessage" class="message"></div>
-<div id="trackResult" class="track-result"></div>
-</div>
-</section>
-
+<div id="trackMessage" class="message"></div><div id="trackResult" class="track-result"></div>
+</div></section>
 <section id="contact">
 <h2>Contact Us</h2>
 <div class="box">
@@ -256,732 +199,59 @@ footer{background:#087c59;color:white;text-align:center;padding:25px;margin-top:
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  collection,
-  addDoc,
-  query,
-  where,
-  getDocs,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {getFirestore,doc,setDoc,getDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  authDomain:"online-medicine-delivery-74346.firebaseapp.com",
-  projectId:"online-medicine-delivery-74346",
-  storageBucket:"online-medicine-delivery-74346.firebasestorage.app",
-  messagingSenderId:"1061955108881",
-  appId:"1:1061955108881:web:64f36ad79b5c612a2171b0",
-  measurementId:"G-LMHDFF01QC"
+const firebaseConfig={authDomain:"online-medicine-delivery-74346.firebaseapp.com",projectId:"online-medicine-delivery-74346",storageBucket:"online-medicine-delivery-74346.firebasestorage.app",messagingSenderId:"1061955108881",appId:"1:1061955108881:web:64f36ad79b5c612a2171b0",measurementId:"G-LMHDFF01QC"};
+const app=initializeApp(firebaseConfig),db=getFirestore(app);
+
+const $=id=>document.getElementById(id);
+const customerName=$("customerName"),customerMobile=$("customerMobile"),orderAddress=$("orderAddress");
+const medicineList=$("medicineList"),addMedicineBtn=$("addMedicineBtn"),estimatedDeliveryTime=$("estimatedDeliveryTime"),paymentMethod=$("paymentMethod");
+const placeOrderBtn=$("placeOrderBtn"),orderMessage=$("orderMessage"),prescriptionFile=$("prescriptionFile"),fileInfo=$("fileInfo");
+const whatsappPrescriptionBtn=$("whatsappPrescriptionBtn"),contactWhatsAppBtn=$("contactWhatsAppBtn");
+const historyMobile=$("historyMobile"),historyOrderId=$("historyOrderId"),checkHistoryBtn=$("checkHistoryBtn"),historyMessage=$("historyMessage"),orderHistory=$("orderHistory");
+const trackMobile=$("trackMobile"),trackOrderId=$("trackOrderId"),trackOrderBtn=$("trackOrderBtn"),trackMessage=$("trackMessage"),trackResult=$("trackResult");
+
+function msg(el,s,t){el.textContent=s;el.className="message "+t;el.style.display="block";}
+function mobile(v){return String(v||"").replace(/\D/g,"");}
+function validMobile(v){return /^\d{10}$/.test(mobile(v));}
+function esc(v){return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
+function money(v){return v===null||v===undefined||v===""||Number.isNaN(Number(v))?"Not updated yet":"₹"+Number(v).toFixed(2);}
+function amount(o){return `<div class="amount-box"><div class="amount-row"><span>💰 Original MRP</span><strong>${money(o.originalMRP)}</strong></div><div class="amount-row"><span>🏷️ Discount Amount</span><strong>${money(o.discountAmount)}</strong></div><div class="amount-row amount-total"><span>💵 Payable Amount</span><strong>${money(o.payableAmount)}</strong></div><div class="amount-row"><span>💳 Customer Payment</span><strong>${money(o.paymentAmount)}</strong></div></div>`;}
+function medicines(arr){return Array.isArray(arr)?arr.map((m,i)=>`<div class="medicine-row"><p><strong>Medicine ${i+1}:</strong> ${esc(m.name||"N/A")}</p><p><strong>Quantity:</strong> ${esc(String(m.quantity||""))} ${esc(m.unit||"Tablet")}</p></div>`).join(""):"<p>No medicine details available.</p>";}
+function render(o,target){target.innerHTML=`<div class="order-card"><p><strong>🆔 Order ID:</strong> ${esc(o.orderId||"N/A")}</p>${medicines(o.medicines)}<p><strong>🚚 Estimated Delivery:</strong> ${esc(o.estimatedDeliveryTime||"Not updated yet")}</p><p><strong>💳 Payment Method:</strong> ${esc(o.paymentMethod||"Cash on Delivery")}</p><p><strong>🚚 Order Status:</strong></p><span class="status">${esc(o.status||"Pending")}</span>${amount(o)}<p style="margin-top:15px;"><strong>💳 Payment Status:</strong> ${esc(o.paymentStatus||"Pending")}</p></div>`;}
+
+let count=1;
+function row(n,remove){return `<div class="medicine-row"><div class="medicine-row-header"><span class="medicine-number">Medicine ${n}</span>${remove?'<button type="button" class="remove-medicine">❌ Remove</button>':""}</div><input type="text" class="input medicine-name" placeholder="Medicine / Product Name"><input type="number" class="input medicine-quantity" placeholder="Quantity" min="1" value="1"><select class="input medicine-unit"><option value="Tablet" selected>Tablet</option><option value="Strip">Strip</option></select></div>`;}
+addMedicineBtn.onclick=()=>{count++;const d=document.createElement("div");d.innerHTML=row(count,true);medicineList.appendChild(d.firstElementChild);renumber();};
+medicineList.onclick=e=>{if(e.target.classList.contains("remove-medicine")){const r=medicineList.querySelectorAll(".medicine-row");if(r.length<=1)return alert("At least one medicine is required.");e.target.closest(".medicine-row").remove();renumber();}};
+function renumber(){medicineList.querySelectorAll(".medicine-row").forEach((r,i)=>r.querySelector(".medicine-number").textContent="Medicine "+(i+1));count=medicineList.querySelectorAll(".medicine-row").length;}
+function getMeds(){const a=[];for(const r of medicineList.querySelectorAll(".medicine-row")){const n=r.querySelector(".medicine-name").value.trim(),q=Number(r.querySelector(".medicine-quantity").value),u=r.querySelector(".medicine-unit").value;if(!n)return{error:"Please enter all medicine names."};if(!q||q<1)return{error:"Please enter a valid quantity for every medicine."};a.push({name:n,quantity:q,unit:u});}return{medicines:a};}
+function newId(){return "ORD-"+Date.now()+"-"+Math.random().toString(36).slice(2,8).toUpperCase();}
+
+placeOrderBtn.onclick=async()=>{
+ const n=customerName.value.trim(),m=mobile(customerMobile.value),a=orderAddress.value.trim(),g=getMeds();
+ if(!n)return msg(orderMessage,"Please enter your full name.","error");
+ if(!validMobile(m))return msg(orderMessage,"Please enter a valid 10-digit mobile number.","error");
+ if(!a)return msg(orderMessage,"Please enter delivery address.","error");
+ if(g.error)return msg(orderMessage,g.error,"error");
+ try{
+  placeOrderBtn.disabled=true;const id=newId(),file=prescriptionFile.files[0];
+  await setDoc(doc(db,"publicOrders",id),{orderId:id,customerName:n,customerPhone:m,medicines:g.medicines,estimatedDeliveryTime:estimatedDeliveryTime.value,paymentMethod:paymentMethod.value,status:"Pending",originalMRP:null,discountAmount:null,discountPercent:10,payableAmount:null,paymentAmount:null,paymentStatus:"Pending",prescriptionSelected:!!file,prescriptionFileName:file?file.name:"",createdAt:serverTimestamp()});
+  msg(orderMessage,"Order placed successfully! Your Order ID is: "+id,"success");historyMobile.value=m;historyOrderId.value=id;trackMobile.value=m;trackOrderId.value=id;
+  medicineList.innerHTML=row(1,false);count=1;prescriptionFile.value="";fileInfo.textContent="No prescription selected.";
+ }catch(e){console.error(e);msg(orderMessage,"Could not place order. Please try again.","error");}finally{placeOrderBtn.disabled=false;}
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
-
-const emailInput=document.getElementById("email");
-const passwordInput=document.getElementById("password");
-const loginBtn=document.getElementById("loginBtn");
-const signupBtn=document.getElementById("signupBtn");
-const loginMessage=document.getElementById("loginMessage");
-const profileSection=document.getElementById("profile");
-const orderSection=document.getElementById("order");
-const ordersSection=document.getElementById("orders");
-const trackSection=document.getElementById("track");
-const userEmail=document.getElementById("userEmail");
-const customerName=document.getElementById("customerName");
-const customerMobile=document.getElementById("customerMobile");
-const customerAddress=document.getElementById("customerAddress");
-const saveProfileBtn=document.getElementById("saveProfileBtn");
-const logoutBtn=document.getElementById("logoutBtn");
-const profileMessage=document.getElementById("profileMessage");
-const medicineList=document.getElementById("medicineList");
-const addMedicineBtn=document.getElementById("addMedicineBtn");
-const orderAddress=document.getElementById("orderAddress");
-const estimatedDeliveryTime=document.getElementById("estimatedDeliveryTime");
-const paymentMethod=document.getElementById("paymentMethod");
-const placeOrderBtn=document.getElementById("placeOrderBtn");
-const orderMessage=document.getElementById("orderMessage");
-const orderHistory=document.getElementById("orderHistory");
-const guestMobile=document.getElementById("guestMobile");
-const guestOrderId=document.getElementById("guestOrderId");
-const guestOrderBtn=document.getElementById("guestOrderBtn");
-const guestOrderMessage=document.getElementById("guestOrderMessage");
-const guestOrderResult=document.getElementById("guestOrderResult");
-const loggedInHistoryBox=document.getElementById("loggedInHistoryBox");
-const prescriptionFile=document.getElementById("prescriptionFile");
-const fileInfo=document.getElementById("fileInfo");
-const whatsappPrescriptionBtn=document.getElementById("whatsappPrescriptionBtn");
-const contactWhatsAppBtn=document.getElementById("contactWhatsAppBtn");
-const trackOrderId=document.getElementById("trackOrderId");
-const trackOrderBtn=document.getElementById("trackOrderBtn");
-const trackMessage=document.getElementById("trackMessage");
-const trackResult=document.getElementById("trackResult");
-
-function showMessage(element,message,type){
-  element.textContent=message;
-  element.className="message "+type;
-  element.style.display="block";
-}
-
-async function hashMobile(mobile){
-  const data=new TextEncoder().encode(mobile);
-  const hashBuffer=await crypto.subtle.digest("SHA-256",data);
-  return Array.from(new Uint8Array(hashBuffer)).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-
-function renderPublicOrder(order){
-  let medicinesHtml="";
-  if(Array.isArray(order.medicines)){
-    order.medicines.forEach((item,index)=>{
-      medicinesHtml+=`
-      <div class="medicine-row">
-        <p><strong>Medicine ${index+1}:</strong> ${escapeHtml(item.name||"N/A")}</p>
-        <p><strong>Quantity:</strong> ${escapeHtml(String(item.quantity||""))} ${escapeHtml(item.unit||"Tablet")}</p>
-      </div>`;
-    });
-  }
-
-  return `
-  <div class="order-card">
-    <p><strong>🆔 Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
-    ${medicinesHtml}
-    <p><strong>🚚 Order Status:</strong></p>
-    <span class="status">${escapeHtml(order.status||"Pending")}</span>
-    <p style="margin-top:15px;"><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime||"Not updated")}</p>
-    <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
-    ${createAmountHtml(order)}
-    <p style="margin-top:15px;"><strong>💳 Payment Status:</strong> ${escapeHtml(order.paymentStatus||"Pending")}</p>
-  </div>`;
-}
-
-guestOrderBtn.addEventListener("click",async()=>{
-  const mobile=guestMobile.value.trim();
-  const orderId=guestOrderId.value.trim();
-
-  if(!/^[0-9]{10}$/.test(mobile)){
-    showMessage(guestOrderMessage,"Please enter a valid 10-digit mobile number.","error");
-    return;
-  }
-  if(!orderId){
-    showMessage(guestOrderMessage,"Please enter your Order ID.","error");
-    return;
-  }
-
-  guestOrderResult.innerHTML="";
-
-  try{
-    guestOrderBtn.disabled=true;
-    const phoneHash=await hashMobile(mobile);
-    const publicQuery=query(
-      collection(db,"publicOrders"),
-      where("orderId","==",orderId),
-      where("customerPhoneHash","==",phoneHash)
-    );
-    const snapshot=await getDocs(publicQuery);
-
-    if(snapshot.empty){
-      showMessage(guestOrderMessage,"Order not found. Please check your Mobile Number and Order ID.","error");
-      return;
-    }
-
-    let order=null;
-    snapshot.forEach(docSnap=>{ order=docSnap.data(); });
-    showMessage(guestOrderMessage,"Order found successfully.","success");
-    guestOrderResult.innerHTML=renderPublicOrder(order);
-  }catch(error){
-    console.error("Guest order history error:",error);
-    showMessage(guestOrderMessage,"Could not check the order. Please try again.","error");
-  }finally{
-    guestOrderBtn.disabled=false;
-  }
-});
-
-signupBtn.addEventListener("click",async()=>{
-  const email=emailInput.value.trim();
-  const password=passwordInput.value.trim();
-
-  if(!email||!password){
-    showMessage(loginMessage,"Please enter email and password.","error");
-    return;
-  }
-  if(password.length<6){
-    showMessage(loginMessage,"Password must be at least 6 characters.","error");
-    return;
-  }
-
-  try{
-    signupBtn.disabled=true;
-    const result=await createUserWithEmailAndPassword(auth,email,password);
-
-    await setDoc(doc(db,"customers",result.user.uid),{
-      email:email,
-      createdAt:serverTimestamp()
-    },{merge:true});
-
-    showMessage(loginMessage,"Account created successfully!","success");
-  }catch(error){
-    console.error(error);
-    let message="Could not create account.";
-    if(error.code==="auth/email-already-in-use") message="This email is already registered. Please login.";
-    if(error.code==="auth/invalid-email") message="Please enter a valid email address.";
-    if(error.code==="auth/weak-password") message="Password must be at least 6 characters.";
-    showMessage(loginMessage,message,"error");
-  }finally{
-    signupBtn.disabled=false;
-  }
-});
-
-loginBtn.addEventListener("click",async()=>{
-  const email=emailInput.value.trim();
-  const password=passwordInput.value.trim();
-
-  if(!email||!password){
-    showMessage(loginMessage,"Please enter email and password.","error");
-    return;
-  }
-
-  try{
-    loginBtn.disabled=true;
-    await signInWithEmailAndPassword(auth,email,password);
-    showMessage(loginMessage,"Login successful!","success");
-  }catch(error){
-    console.error(error);
-    let message="Login failed.";
-    if(error.code==="auth/invalid-credential"||error.code==="auth/wrong-password"||error.code==="auth/user-not-found"){
-      message="Email or password is incorrect.";
-    }
-    if(error.code==="auth/invalid-email") message="Please enter a valid email address.";
-    showMessage(loginMessage,message,"error");
-  }finally{
-    loginBtn.disabled=false;
-  }
-});
-
-onAuthStateChanged(auth,async(user)=>{
-  if(user){
-    userEmail.textContent=user.email;
-    profileSection.style.display="block";
-    orderSection.style.display="block";
-    ordersSection.style.display="block";
-    loggedInHistoryBox.style.display="block";
-    trackSection.style.display="block";
-    emailInput.value="";
-    passwordInput.value="";
-    await loadCustomerProfile(user);
-    await loadOrderHistory(user);
-  }else{
-    profileSection.style.display="none";
-    orderSection.style.display="none";
-    ordersSection.style.display="block";
-    trackSection.style.display="none";
-    loggedInHistoryBox.style.display="none";
-  }
-});
-
-async function loadCustomerProfile(user){
-  try{
-    const customerSnap=await getDoc(doc(db,"customers",user.uid));
-    if(customerSnap.exists()){
-      const data=customerSnap.data();
-      customerName.value=data.name||"";
-      customerMobile.value=data.mobile||"";
-      customerAddress.value=data.address||"";
-      orderAddress.value=data.address||"";
-    }
-  }catch(error){
-    console.error("Profile loading error:",error);
-  }
-}
-
-saveProfileBtn.addEventListener("click",async()=>{
-  const user=auth.currentUser;
-  if(!user){
-    showMessage(profileMessage,"Please login first.","error");
-    return;
-  }
-
-  const name=customerName.value.trim();
-  const mobile=customerMobile.value.trim();
-  const address=customerAddress.value.trim();
-
-  if(!name||!mobile||!address){
-    showMessage(profileMessage,"Please fill all profile details.","error");
-    return;
-  }
-
-  try{
-    await setDoc(doc(db,"customers",user.uid),{
-      email:user.email,
-      name:name,
-      mobile:mobile,
-      address:address,
-      updatedAt:serverTimestamp()
-    },{merge:true});
-
-    orderAddress.value=address;
-    showMessage(profileMessage,"Profile saved successfully!","success");
-  }catch(error){
-    console.error(error);
-    showMessage(profileMessage,"Could not save profile.","error");
-  }
-});
-
-let medicineCounter=1;
-
-function medicineRowHtml(number,showRemove){
-  return `
-  <div class="medicine-row">
-    <div class="medicine-row-header">
-      <span class="medicine-number">Medicine ${number}</span>
-      ${showRemove ? '<button type="button" class="remove-medicine">❌ Remove</button>' : ''}
-    </div>
-
-    <input type="text"
-      class="input medicine-name"
-      placeholder="Medicine / Product Name">
-
-    <input type="number"
-      class="input medicine-quantity"
-      placeholder="Quantity"
-      min="1"
-      value="1">
-
-    <select class="input medicine-unit" aria-label="Medicine unit">
-      <option value="Tablet" selected>Tablet</option>
-      <option value="Strip">Strip</option>
-    </select>
-  </div>`;
-}
-
-addMedicineBtn.addEventListener("click",()=>{
-  medicineCounter++;
-  const row=document.createElement("div");
-  row.innerHTML=medicineRowHtml(medicineCounter,true);
-  medicineList.appendChild(row.firstElementChild);
-  updateMedicineNumbers();
-});
-
-medicineList.addEventListener("click",(event)=>{
-  if(event.target.classList.contains("remove-medicine")){
-    const rows=medicineList.querySelectorAll(".medicine-row");
-    if(rows.length<=1){
-      alert("At least one medicine is required.");
-      return;
-    }
-    event.target.closest(".medicine-row").remove();
-    updateMedicineNumbers();
-  }
-});
-
-function updateMedicineNumbers(){
-  const rows=medicineList.querySelectorAll(".medicine-row");
-  rows.forEach((row,index)=>{
-    row.querySelector(".medicine-number").textContent="Medicine "+(index+1);
-  });
-  medicineCounter=rows.length;
-}
-
-function getMedicines(){
-  const rows=medicineList.querySelectorAll(".medicine-row");
-  const medicines=[];
-
-  for(const row of rows){
-    const name=row.querySelector(".medicine-name").value.trim();
-    const quantity=Number(row.querySelector(".medicine-quantity").value);
-    const unitSelect=row.querySelector(".medicine-unit");
-    const unit=unitSelect ? unitSelect.value : "Tablet";
-
-    if(!name){
-      return {error:"Please enter all medicine names."};
-    }
-
-    if(!quantity||quantity<1){
-      return {error:"Please enter a valid quantity for every medicine."};
-    }
-
-    medicines.push({
-      name:name,
-      quantity:quantity,
-      unit:unit
-    });
-  }
-
-  return {medicines:medicines};
-}
-
-placeOrderBtn.addEventListener("click",async()=>{
-  const user=auth.currentUser;
-
-  if(!user){
-    showMessage(orderMessage,"Please login first.","error");
-    return;
-  }
-
-  const medicineResult=getMedicines();
-  if(medicineResult.error){
-    showMessage(orderMessage,medicineResult.error,"error");
-    return;
-  }
-
-  const medicines=medicineResult.medicines;
-  const address=orderAddress.value.trim();
-
-  if(!address){
-    showMessage(orderMessage,"Please enter delivery address.","error");
-    return;
-  }
-
-  try{
-    placeOrderBtn.disabled=true;
-
-    const orderId="ORD-"+Date.now();
-    const hasPrescription=prescriptionFile.files.length>0;
-    const prescriptionName=hasPrescription?prescriptionFile.files[0].name:"";
-
-    const customerPhone=customerMobile.value.trim();
-    if(!/^[0-9]{10}$/.test(customerPhone)){
-      showMessage(orderMessage,"Please save a valid 10-digit mobile number in your profile first.","error");
-      return;
-    }
-    const customerPhoneHash=await hashMobile(customerPhone);
-
-    await addDoc(collection(db,"orders"),{
-      orderId:orderId,
-      customerUid:user.uid,
-      customerEmail:user.email,
-      customerName:customerName.value.trim(),
-      customerPhone:customerPhone,
-      medicines:medicines,
-      address:address,
-      estimatedDeliveryTime:estimatedDeliveryTime.value,
-      paymentMethod:paymentMethod.value,
-      status:"Pending",
-      originalMRP:null,
-      discountAmount:null,
-      discountPercent:10,
-      payableAmount:null,
-      paymentAmount:null,
-      paymentStatus:"Pending",
-      prescriptionSelected:hasPrescription,
-      prescriptionFileName:prescriptionName,
-      createdAt:serverTimestamp()
-    });
-
-    await setDoc(doc(db,"publicOrders",orderId),{
-      orderId:orderId,
-      customerPhoneHash:customerPhoneHash,
-      medicines:medicines,
-      estimatedDeliveryTime:estimatedDeliveryTime.value,
-      paymentMethod:paymentMethod.value,
-      status:"Pending",
-      originalMRP:null,
-      discountAmount:null,
-      discountPercent:10,
-      payableAmount:null,
-      paymentAmount:null,
-      paymentStatus:"Pending",
-      createdAt:serverTimestamp()
-    });
-
-    showMessage(orderMessage,"Order placed successfully! Order ID: "+orderId,"success");
-
-    medicineList.innerHTML=medicineRowHtml(1,false);
-    medicineCounter=1;
-    prescriptionFile.value="";
-    fileInfo.textContent="No prescription selected.";
-
-    await loadOrderHistory(user);
-    trackOrderId.value=orderId;
-  }catch(error){
-    console.error(error);
-    showMessage(orderMessage,"Could not place order. Please try again.","error");
-  }finally{
-    placeOrderBtn.disabled=false;
-  }
-});
-
-async function loadOrderHistory(user){
-  orderHistory.innerHTML="Loading orders...";
-
-  try{
-    const ordersQuery=query(
-      collection(db,"orders"),
-      where("customerUid","==",user.uid)
-    );
-
-    const snapshot=await getDocs(ordersQuery);
-
-    if(snapshot.empty){
-      orderHistory.innerHTML="<p>No orders found.</p>";
-      return;
-    }
-
-    const orders=[];
-    snapshot.forEach(docSnap=>{
-      orders.push({id:docSnap.id,...docSnap.data()});
-    });
-
-    orders.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-    orderHistory.innerHTML="";
-
-    orders.forEach(order=>{
-      const card=document.createElement("div");
-      card.className="order-card";
-
-      let medicinesHtml="";
-
-      if(Array.isArray(order.medicines)){
-        order.medicines.forEach((item,index)=>{
-          medicinesHtml+=`
-          <p>
-            <strong>Medicine ${index+1}:</strong>
-            ${escapeHtml(item.name||"N/A")}
-          </p>
-          <p>
-            <strong>Quantity:</strong>
-            ${escapeHtml(String(item.quantity||""))}
-            ${escapeHtml(item.unit||"Tablet")}
-          </p>`;
-        });
-      }
-
-      card.innerHTML=`
-      <p><strong>Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
-      ${medicinesHtml}
-      <p><strong>Address:</strong> ${escapeHtml(order.address||"N/A")}</p>
-      <p><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime||"Not updated")}</p>
-      <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
-      <p><strong>Prescription:</strong>
-        ${order.prescriptionFileName?escapeHtml(order.prescriptionFileName):"Not selected"}
-      </p>
-      <span class="status">${escapeHtml(order.status||"Pending")}</span>
-      ${createAmountHtml(order)}
-      <br><br>
-      <button class="btn btn-small" data-track-id="${escapeHtml(order.orderId||"")}">
-        🔎 Track This Order
-      </button>`;
-
-      orderHistory.appendChild(card);
-    });
-  }catch(error){
-    console.error("Order history error:",error);
-    orderHistory.innerHTML="<p style='color:red;'>Could not load order history.</p>";
-  }
-}
-
-orderHistory.addEventListener("click",(event)=>{
-  const button=event.target.closest("button[data-track-id]");
-  if(!button)return;
-
-  trackOrderId.value=button.getAttribute("data-track-id");
-  document.getElementById("track").scrollIntoView({behavior:"smooth"});
-  trackOrderBtn.click();
-});
-
-function createAmountHtml(order){
-  return `
-  <div class="amount-box">
-    <div class="amount-row">
-      <span>💰 Original MRP</span>
-      <strong>${formatMoney(order.originalMRP)}</strong>
-    </div>
-    <div class="amount-row">
-      <span>🏷️ Discount Amount</span>
-      <strong>${formatMoney(order.discountAmount)}</strong>
-    </div>
-    <div class="amount-row amount-total">
-      <span>💵 Payable Amount</span>
-      <strong>${formatMoney(order.payableAmount)}</strong>
-    </div>
-    <div class="amount-row">
-      <span>💳 Customer Payment</span>
-      <strong>${formatMoney(order.paymentAmount)}</strong>
-    </div>
-  </div>`;
-}
-
-function formatMoney(value){
-  if(value===null||value===undefined||value===""||Number.isNaN(Number(value))){
-    return "Not updated yet";
-  }
-  return "₹"+Number(value).toFixed(2);
-}
-
-trackOrderBtn.addEventListener("click",async()=>{
-  const user=auth.currentUser;
-
-  if(!user){
-    showMessage(trackMessage,"Please login first.","error");
-    return;
-  }
-
-  const orderId=trackOrderId.value.trim();
-
-  if(!orderId){
-    showMessage(trackMessage,"Please enter your Order ID.","error");
-    return;
-  }
-
-  trackResult.innerHTML="";
-
-  try{
-    trackOrderBtn.disabled=true;
-
-    const trackQuery=query(
-      collection(db,"orders"),
-      where("customerUid","==",user.uid),
-      where("orderId","==",orderId)
-    );
-
-    const snapshot=await getDocs(trackQuery);
-
-    if(snapshot.empty){
-      showMessage(trackMessage,"Order not found. Please check your Order ID.","error");
-      return;
-    }
-
-    let order=null;
-    snapshot.forEach(docSnap=>{
-      order={id:docSnap.id,...docSnap.data()};
-    });
-
-    showMessage(trackMessage,"Order found successfully.","success");
-
-    let medicinesHtml="";
-
-    if(Array.isArray(order.medicines)){
-      order.medicines.forEach((item,index)=>{
-        medicinesHtml+=`
-        <div class="medicine-row">
-          <p>
-            <strong>Medicine ${index+1}:</strong>
-            ${escapeHtml(item.name||"N/A")}
-          </p>
-          <p>
-            <strong>Quantity:</strong>
-            ${escapeHtml(String(item.quantity||""))}
-            ${escapeHtml(item.unit||"Tablet")}
-          </p>
-        </div>`;
-      });
-    }
-
-    trackResult.innerHTML=`
-    <div class="order-card">
-      <p><strong>🆔 Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
-      ${medicinesHtml}
-      <p><strong>🚚 Delivery Address:</strong> ${escapeHtml(order.address||"N/A")}</p>
-      <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
-      <p><strong>📄 Prescription:</strong>
-        ${order.prescriptionFileName?escapeHtml(order.prescriptionFileName):"Not selected"}
-      </p>
-      <p><strong>🚚 Order Status:</strong></p>
-      <span class="status">${escapeHtml(order.status||"Pending")}</span>
-      ${createAmountHtml(order)}
-      <p style="margin-top:15px;">
-        <strong>💳 Payment Status:</strong>
-        ${escapeHtml(order.paymentStatus||"Pending")}
-      </p>
-    </div>`;
-  }catch(error){
-    console.error("Track order error:",error);
-    showMessage(trackMessage,"Could not track order. Please try again.","error");
-  }finally{
-    trackOrderBtn.disabled=false;
-  }
-});
-
-function escapeHtml(value){
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-logoutBtn.addEventListener("click",async()=>{
-  try{
-    await signOut(auth);
-    alert("Logged out successfully.");
-    window.location.hash="login";
-  }catch(error){
-    console.error(error);
-    alert("Logout failed.");
-  }
-});
-
-prescriptionFile.addEventListener("change",()=>{
-  const file=prescriptionFile.files[0];
-
-  if(!file){
-    fileInfo.textContent="No prescription selected.";
-    return;
-  }
-
-  const allowedTypes=["image/jpeg","image/png","application/pdf"];
-
-  if(!allowedTypes.includes(file.type)){
-    fileInfo.textContent="Please select JPG, PNG or PDF.";
-    prescriptionFile.value="";
-    return;
-  }
-
-  fileInfo.textContent="Selected: "+file.name;
-});
-
-whatsappPrescriptionBtn.addEventListener("click",()=>{
-  const file=prescriptionFile.files[0];
-
-  if(!file){
-    alert("Please select your prescription first.");
-    return;
-  }
-
-  const user=auth.currentUser;
-  let customerText="";
-
-  if(user){
-    customerText="Customer: "+user.email+"\n";
-  }
-
-  const message=
-    "Hello, I want to send my prescription for medicine delivery.\n\n"+
-    customerText+
-    "Prescription file: "+file.name+
-    "\n\nPlease check the prescription.";
-
-  const whatsappUrl=
-    "https://wa.me/916009415805?text="+encodeURIComponent(message);
-
-  window.open(whatsappUrl,"_blank");
-});
-
-contactWhatsAppBtn.addEventListener("click",()=>{
-  const message="Hello, I need help with my medicine order.";
-  const whatsappUrl=
-    "https://wa.me/916009415805?text="+encodeURIComponent(message);
-  window.open(whatsappUrl,"_blank");
-});
-
-if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>{
-    navigator.serviceWorker.register("sw.js",{scope:"./"})
-      .then(()=>console.log("Service Worker registered successfully."))
-      .catch(error=>console.error("Service Worker registration failed:",error));
-  });
-}
+async function lookup(m,id){const s=await getDoc(doc(db,"publicOrders",id));if(!s.exists())return null;const o=s.data();return mobile(o.customerPhone)===m?o:null;}
+checkHistoryBtn.onclick=async()=>{const m=mobile(historyMobile.value),id=historyOrderId.value.trim();orderHistory.innerHTML="";if(!validMobile(m))return msg(historyMessage,"Please enter a valid 10-digit mobile number.","error");if(!id)return msg(historyMessage,"Please enter your Order ID.","error");try{checkHistoryBtn.disabled=true;const o=await lookup(m,id);if(!o)return msg(historyMessage,"Order not found. Please check your Mobile Number and Order ID.","error");msg(historyMessage,"Order found successfully.","success");render(o,orderHistory);}catch(e){console.error(e);msg(historyMessage,"Could not check order. Please try again.","error");}finally{checkHistoryBtn.disabled=false;}};
+trackOrderBtn.onclick=async()=>{const m=mobile(trackMobile.value),id=trackOrderId.value.trim();trackResult.innerHTML="";if(!validMobile(m))return msg(trackMessage,"Please enter a valid 10-digit mobile number.","error");if(!id)return msg(trackMessage,"Please enter your Order ID.","error");try{trackOrderBtn.disabled=true;const o=await lookup(m,id);if(!o)return msg(trackMessage,"Order not found. Please check your Mobile Number and Order ID.","error");msg(trackMessage,"Order found successfully.","success");render(o,trackResult);}catch(e){console.error(e);msg(trackMessage,"Could not track order. Please try again.","error");}finally{trackOrderBtn.disabled=false;}};
+
+prescriptionFile.onchange=()=>{const f=prescriptionFile.files[0];if(!f){fileInfo.textContent="No prescription selected.";return;}if(!["image/jpeg","image/png","application/pdf"].includes(f.type)){fileInfo.textContent="Please select JPG, PNG or PDF.";prescriptionFile.value="";return;}fileInfo.textContent="Selected: "+f.name;};
+whatsappPrescriptionBtn.onclick=()=>{const f=prescriptionFile.files[0];if(!f)return alert("Please select your prescription first.");const text="Hello, I want to send my prescription for medicine delivery.\n\nCustomer: "+customerName.value.trim()+"\nMobile: "+mobile(customerMobile.value)+"\nPrescription file: "+f.name;window.open("https://wa.me/916009415805?text="+encodeURIComponent(text),"_blank");};
+contactWhatsAppBtn.onclick=()=>window.open("https://wa.me/916009415805?text="+encodeURIComponent("Hello, I need help with my medicine order."),"_blank");
+
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(console.error));
 </script>
 
 </body>
