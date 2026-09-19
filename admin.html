@@ -269,14 +269,86 @@ async function loadOrders(){
 
   try{
 
-    const q = query(
+    /*
+      Read both collections:
+      1. publicOrders = current guest-order system
+      2. orders      = older order records
+
+      This prevents old orders from losing Customer/Address information.
+    */
+
+    const publicQuery = query(
       collection(db,"publicOrders"),
       orderBy("createdAt","desc")
     );
 
-    const snapshot = await getDocs(q);
+    const oldQuery = query(
+      collection(db,"orders"),
+      orderBy("createdAt","desc")
+    );
 
-    if(snapshot.empty){
+    const [publicSnapshot, oldSnapshot] =
+      await Promise.all([
+        getDocs(publicQuery),
+        getDocs(oldQuery)
+      ]);
+
+    const allOrders = [];
+
+    publicSnapshot.forEach(function(orderDoc){
+      allOrders.push({
+        documentId: orderDoc.id,
+        collectionName: "publicOrders",
+        data: orderDoc.data()
+      });
+    });
+
+    oldSnapshot.forEach(function(orderDoc){
+      allOrders.push({
+        documentId: orderDoc.id,
+        collectionName: "orders",
+        data: orderDoc.data()
+      });
+    });
+
+    /*
+      Remove duplicate Order IDs.
+      publicOrders is preferred when the same Order ID exists
+      in both collections.
+    */
+
+    const uniqueOrders = new Map();
+
+    allOrders.forEach(function(item){
+
+      const orderId =
+        item.data.orderId || item.documentId;
+
+      if(
+        !uniqueOrders.has(orderId) ||
+        item.collectionName === "publicOrders"
+      ){
+        uniqueOrders.set(orderId,item);
+      }
+    });
+
+    const orders = Array.from(
+      uniqueOrders.values()
+    );
+
+    orders.sort(function(a,b){
+
+      const aSeconds =
+        a.data.createdAt?.seconds || 0;
+
+      const bSeconds =
+        b.data.createdAt?.seconds || 0;
+
+      return bSeconds - aSeconds;
+    });
+
+
+    if(orders.length === 0){
 
       ordersContainer.innerHTML =
         "<div class='card'><h2>No orders found.</h2></div>";
@@ -284,23 +356,26 @@ async function loadOrders(){
       return;
     }
 
+
     ordersContainer.innerHTML = "";
 
-    snapshot.forEach(function(orderDoc){
-
-      const order = orderDoc.data();
+    orders.forEach(function(item){
 
       createOrderCard(
-        orderDoc.id,
-        order
+        item.documentId,
+        item.data,
+        item.collectionName
       );
+
     });
+
 
     showMessage(
       adminMessage,
       "Orders loaded successfully.",
       "success"
     );
+
 
   }catch(error){
 
@@ -309,7 +384,9 @@ async function loadOrders(){
     ordersContainer.innerHTML =
       "<div class='card'>" +
       "<h2>Unable to load orders</h2>" +
-      "<p>" + escapeHTML(error.message) + "</p>" +
+      "<p>" +
+      escapeHTML(error.message) +
+      "</p>" +
       "</div>";
 
     showMessage(
@@ -320,8 +397,7 @@ async function loadOrders(){
   }
 }
 
-
-function createOrderCard(documentId,order){
+function createOrderCard(documentId,order,collectionName){
 
   const card = document.createElement("div");
   card.className = "order-card";
@@ -374,6 +450,7 @@ function createOrderCard(documentId,order){
       <strong>Customer Name:</strong>
       ${escapeHTML(
         order.customerName ||
+        order.fullName ||
         order.name ||
         ""
       )}
@@ -394,6 +471,7 @@ function createOrderCard(documentId,order){
       ${escapeHTML(
         order.address ||
         order.deliveryAddress ||
+        order.customerAddress ||
         ""
       )}
     </div>
@@ -716,7 +794,7 @@ function createOrderCard(documentId,order){
 
           doc(
             db,
-            "publicOrders",
+            collectionName,
             documentId
           ),
 
