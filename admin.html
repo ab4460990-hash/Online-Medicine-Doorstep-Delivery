@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medicine Delivery - Admin Panel</title>
+  <title>Online Medicine Doorstep Delivery - Admin Panel</title>
 
   <style>
     * {
@@ -147,7 +147,7 @@
 <body>
 
 <header>
-  <h1>💊 Medicine Delivery - Admin Panel</h1>
+  <h1>💊 Online Medicine Doorstep Delivery - Admin Panel</h1>
 </header>
 
 <div class="container">
@@ -418,7 +418,7 @@
 
       const q =
         query(
-          collection(db, "orders"),
+          collection(db, "publicOrders"),
           orderBy("createdAt", "desc")
         );
 
@@ -534,15 +534,25 @@
       <p>
         <b>Customer:</b>
         ${escapeHTML(
-          order.fullName || ""
+          (order.customerName || order.fullName || "")
         )}
       </p>
 
       <p>
         <b>Mobile:</b>
         ${escapeHTML(
-          order.mobile || ""
+          (order.customerPhone || order.mobile || "")
         )}
+      </p>
+
+      <p>
+        <b>Estimated Delivery:</b>
+        ${escapeHTML(order.estimatedDeliveryTime || "")}
+      </p>
+
+      <p>
+        <b>Payment Method:</b>
+        ${escapeHTML(order.paymentMethod || "")}
       </p>
 
       <p>
