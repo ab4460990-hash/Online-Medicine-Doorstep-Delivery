@@ -607,6 +607,25 @@ placeOrderBtn.addEventListener("click",async()=>{
       createdAt:serverTimestamp()
     });
 
+    const guestKey=await makeGuestKey(orderId,customerMobile.value.trim());
+    await setDoc(doc(db,"publicOrders",guestKey),{
+      orderId:orderId,
+      customerPhoneLast4:customerMobile.value.trim().slice(-4),
+      medicines:medicines,
+      paymentMethod:paymentMethod.value,
+      estimatedDeliveryTime:estimatedDeliveryTime.value,
+      status:"Pending",
+      originalMRP:null,
+      discountAmount:null,
+      discountPercent:10,
+      payableAmount:null,
+      paymentAmount:null,
+      paymentStatus:"Pending",
+      prescriptionSelected:hasPrescription,
+      prescriptionFileName:prescriptionName,
+      createdAt:serverTimestamp()
+    });
+
     showMessage(orderMessage,"Order placed successfully! Order ID: "+orderId,"success");
 
     medicineList.innerHTML=medicineRowHtml(1,false);
@@ -759,6 +778,13 @@ function renderOrderDetails(order){
 }
 
 
+async function makeGuestKey(orderId,mobile){
+  const raw=orderId.trim()+":"+mobile.trim();
+  const data=new TextEncoder().encode(raw);
+  const hash=await crypto.subtle.digest("SHA-256",data);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
 guestHistoryBtn.addEventListener("click",async()=>{
   const orderId=guestHistoryOrderId.value.trim();
   const mobile=guestHistoryMobile.value.trim();
@@ -777,24 +803,15 @@ guestHistoryBtn.addEventListener("click",async()=>{
   try{
     guestHistoryBtn.disabled=true;
 
-    const historyQuery=query(
-      collection(db,"orders"),
-      where("orderId","==",orderId),
-      where("customerPhone","==",mobile)
-    );
+    const publicKey=await makeGuestKey(orderId,mobile);
+    const publicSnap=await getDoc(doc(db,"publicOrders",publicKey));
 
-    const snapshot=await getDocs(historyQuery);
-
-    if(snapshot.empty){
+    if(!publicSnap.exists()){
       showMessage(guestHistoryMessage,"Order not found. Please check your Order ID and mobile number.","error");
       return;
     }
 
-    let order=null;
-    snapshot.forEach(docSnap=>{
-      order={id:docSnap.id,...docSnap.data()};
-    });
-
+    const order=publicSnap.data();
     guestHistoryResult.innerHTML=renderOrderDetails(order);
     showMessage(guestHistoryMessage,"Order found successfully.","success");
   }catch(error){
