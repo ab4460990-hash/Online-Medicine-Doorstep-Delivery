@@ -228,17 +228,20 @@ footer{background:#087c59;color:white;text-align:center;padding:25px;margin-top:
 </section>
 
 <section id="orders" class="history-panel">
-<h2>My Order History</h2>
-<div class="box"><div id="orderHistory">Loading orders...</div></div>
+<h2>Order History</h2>
+<div class="box" id="guestOrderBox">
+<p><strong>Check your order without login.</strong></p>
+<p>Enter your mobile number and Order ID to view your order status and details.</p>
+<input type="tel" id="guestMobile" class="input" placeholder="Enter 10-digit Mobile Number" inputmode="numeric" maxlength="10">
+<input type="text" id="guestOrderId" class="input" placeholder="Example: ORD-123456789">
+<button class="btn" id="guestOrderBtn">🔎 Check Order History</button>
+<div id="guestOrderMessage" class="message"></div>
+<div id="guestOrderResult" class="track-result"></div>
+</div>
 
-<div class="box" style="margin-top:20px;">
-<h3 style="color:#087c59;margin-bottom:10px;">🔎 View Order Without Login</h3>
-<p>Enter your Order ID and the mobile number used when placing the order.</p>
-<input type="text" id="guestHistoryOrderId" class="input" placeholder="Order ID (Example: ORD-123456789)">
-<input type="text" id="guestHistoryMobile" class="input" placeholder="10-digit Mobile Number" maxlength="10">
-<button class="btn" id="guestHistoryBtn">View My Order</button>
-<div id="guestHistoryMessage" class="message"></div>
-<div id="guestHistoryResult" class="track-result"></div>
+<div class="box" style="margin-top:20px;" id="loggedInHistoryBox">
+<h3 style="color:#087c59;margin-bottom:12px;">My Logged-in Order History</h3>
+<div id="orderHistory">Loading orders...</div>
 </div>
 </section>
 
@@ -325,6 +328,12 @@ const paymentMethod=document.getElementById("paymentMethod");
 const placeOrderBtn=document.getElementById("placeOrderBtn");
 const orderMessage=document.getElementById("orderMessage");
 const orderHistory=document.getElementById("orderHistory");
+const guestMobile=document.getElementById("guestMobile");
+const guestOrderId=document.getElementById("guestOrderId");
+const guestOrderBtn=document.getElementById("guestOrderBtn");
+const guestOrderMessage=document.getElementById("guestOrderMessage");
+const guestOrderResult=document.getElementById("guestOrderResult");
+const loggedInHistoryBox=document.getElementById("loggedInHistoryBox");
 const prescriptionFile=document.getElementById("prescriptionFile");
 const fileInfo=document.getElementById("fileInfo");
 const whatsappPrescriptionBtn=document.getElementById("whatsappPrescriptionBtn");
@@ -333,17 +342,85 @@ const trackOrderId=document.getElementById("trackOrderId");
 const trackOrderBtn=document.getElementById("trackOrderBtn");
 const trackMessage=document.getElementById("trackMessage");
 const trackResult=document.getElementById("trackResult");
-const guestHistoryOrderId=document.getElementById("guestHistoryOrderId");
-const guestHistoryMobile=document.getElementById("guestHistoryMobile");
-const guestHistoryBtn=document.getElementById("guestHistoryBtn");
-const guestHistoryMessage=document.getElementById("guestHistoryMessage");
-const guestHistoryResult=document.getElementById("guestHistoryResult");
 
 function showMessage(element,message,type){
   element.textContent=message;
   element.className="message "+type;
   element.style.display="block";
 }
+
+async function hashMobile(mobile){
+  const data=new TextEncoder().encode(mobile);
+  const hashBuffer=await crypto.subtle.digest("SHA-256",data);
+  return Array.from(new Uint8Array(hashBuffer)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+function renderPublicOrder(order){
+  let medicinesHtml="";
+  if(Array.isArray(order.medicines)){
+    order.medicines.forEach((item,index)=>{
+      medicinesHtml+=`
+      <div class="medicine-row">
+        <p><strong>Medicine ${index+1}:</strong> ${escapeHtml(item.name||"N/A")}</p>
+        <p><strong>Quantity:</strong> ${escapeHtml(String(item.quantity||""))} ${escapeHtml(item.unit||"Tablet")}</p>
+      </div>`;
+    });
+  }
+
+  return `
+  <div class="order-card">
+    <p><strong>🆔 Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
+    ${medicinesHtml}
+    <p><strong>🚚 Order Status:</strong></p>
+    <span class="status">${escapeHtml(order.status||"Pending")}</span>
+    <p style="margin-top:15px;"><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime||"Not updated")}</p>
+    <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
+    ${createAmountHtml(order)}
+    <p style="margin-top:15px;"><strong>💳 Payment Status:</strong> ${escapeHtml(order.paymentStatus||"Pending")}</p>
+  </div>`;
+}
+
+guestOrderBtn.addEventListener("click",async()=>{
+  const mobile=guestMobile.value.trim();
+  const orderId=guestOrderId.value.trim();
+
+  if(!/^[0-9]{10}$/.test(mobile)){
+    showMessage(guestOrderMessage,"Please enter a valid 10-digit mobile number.","error");
+    return;
+  }
+  if(!orderId){
+    showMessage(guestOrderMessage,"Please enter your Order ID.","error");
+    return;
+  }
+
+  guestOrderResult.innerHTML="";
+
+  try{
+    guestOrderBtn.disabled=true;
+    const phoneHash=await hashMobile(mobile);
+    const publicQuery=query(
+      collection(db,"publicOrders"),
+      where("orderId","==",orderId),
+      where("customerPhoneHash","==",phoneHash)
+    );
+    const snapshot=await getDocs(publicQuery);
+
+    if(snapshot.empty){
+      showMessage(guestOrderMessage,"Order not found. Please check your Mobile Number and Order ID.","error");
+      return;
+    }
+
+    let order=null;
+    snapshot.forEach(docSnap=>{ order=docSnap.data(); });
+    showMessage(guestOrderMessage,"Order found successfully.","success");
+    guestOrderResult.innerHTML=renderPublicOrder(order);
+  }catch(error){
+    console.error("Guest order history error:",error);
+    showMessage(guestOrderMessage,"Could not check the order. Please try again.","error");
+  }finally{
+    guestOrderBtn.disabled=false;
+  }
+});
 
 signupBtn.addEventListener("click",async()=>{
   const email=emailInput.value.trim();
@@ -412,6 +489,7 @@ onAuthStateChanged(auth,async(user)=>{
     profileSection.style.display="block";
     orderSection.style.display="block";
     ordersSection.style.display="block";
+    loggedInHistoryBox.style.display="block";
     trackSection.style.display="block";
     emailInput.value="";
     passwordInput.value="";
@@ -420,8 +498,9 @@ onAuthStateChanged(auth,async(user)=>{
   }else{
     profileSection.style.display="none";
     orderSection.style.display="none";
-    ordersSection.style.display="none";
+    ordersSection.style.display="block";
     trackSection.style.display="none";
+    loggedInHistoryBox.style.display="none";
   }
 });
 
@@ -585,16 +664,23 @@ placeOrderBtn.addEventListener("click",async()=>{
     const hasPrescription=prescriptionFile.files.length>0;
     const prescriptionName=hasPrescription?prescriptionFile.files[0].name:"";
 
+    const customerPhone=customerMobile.value.trim();
+    if(!/^[0-9]{10}$/.test(customerPhone)){
+      showMessage(orderMessage,"Please save a valid 10-digit mobile number in your profile first.","error");
+      return;
+    }
+    const customerPhoneHash=await hashMobile(customerPhone);
+
     await addDoc(collection(db,"orders"),{
       orderId:orderId,
       customerUid:user.uid,
       customerEmail:user.email,
       customerName:customerName.value.trim(),
-      customerPhone:customerMobile.value.trim(),
+      customerPhone:customerPhone,
       medicines:medicines,
       address:address,
-      paymentMethod:paymentMethod.value,
       estimatedDeliveryTime:estimatedDeliveryTime.value,
+      paymentMethod:paymentMethod.value,
       status:"Pending",
       originalMRP:null,
       discountAmount:null,
@@ -607,13 +693,12 @@ placeOrderBtn.addEventListener("click",async()=>{
       createdAt:serverTimestamp()
     });
 
-    const guestKey=await makeGuestKey(orderId,customerMobile.value.trim());
-    await setDoc(doc(db,"publicOrders",guestKey),{
+    await setDoc(doc(db,"publicOrders",orderId),{
       orderId:orderId,
-      customerPhoneLast4:customerMobile.value.trim().slice(-4),
+      customerPhoneHash:customerPhoneHash,
       medicines:medicines,
-      paymentMethod:paymentMethod.value,
       estimatedDeliveryTime:estimatedDeliveryTime.value,
+      paymentMethod:paymentMethod.value,
       status:"Pending",
       originalMRP:null,
       discountAmount:null,
@@ -621,8 +706,6 @@ placeOrderBtn.addEventListener("click",async()=>{
       payableAmount:null,
       paymentAmount:null,
       paymentStatus:"Pending",
-      prescriptionSelected:hasPrescription,
-      prescriptionFileName:prescriptionName,
       createdAt:serverTimestamp()
     });
 
@@ -692,8 +775,8 @@ async function loadOrderHistory(user){
       <p><strong>Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
       ${medicinesHtml}
       <p><strong>Address:</strong> ${escapeHtml(order.address||"N/A")}</p>
+      <p><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime||"Not updated")}</p>
       <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
-      ${order.estimatedDeliveryTime ? `<p><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime)}</p>` : ""}
       <p><strong>Prescription:</strong>
         ${order.prescriptionFileName?escapeHtml(order.prescriptionFileName):"Not selected"}
       </p>
@@ -749,78 +832,6 @@ function formatMoney(value){
   }
   return "₹"+Number(value).toFixed(2);
 }
-
-function renderOrderDetails(order){
-  let medicinesHtml="";
-  if(Array.isArray(order.medicines)){
-    order.medicines.forEach((item,index)=>{
-      medicinesHtml+=`
-      <div class="medicine-row">
-        <p><strong>Medicine ${index+1}:</strong> ${escapeHtml(item.name||"N/A")}</p>
-        <p><strong>Quantity:</strong> ${escapeHtml(String(item.quantity||""))} ${escapeHtml(item.unit||"Tablet")}</p>
-      </div>`;
-    });
-  }
-
-  return `
-    <div class="order-card">
-      <p><strong>🆔 Order ID:</strong> ${escapeHtml(order.orderId||"N/A")}</p>
-      ${medicinesHtml}
-      <p><strong>🚚 Delivery Address:</strong> ${escapeHtml(order.address||"N/A")}</p>
-      <p><strong>💳 Payment Method:</strong> ${escapeHtml(order.paymentMethod||"Cash on Delivery")}</p>
-      <p><strong>📄 Prescription:</strong> ${order.prescriptionFileName?escapeHtml(order.prescriptionFileName):"Not selected"}</p>
-      <p><strong>🚚 Order Status:</strong></p>
-      <span class="status">${escapeHtml(order.status||"Pending")}</span>
-      ${order.estimatedDeliveryTime ? `<p style="margin-top:12px;"><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime)}</p>` : ""}
-      ${createAmountHtml(order)}
-      <p style="margin-top:15px;"><strong>💳 Payment Status:</strong> ${escapeHtml(order.paymentStatus||"Pending")}</p>
-    </div>`;
-}
-
-
-async function makeGuestKey(orderId,mobile){
-  const raw=orderId.trim()+":"+mobile.trim();
-  const data=new TextEncoder().encode(raw);
-  const hash=await crypto.subtle.digest("SHA-256",data);
-  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-
-guestHistoryBtn.addEventListener("click",async()=>{
-  const orderId=guestHistoryOrderId.value.trim();
-  const mobile=guestHistoryMobile.value.trim();
-  guestHistoryResult.innerHTML="";
-
-  if(!orderId||!mobile){
-    showMessage(guestHistoryMessage,"Please enter your Order ID and mobile number.","error");
-    return;
-  }
-
-  if(!/^\d{10}$/.test(mobile)){
-    showMessage(guestHistoryMessage,"Please enter a valid 10-digit mobile number.","error");
-    return;
-  }
-
-  try{
-    guestHistoryBtn.disabled=true;
-
-    const publicKey=await makeGuestKey(orderId,mobile);
-    const publicSnap=await getDoc(doc(db,"publicOrders",publicKey));
-
-    if(!publicSnap.exists()){
-      showMessage(guestHistoryMessage,"Order not found. Please check your Order ID and mobile number.","error");
-      return;
-    }
-
-    const order=publicSnap.data();
-    guestHistoryResult.innerHTML=renderOrderDetails(order);
-    showMessage(guestHistoryMessage,"Order found successfully.","success");
-  }catch(error){
-    console.error("Guest order history error:",error);
-    showMessage(guestHistoryMessage,"Could not load the order. Please try again.","error");
-  }finally{
-    guestHistoryBtn.disabled=false;
-  }
-});
 
 trackOrderBtn.addEventListener("click",async()=>{
   const user=auth.currentUser;
@@ -892,7 +903,6 @@ trackOrderBtn.addEventListener("click",async()=>{
       </p>
       <p><strong>🚚 Order Status:</strong></p>
       <span class="status">${escapeHtml(order.status||"Pending")}</span>
-      ${order.estimatedDeliveryTime ? `<p style="margin-top:12px;"><strong>⏱️ Estimated Delivery:</strong> ${escapeHtml(order.estimatedDeliveryTime)}</p>` : ""}
       ${createAmountHtml(order)}
       <p style="margin-top:15px;">
         <strong>💳 Payment Status:</strong>
