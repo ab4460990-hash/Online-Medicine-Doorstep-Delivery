@@ -13,236 +13,236 @@ content="Online Medicine Doorstep Delivery - Order medicines online from Narsing
 <link rel="manifest" href="manifest.json">
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f8f6;
-  color:#222;
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f8f6;
+color:#222
 }
 
 header{
-  background:#087c59;
-  color:white;
-  padding:15px;
-  text-align:center;
+background:#087c59;
+color:white;
+padding:15px;
+text-align:center
 }
 
 .logo{
-  font-size:23px;
-  font-weight:bold;
+font-size:23px;
+font-weight:bold
 }
 
 .location{
-  font-size:13px;
-  margin-top:5px;
+font-size:13px;
+margin-top:5px
 }
 
 nav{
-  display:flex;
-  justify-content:center;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-top:12px;
+display:flex;
+justify-content:center;
+gap:7px;
+flex-wrap:wrap;
+margin-top:12px
 }
 
 nav a{
-  color:white;
-  text-decoration:none;
-  padding:8px 11px;
-  border-radius:7px;
-  background:#066b4d;
-  font-size:14px;
+color:white;
+text-decoration:none;
+padding:8px 11px;
+border-radius:7px;
+background:#066b4d;
+font-size:14px
 }
 
 .offer{
-  background:#ff8c00;
-  color:white;
-  text-align:center;
-  font-weight:bold;
-  padding:10px;
+background:#ff8c00;
+color:white;
+text-align:center;
+font-weight:bold;
+padding:10px
 }
 
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:15px;
+max-width:900px;
+margin:auto;
+padding:15px
 }
 
 .card{
-  background:white;
-  border-radius:14px;
-  padding:18px;
-  margin:15px 0;
-  box-shadow:0 2px 10px #0001;
+background:white;
+border-radius:14px;
+padding:18px;
+margin:15px 0;
+box-shadow:0 2px 10px #0001
 }
 
 h2{
-  color:#087c59;
-  margin-top:0;
+color:#087c59;
+margin-top:0
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px
 }
 
 .category{
-  padding:18px 8px;
-  background:#e8f5ef;
-  border-radius:10px;
-  text-align:center;
-  font-weight:bold;
+padding:18px 8px;
+background:#e8f5ef;
+border-radius:10px;
+text-align:center;
+font-weight:bold
 }
 
 label{
-  display:block;
-  font-weight:bold;
-  margin:12px 0 6px;
+display:block;
+font-weight:bold;
+margin:12px 0 6px
 }
 
-input,
-select,
-textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:15px;
+input,select,textarea{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px
 }
 
 textarea{
-  min-height:90px;
-  resize:vertical;
+min-height:90px;
+resize:vertical
 }
 
 .btn{
-  border:0;
-  border-radius:8px;
-  padding:12px 16px;
-  font-weight:bold;
-  cursor:pointer;
-  margin:6px 4px 6px 0;
+border:0;
+border-radius:8px;
+padding:12px 16px;
+font-weight:bold;
+cursor:pointer;
+margin:6px 4px 6px 0
 }
 
 .green{
-  background:#087c59;
-  color:white;
+background:#087c59;
+color:white
 }
 
 .wa{
-  background:#25d366;
-  color:white;
+background:#25d366;
+color:white
 }
 
 .orange{
-  background:#ff8c00;
-  color:white;
+background:#ff8c00;
+color:white
 }
 
 .red{
-  background:#d93025;
-  color:white;
+background:#d93025;
+color:white
+}
+
+.btn:disabled{
+opacity:.6;
+cursor:not-allowed
 }
 
 .success{
-  background:#e7f7ed;
-  color:#126b3d;
-  padding:12px;
-  border-radius:8px;
-  margin-top:10px;
+background:#e7f7ed;
+color:#126b3d;
+padding:12px;
+border-radius:8px;
+margin-top:10px
 }
 
 .error{
-  background:#fdeaea;
-  color:#a11;
-  padding:12px;
-  border-radius:8px;
-  margin-top:10px;
-}
-
-.medicine{
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:12px;
-  margin:10px 0;
-  background:#fafafa;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 100px 110px 45px;
-  gap:8px;
-  align-items:end;
-}
-
-.remove{
-  background:#d93025;
-  color:white;
-  border:0;
-  border-radius:7px;
-  padding:11px;
-  cursor:pointer;
-}
-
-.orderbox{
-  border-left:5px solid #087c59;
-  padding:12px;
-  background:#f7fffb;
-  margin-top:12px;
-}
-
-footer{
-  text-align:center;
-  background:#087c59;
-  color:white;
-  padding:18px;
-  margin-top:30px;
-}
-
-small{
-  color:#666;
+background:#fdeaea;
+color:#a11;
+padding:12px;
+border-radius:8px;
+margin-top:10px
 }
 
 .loading{
-  background:#fff8e6;
-  color:#8a5a00;
-  padding:12px;
-  border-radius:8px;
-  margin-top:10px;
+background:#fff8e6;
+color:#8a5a00;
+padding:12px;
+border-radius:8px;
+margin-top:10px
+}
+
+.medicine{
+border:1px solid #ddd;
+border-radius:10px;
+padding:12px;
+margin:10px 0;
+background:#fafafa
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 100px 110px 45px;
+gap:8px;
+align-items:end
+}
+
+.remove{
+background:#d93025;
+color:white;
+border:0;
+border-radius:7px;
+padding:11px;
+cursor:pointer
+}
+
+.orderbox{
+border-left:5px solid #087c59;
+padding:12px;
+background:#f7fffb;
+margin-top:12px
+}
+
+footer{
+text-align:center;
+background:#087c59;
+color:white;
+padding:18px;
+margin-top:30px
+}
+
+small{
+color:#666
 }
 
 @media(max-width:650px){
 
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+.grid{
+grid-template-columns:repeat(2,1fr)
+}
 
-  .row{
-    grid-template-columns:1fr 65px 90px 40px;
-  }
+.row{
+grid-template-columns:1fr 65px 90px 40px
+}
 
-  nav a{
-    font-size:12px;
-  }
+nav a{
+font-size:12px
+}
 
-  .logo{
-    font-size:19px;
-  }
+.logo{
+font-size:19px
+}
 
-  .medicine{
-    padding:8px;
-  }
+.medicine{
+padding:8px
+}
 
-  input,
-  select,
-  textarea{
-    font-size:14px;
-  }
+input,select,textarea{
+font-size:14px
+}
+
 }
 </style>
 </head>
@@ -276,8 +276,6 @@ Online Medicine Doorstep Delivery
 
 <main class="container">
 
-<!-- HOME -->
-
 <section class="card" id="home">
 
 <h2>
@@ -305,8 +303,6 @@ href="tel:6009415805">
 </section>
 
 
-<!-- CATEGORIES -->
-
 <section class="card" id="shop">
 
 <h2>
@@ -327,8 +323,6 @@ Medicine Categories
 </section>
 
 
-<!-- OFFER -->
-
 <section class="card" id="offers">
 
 <h2>
@@ -342,17 +336,13 @@ Special Offer
 </section>
 
 
-<!-- ORDER -->
-
 <section class="card" id="order">
 
 <h2>
 🛒 Place Your Order
 </h2>
 
-<label>
-Full Name
-</label>
+<label>Full Name</label>
 
 <input
 id="customerName"
@@ -361,9 +351,7 @@ placeholder="Enter your full name"
 autocomplete="name"
 >
 
-<label>
-Mobile Number
-</label>
+<label>Mobile Number</label>
 
 <input
 id="customerPhone"
@@ -374,14 +362,11 @@ placeholder="10-digit mobile number"
 autocomplete="tel"
 >
 
-<label>
-Delivery Address
-</label>
+<label>Delivery Address</label>
 
 <textarea
 id="address"
-placeholder="Enter complete delivery address">
-</textarea>
+placeholder="Enter complete delivery address"></textarea>
 
 <div id="medicineList"></div>
 
@@ -392,53 +377,28 @@ type="button">
 ➕ Add Another Medicine
 </button>
 
-<label>
-Estimated Delivery Time
-</label>
+<label>Estimated Delivery Time</label>
 
 <select id="estimatedDeliveryTime">
 
-<option value="30–60 minutes">
-30–60 minutes
-</option>
-
-<option value="1–2 hours">
-1–2 hours
-</option>
-
-<option value="2–4 hours">
-2–4 hours
-</option>
-
-<option value="Today">
-Today
-</option>
-
-<option value="Tomorrow">
-Tomorrow
-</option>
+<option value="30–60 minutes">30–60 minutes</option>
+<option value="1–2 hours">1–2 hours</option>
+<option value="2–4 hours">2–4 hours</option>
+<option value="Today">Today</option>
+<option value="Tomorrow">Tomorrow</option>
 
 </select>
 
-<label>
-Payment Method
-</label>
+<label>Payment Method</label>
 
 <select id="paymentMethod">
 
-<option value="Cash on Delivery">
-Cash on Delivery
-</option>
-
-<option value="Online Payment">
-Online Payment
-</option>
+<option value="Cash on Delivery">Cash on Delivery</option>
+<option value="Online Payment">Online Payment</option>
 
 </select>
 
-<label>
-Prescription (optional)
-</label>
+<label>Prescription (optional)</label>
 
 <input
 id="prescription"
@@ -470,8 +430,6 @@ type="button">
 </section>
 
 
-<!-- TRACK -->
-
 <section class="card" id="track">
 
 <h2>
@@ -482,27 +440,21 @@ type="button">
 Enter your mobile number and Order ID.
 </p>
 
-<label>
-Mobile Number
-</label>
+<label>Mobile Number</label>
 
 <input
 id="trackPhone"
 type="tel"
 inputmode="numeric"
 maxlength="10"
-placeholder="10-digit mobile number"
->
+placeholder="10-digit mobile number">
 
-<label>
-Order ID
-</label>
+<label>Order ID</label>
 
 <input
 id="trackOrderId"
 type="text"
-placeholder="Example: OMD12345678"
->
+placeholder="Example: OMD12345678">
 
 <button
 class="btn green"
@@ -516,21 +468,15 @@ Track Order
 </section>
 
 
-<!-- CONTACT -->
-
 <section class="card" id="contact">
 
 <h2>
 📞 Contact
 </h2>
 
-<p>
-📍 Narsingarh, Tripura
-</p>
+<p>📍 Narsingarh, Tripura</p>
 
-<p>
-📱 6009415805
-</p>
+<p>📱 6009415805</p>
 
 <a
 class="btn wa"
@@ -556,616 +502,527 @@ Call Us
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
-
 import {
-  initializeApp
+initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
 import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp
+getFirestore,
+doc,
+setDoc,
+getDoc,
+serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =====================================================
-   FIREBASE CONFIG
-=====================================================
-
-   IMPORTANT:
-   Put your NEW Firebase Web API key below.
-
-===================================================== */
+/* ==========================================
+FIREBASE CONFIG
+========================================== */
 
 const firebaseConfig = {
 
-  apiKey:
- AIzaSyBmB8riOCFLi670mu8NXAI2kwFj4973aas
+apiKey: "AIzaSyBmB8riOCFLi670mu8NXAI2kwFj4973aas",
 
-  authDomain:
-  "online-medicine-delivery-74346.firebaseapp.com",
+authDomain:
+"online-medicine-delivery-74346.firebaseapp.com",
 
-  projectId:
-  "online-medicine-delivery-74346",
+projectId:
+"online-medicine-delivery-74346",
 
-  storageBucket:
-  "online-medicine-delivery-74346.firebasestorage.app",
+storageBucket:
+"online-medicine-delivery-74346.firebasestorage.app",
 
-  messagingSenderId:
-  "1061955108881",
+messagingSenderId:
+"1061955108881",
 
-  appId:
-  "1:1061955108881:web:64f36ad79b5c612a2171b0",
+appId:
+"1:1061955108881:web:64f36ad79b5c612a2171b0",
 
-  measurementId:
-  "G-LMHDFF01QC"
+measurementId:
+"G-LMHDFF01QC"
 
 };
 
 
-/* =====================================================
-   INITIALIZE FIREBASE
-===================================================== */
+/* ==========================================
+FIREBASE
+========================================== */
 
-let app;
-let db;
+let db=null;
 
 try{
 
-  app = initializeApp(firebaseConfig);
+const app=initializeApp(firebaseConfig);
 
-  db = getFirestore(app);
+db=getFirestore(app);
+
+console.log("Firebase connected successfully");
+
+}catch(error){
+
+console.error(
+"Firebase initialization error:",
+error
+);
 
 }
-catch(error){
-
-  console.error(
-    "Firebase initialization error:",
-    error
-  );
-
-}
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* ==========================================
+ELEMENTS
+========================================== */
 
-const medicineList =
+const medicineList=
 document.getElementById("medicineList");
 
-const orderMessage =
+const orderMessage=
 document.getElementById("orderMessage");
 
 
-/* =====================================================
-   ADD MEDICINE
-===================================================== */
+/* ==========================================
+ADD MEDICINE
+========================================== */
 
 function addMedicine(){
 
-  const div =
-  document.createElement("div");
+const div=
+document.createElement("div");
 
-  div.className =
-  "medicine";
+div.className="medicine";
 
-  div.innerHTML = `
+div.innerHTML=`
 
-    <div class="row">
+<div class="row">
 
-      <div>
+<div>
 
-        <label>
-        Medicine Name
-        </label>
+<label>Medicine Name</label>
 
-        <input
-        class="medName"
-        type="text"
-        placeholder="Medicine name">
+<input
+class="medName"
+type="text"
+placeholder="Medicine name">
 
-      </div>
+</div>
 
-      <div>
+<div>
 
-        <label>
-        Qty
-        </label>
+<label>Qty</label>
 
-        <input
-        class="medQty"
-        type="number"
-        min="1"
-        value="1">
+<input
+class="medQty"
+type="number"
+min="1"
+value="1">
 
-      </div>
+</div>
 
-      <div>
+<div>
 
-        <label>
-        Unit
-        </label>
+<label>Unit</label>
 
-        <select class="medUnit">
+<select class="medUnit">
 
-          <option value="Tablet">
-          Tablet
-          </option>
+<option value="Tablet">Tablet</option>
+<option value="Strip">Strip</option>
+<option value="Bottle">Bottle</option>
+<option value="Tube">Tube</option>
+<option value="Box">Box</option>
+<option value="Piece">Piece</option>
 
-          <option value="Strip">
-          Strip
-          </option>
+</select>
 
-          <option value="Bottle">
-          Bottle
-          </option>
+</div>
 
-          <option value="Tube">
-          Tube
-          </option>
+<button
+class="remove"
+type="button">
+×
+</button>
 
-          <option value="Box">
-          Box
-          </option>
-
-          <option value="Piece">
-          Piece
-          </option>
-
-        </select>
-
-      </div>
-
-      <button
-      class="remove"
-      type="button"
-      title="Remove medicine">
-      ×
-      </button>
-
-    </div>
-  `;
+</div>
+`;
 
 
-  div
-  .querySelector(".remove")
-  .addEventListener(
-    "click",
-    function(){
+div
+.querySelector(".remove")
+.addEventListener(
+"click",
+()=>{
 
-      div.remove();
+div.remove();
 
-    }
-  );
+}
+);
 
 
-  medicineList.appendChild(div);
+medicineList.appendChild(div);
 
 }
 
-
-/* FIRST MEDICINE */
 
 addMedicine();
 
 
-/* =====================================================
-   ADD ANOTHER MEDICINE
-===================================================== */
-
 document
 .getElementById("addMedicineBtn")
 .addEventListener(
-  "click",
-  addMedicine
+"click",
+addMedicine
 );
 
 
-/* =====================================================
-   PHONE VALIDATION
-===================================================== */
+/* ==========================================
+PHONE VALIDATION
+========================================== */
 
 function validPhone(phone){
 
-  return /^[6-9]\d{9}$/.test(phone);
+return /^[6-9]\d{9}$/.test(phone);
 
 }
 
 
-/* =====================================================
-   GET MEDICINES
-===================================================== */
+/* ==========================================
+GET MEDICINES
+========================================== */
 
 function getMedicines(){
 
-  const items =
-  document.querySelectorAll(".medicine");
+const items=
+document.querySelectorAll(".medicine");
+
+const medicines=[];
+
+items.forEach(item=>{
+
+const name=
+item
+.querySelector(".medName")
+.value
+.trim();
+
+const quantity=
+Number(
+item
+.querySelector(".medQty")
+.value
+);
+
+const unit=
+item
+.querySelector(".medUnit")
+.value;
 
 
-  const medicines = [];
+if(name){
 
+medicines.push({
 
-  items.forEach(function(item){
+name:name,
 
-    const name =
-    item
-    .querySelector(".medName")
-    .value
-    .trim();
+quantity:
+quantity>0
+?quantity
+:1,
 
+unit:unit
 
-    const quantity =
-    Number(
-      item
-      .querySelector(".medQty")
-      .value
-    );
+});
 
+}
 
-    const unit =
-    item
-    .querySelector(".medUnit")
-    .value;
+});
 
-
-    if(name){
-
-      medicines.push({
-
-        name:name,
-
-        quantity:
-        quantity > 0
-        ? quantity
-        : 1,
-
-        unit:unit
-
-      });
-
-    }
-
-  });
-
-
-  return medicines;
+return medicines;
 
 }
 
 
-/* =====================================================
-   ORDER ID
-===================================================== */
+/* ==========================================
+ORDER ID
+========================================== */
 
 function makeOrderId(){
 
-  const random =
-  Math.floor(
-    1000 +
-    Math.random() * 9000
-  );
+const random=
+Math.floor(
+1000+
+Math.random()*9000
+);
 
-
-  return "OMD" +
-  Date.now()
-  .toString()
-  .slice(-8) +
-  random;
+return "OMD"+
+Date.now()
+.toString()
+.slice(-8)+
+random;
 
 }
 
 
-/* =====================================================
-   SUBMIT ORDER
-===================================================== */
+/* ==========================================
+ESCAPE
+========================================== */
+
+function escapeHtml(value){
+
+return String(value??"")
+.replace(
+/[&<>"']/g,
+character=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[character])
+);
+
+}
+
+
+/* ==========================================
+SUBMIT ORDER
+========================================== */
 
 document
 .getElementById("submitOrderBtn")
 .addEventListener(
 "click",
-async function(){
+async()=>{
 
-  orderMessage.innerHTML = "";
+orderMessage.innerHTML="";
 
 
-  const name =
-  document
-  .getElementById("customerName")
-  .value
-  .trim();
+const submitButton=
+document.getElementById(
+"submitOrderBtn"
+);
 
 
-  const phone =
-  document
-  .getElementById("customerPhone")
-  .value
-  .trim();
+const name=
+document
+.getElementById("customerName")
+.value
+.trim();
 
 
-  const address =
-  document
-  .getElementById("address")
-  .value
-  .trim();
+const phone=
+document
+.getElementById("customerPhone")
+.value
+.trim();
 
 
-  const medicines =
-  getMedicines();
+const address=
+document
+.getElementById("address")
+.value
+.trim();
 
 
-  const file =
-  document
-  .getElementById("prescription")
-  .files[0];
+const medicines=
+getMedicines();
 
 
-  /* VALIDATION */
+const file=
+document
+.getElementById("prescription")
+.files[0];
 
-  if(!name){
 
-    orderMessage.innerHTML = `
+if(!name){
 
-      <div class="error">
-      Please enter your full name.
-      </div>
+orderMessage.innerHTML=`
+<div class="error">
+Please enter your full name.
+</div>
+`;
 
-    `;
+return;
 
-    return;
+}
 
-  }
 
+if(!validPhone(phone)){
 
-  if(!validPhone(phone)){
+orderMessage.innerHTML=`
+<div class="error">
+Please enter a valid 10-digit mobile number.
+</div>
+`;
 
-    orderMessage.innerHTML = `
+return;
 
-      <div class="error">
-      Please enter a valid 10-digit mobile number.
-      </div>
+}
 
-    `;
 
-    return;
+if(!address){
 
-  }
+orderMessage.innerHTML=`
+<div class="error">
+Please enter your delivery address.
+</div>
+`;
 
+return;
 
-  if(!address){
+}
 
-    orderMessage.innerHTML = `
 
-      <div class="error">
-      Please enter your delivery address.
-      </div>
+if(medicines.length===0){
 
-    `;
+orderMessage.innerHTML=`
+<div class="error">
+Please enter at least one medicine.
+</div>
+`;
 
-    return;
+return;
 
-  }
+}
 
 
-  if(medicines.length === 0){
+if(
+file &&
+file.size>
+50*1024*1024
+){
 
-    orderMessage.innerHTML = `
+orderMessage.innerHTML=`
+<div class="error">
+Prescription file must be 50 MB or smaller.
+</div>
+`;
 
-      <div class="error">
-      Please enter at least one medicine.
-      </div>
+return;
 
-    `;
+}
 
-    return;
 
-  }
+if(!db){
 
+orderMessage.innerHTML=`
+<div class="error">
+Firebase is not connected.
+Please check the Firebase Web API key.
+</div>
+`;
 
-  if(
-    file &&
-    file.size > 50 * 1024 * 1024
-  ){
+return;
 
-    orderMessage.innerHTML = `
+}
 
-      <div class="error">
-      Prescription file must be 50 MB or smaller.
-      </div>
 
-    `;
+const orderId=
+makeOrderId();
 
-    return;
 
-  }
+const estimated=
+document
+.getElementById(
+"estimatedDeliveryTime"
+)
+.value;
 
 
-  /* CHECK FIREBASE */
+const payment=
+document
+.getElementById(
+"paymentMethod"
+)
+.value;
 
-  if(!db){
 
-    orderMessage.innerHTML = `
+const orderData={
 
-      <div class="error">
+orderId:orderId,
 
-      ❌ Firebase could not be initialized.
+customerName:name,
 
-      <br><br>
+customerPhone:phone,
 
-      Please check your Firebase API key.
+address:address,
 
-      </div>
+medicines:medicines,
 
-    `;
+estimatedDeliveryTime:
+estimated,
 
-    return;
+paymentMethod:
+payment,
 
-  }
+status:"Pending",
 
+originalMRP:null,
 
-  /* ORDER ID */
+discountPercent:10,
 
-  const orderId =
-  makeOrderId();
+discountAmount:null,
 
+payableAmount:null,
 
-  /* ORDER DATA */
+paymentAmount:null,
 
-  const orderData = {
+paymentStatus:"Pending",
 
-    orderId:orderId,
+prescriptionSelected:
+!!file,
 
-    customerName:name,
+prescriptionFileName:
+file
+?file.name
+:"",
 
-    customerPhone:phone,
+createdAt:
+serverTimestamp()
 
-    address:address,
+};
 
-    medicines:medicines,
 
-    estimatedDeliveryTime:
-    document
-    .getElementById(
-      "estimatedDeliveryTime"
-    )
-    .value,
+orderMessage.innerHTML=`
+<div class="loading">
+⏳ Saving your order...
+</div>
+`;
 
-    paymentMethod:
-    document
-    .getElementById(
-      "paymentMethod"
-    )
-    .value,
+submitButton.disabled=true;
 
-    status:"Pending",
+submitButton.textContent=
+"Saving...";
 
-    originalMRP:null,
 
-    discountPercent:10,
+try{
 
-    discountAmount:null,
+await setDoc(
 
-    payableAmount:null,
+doc(
+db,
+"publicOrders",
+orderId
+),
 
-    paymentAmount:null,
+orderData
 
-    paymentStatus:"Pending",
+);
 
-    prescriptionSelected:
-    !!file,
 
-    prescriptionFileName:
-    file
-    ? file.name
-    : "",
+const medicineText=
+medicines
+.map(m=>
+`${m.name} - ${m.quantity} ${m.unit}`
+)
+.join("\n");
 
-    createdAt:
-    serverTimestamp()
 
-  };
-
-
-  /* SHOW SAVING */
-
-  orderMessage.innerHTML = `
-
-    <div class="loading">
-    ⏳ Saving your order...
-    </div>
-
-  `;
-
-
-  try{
-
-    await setDoc(
-
-      doc(
-        db,
-        "publicOrders",
-        orderId
-      ),
-
-      orderData
-
-    );
-
-
-    /* SUCCESS */
-
-    orderMessage.innerHTML = `
-
-      <div class="success">
-
-        <strong>
-        ✅ Order submitted successfully!
-        </strong>
-
-        <br><br>
-
-        Your Order ID:
-
-        <strong>
-        ${escapeHtml(orderId)}
-        </strong>
-
-        <br><br>
-
-        Please save this Order ID for tracking.
-
-        <br><br>
-
-        <button
-        class="btn wa"
-        type="button"
-        id="sendWhatsAppBtn">
-
-        💬 Send Order on WhatsApp
-
-        </button>
-
-      </div>
-
-    `;
-
-
-    /* WHATSAPP */
-
-    document
-    .getElementById(
-      "sendWhatsAppBtn"
-    )
-    .addEventListener(
-      "click",
-      function(){
-
-        const medicineText =
-        medicines
-        .map(function(m){
-
-          return (
-            m.name +
-            " - " +
-            m.quantity +
-            " " +
-            m.unit
-          );
-
-        })
-        .join("\n");
-
-
-        const text =
+const whatsappText=
 `New Medicine Order
 
 Order ID: ${orderId}
@@ -1179,608 +1036,487 @@ Address: ${address}
 Medicines:
 ${medicineText}
 
-Delivery: ${orderData.estimatedDeliveryTime}
+Delivery: ${estimated}
 
-Payment: ${orderData.paymentMethod}`;
-
-
-        window.open(
-
-          "https://wa.me/916009415805?text=" +
-          encodeURIComponent(text),
-
-          "_blank"
-
-        );
-
-      }
-    );
+Payment: ${payment}`;
 
 
-    /* CLEAR FORM */
+orderMessage.innerHTML=`
 
-    document
-    .getElementById(
-      "customerName"
-    )
-    .value = "";
+<div class="success">
 
+<strong>
+✅ Order submitted successfully!
+</strong>
 
-    document
-    .getElementById(
-      "customerPhone"
-    )
-    .value = "";
+<br><br>
 
+Order ID:
 
-    document
-    .getElementById(
-      "address"
-    )
-    .value = "";
+<strong>
+${escapeHtml(orderId)}
+</strong>
 
+<br><br>
 
-    document
-    .getElementById(
-      "prescription"
-    )
-    .value = "";
+Please save this Order ID for tracking.
 
+<br><br>
 
-    medicineList.innerHTML = "";
+<button
+class="btn wa"
+type="button"
+id="sendWhatsAppBtn">
+💬 Send Order on WhatsApp
+</button>
 
+</div>
+`;
 
-    addMedicine();
-
-  }
-  catch(error){
-
-    console.error(
-      "Order save error:",
-      error
-    );
-
-
-    orderMessage.innerHTML = `
-
-      <div class="error">
-
-      ❌ Order could not be saved.
-
-      <br><br>
-
-      Firebase Error:
-
-      <br>
-
-      ${escapeHtml(
-        error.message || "Unknown error"
-      )}
-
-      <br><br>
-
-      Please check Firestore Database
-      and Firestore Rules.
-
-      </div>
-
-    `;
-
-  }
-
-});
-
-
-/* =====================================================
-   WHATSAPP PRESCRIPTION
-===================================================== */
 
 document
 .getElementById(
-  "whatsappPrescriptionBtn"
+"sendWhatsAppBtn"
 )
 .addEventListener(
-  "click",
-  function(){
+"click",
+()=>{
 
-    const file =
-    document
-    .getElementById(
-      "prescription"
-    )
-    .files[0];
+window.open(
 
+"https://wa.me/916009415805?text="+
+encodeURIComponent(whatsappText),
 
-    const phone =
-    document
-    .getElementById(
-      "customerPhone"
-    )
-    .value
-    .trim();
+"_blank"
 
+);
 
-    let text;
-
-
-    if(file){
-
-      text =
-`Hello, I want to send my prescription.
-
-Prescription file:
-${file.name}
-
-My mobile number:
-${phone}`;
-
-    }
-    else{
-
-      text =
-`Hello, I want to send my prescription.
-
-My mobile number:
-${phone}`;
-
-    }
-
-
-    window.open(
-
-      "https://wa.me/916009415805?text=" +
-      encodeURIComponent(text),
-
-      "_blank"
-
-    );
-
-  }
+}
 );
 
 
-/* =====================================================
-   TRACK ORDER
-===================================================== */
+/* CLEAR */
+
+document
+.getElementById("customerName")
+.value="";
+
+document
+.getElementById("customerPhone")
+.value="";
+
+document
+.getElementById("address")
+.value="";
+
+document
+.getElementById("prescription")
+.value="";
+
+medicineList.innerHTML="";
+
+addMedicine();
+
+
+}catch(error){
+
+console.error(
+"Order save error:",
+error
+);
+
+
+orderMessage.innerHTML=`
+
+<div class="error">
+
+<strong>
+❌ Order could not be saved.
+</strong>
+
+<br><br>
+
+${escapeHtml(
+error.message||
+"Unknown Firebase error"
+)}
+
+<br><br>
+
+Please check Firestore Rules.
+
+</div>
+
+`;
+
+}finally{
+
+submitButton.disabled=false;
+
+submitButton.textContent=
+"✅ Submit Order";
+
+}
+
+}
+);
+
+
+/* ==========================================
+WHATSAPP PRESCRIPTION
+========================================== */
+
+document
+.getElementById(
+"whatsappPrescriptionBtn"
+)
+.addEventListener(
+"click",
+()=>{
+
+const file=
+document
+.getElementById(
+"prescription"
+)
+.files[0];
+
+
+const phone=
+document
+.getElementById(
+"customerPhone"
+)
+.value
+.trim();
+
+
+const message=
+`Hello, I want to send my prescription.
+
+Prescription:
+${file?file.name:"Not selected"}
+
+My mobile number:
+${phone}`;
+
+
+window.open(
+
+"https://wa.me/916009415805?text="+
+encodeURIComponent(message),
+
+"_blank"
+
+);
+
+}
+);
+
+
+/* ==========================================
+TRACK ORDER
+========================================== */
 
 document
 .getElementById("trackBtn")
 .addEventListener(
 "click",
-async function(){
+async()=>{
 
-  const phone =
-  document
-  .getElementById(
-    "trackPhone"
-  )
-  .value
-  .trim();
+const phone=
+document
+.getElementById(
+"trackPhone"
+)
+.value
+.trim();
 
 
-  const orderId =
-  document
-  .getElementById(
-    "trackOrderId"
-  )
-  .value
-  .trim()
-  .toUpperCase();
+const orderId=
+document
+.getElementById(
+"trackOrderId"
+)
+.value
+.trim()
+.toUpperCase();
 
 
-  const result =
-  document.getElementById(
-    "trackResult"
-  );
+const result=
+document.getElementById(
+"trackResult"
+);
 
 
-  result.innerHTML = "";
+result.innerHTML="";
 
 
-  /* VALIDATION */
+if(!validPhone(phone)){
 
-  if(!validPhone(phone)){
+result.innerHTML=`
 
-    result.innerHTML = `
+<div class="error">
+Enter a valid mobile number.
+</div>
 
-      <div class="error">
-      Enter a valid mobile number.
-      </div>
+`;
 
-    `;
-
-    return;
-
-  }
-
-
-  if(!orderId){
-
-    result.innerHTML = `
-
-      <div class="error">
-      Enter your Order ID.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  if(!db){
-
-    result.innerHTML = `
-
-      <div class="error">
-      Firebase is not connected.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  result.innerHTML = `
-
-    <div class="loading">
-    ⏳ Loading order...
-    </div>
-
-  `;
-
-
-  try{
-
-    const snapshot =
-    await getDoc(
-
-      doc(
-        db,
-        "publicOrders",
-        orderId
-      )
-
-    );
-
-
-    if(!snapshot.exists()){
-
-      result.innerHTML = `
-
-        <div class="error">
-        ❌ Order not found.
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-
-    const order =
-    snapshot.data();
-
-
-    /* PHONE CHECK */
-
-    if(
-      String(
-        order.customerPhone || ""
-      ) !== phone
-    ){
-
-      result.innerHTML = `
-
-        <div class="error">
-
-        ❌ Mobile number does not
-        match this order.
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-
-    /* MEDICINES */
-
-    const medicines =
-
-    (order.medicines || [])
-
-    .map(function(medicine){
-
-      return `
-
-        <li>
-
-        ${escapeHtml(
-          medicine.name
-        )}
-
-        —
-
-        ${escapeHtml(
-          medicine.quantity
-        )}
-
-        ${escapeHtml(
-          medicine.unit || ""
-        )}
-
-        </li>
-
-      `;
-
-    })
-
-    .join("");
-
-
-    /* RESULT */
-
-    result.innerHTML = `
-
-      <div class="orderbox">
-
-        <p>
-
-        <strong>
-        Order ID:
-        </strong>
-
-        ${escapeHtml(
-          order.orderId ||
-          orderId
-        )}
-
-        </p>
-
-
-        <p>
-
-        <strong>
-        Status:
-        </strong>
-
-        ${escapeHtml(
-          order.status ||
-          "Pending"
-        )}
-
-        </p>
-
-
-        <p>
-
-        <strong>
-        Estimated Delivery:
-        </strong>
-
-        ${escapeHtml(
-          order.estimatedDeliveryTime ||
-          "Not updated"
-        )}
-
-        </p>
-
-
-        <p>
-
-        <strong>
-        Payment Method:
-        </strong>
-
-        ${escapeHtml(
-          order.paymentMethod ||
-          "Not updated"
-        )}
-
-        </p>
-
-
-        <p>
-
-        <strong>
-        Payment Status:
-        </strong>
-
-        ${escapeHtml(
-          order.paymentStatus ||
-          "Pending"
-        )}
-
-        </p>
-
-
-        <p>
-        <strong>
-        Medicines:
-        </strong>
-        </p>
-
-
-        <ul>
-
-        ${
-          medicines ||
-          "<li>Not available</li>"
-        }
-
-        </ul>
-
-
-        <p>
-
-        <strong>
-        Original MRP:
-        </strong>
-
-        ${money(
-          order.originalMRP
-        )}
-
-        </p>
-
-
-        <p>
-
-        <strong>
-        Discount:
-        </strong>
-
-        ${money(
-          order.discountAmount
-        )}
-
-        ${
-          order.discountPercent != null
-          ?
-          " (" +
-          escapeHtml(
-            order.discountPercent
-          ) +
-          "%)"
-          :
-          ""
-        }
-
-        </p>
-
-
-        <p>
-
-        <strong>
-        Payable Amount:
-        </strong>
-
-        ${money(
-          order.payableAmount
-        )}
-
-        </p>
-
-
-        <p>
-
-        <strong>
-        Customer Payment:
-        </strong>
-
-        ${money(
-          order.paymentAmount
-        )}
-
-        </p>
-
-      </div>
-
-    `;
-
-  }
-  catch(error){
-
-    console.error(
-      "Track error:",
-      error
-    );
-
-
-    result.innerHTML = `
-
-      <div class="error">
-
-      ❌ Could not load the order.
-
-      <br><br>
-
-      ${escapeHtml(
-        error.message ||
-        "Please check Firestore rules."
-      )}
-
-      </div>
-
-    `;
-
-  }
-
-});
-
-
-/* =====================================================
-   MONEY
-===================================================== */
-
-function money(value){
-
-  if(
-    value === null ||
-    value === undefined ||
-    value === ""
-  ){
-
-    return "Not updated";
-
-  }
-
-
-  const number =
-  Number(value);
-
-
-  if(
-    Number.isNaN(number)
-  ){
-
-    return "Not updated";
-
-  }
-
-
-  return "₹" +
-  number.toFixed(2);
+return;
 
 }
 
 
-/* =====================================================
-   HTML SECURITY
-===================================================== */
+if(!orderId){
 
-function escapeHtml(value){
+result.innerHTML=`
 
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /[&<>"']/g,
-    function(character){
+<div class="error">
+Enter your Order ID.
+</div>
 
-      return {
+`;
 
-        "&":"&amp;",
+return;
 
-        "<":"&lt;",
+}
 
-        ">":"&gt;",
 
-        '"':"&quot;",
+if(!db){
 
-        "'":"&#039;"
+result.innerHTML=`
 
-      }[character];
+<div class="error">
+Firebase is not connected.
+</div>
 
-    }
-  );
+`;
+
+return;
+
+}
+
+
+result.innerHTML=`
+
+<div class="loading">
+⏳ Loading order...
+</div>
+
+`;
+
+
+try{
+
+const snapshot=
+await getDoc(
+
+doc(
+db,
+"publicOrders",
+orderId
+)
+
+);
+
+
+if(!snapshot.exists()){
+
+result.innerHTML=`
+
+<div class="error">
+❌ Order not found.
+</div>
+
+`;
+
+return;
+
+}
+
+
+const order=
+snapshot.data();
+
+
+if(
+String(
+order.customerPhone||""
+)!==
+phone
+){
+
+result.innerHTML=`
+
+<div class="error">
+❌ Mobile number does not match this order.
+</div>
+
+`;
+
+return;
+
+}
+
+
+const medicines=
+(order.medicines||[])
+.map(
+medicine=>
+`<li>
+${escapeHtml(medicine.name)}
+—
+${escapeHtml(medicine.quantity)}
+${escapeHtml(medicine.unit||"")}
+</li>`
+)
+.join("");
+
+
+result.innerHTML=`
+
+<div class="orderbox">
+
+<p>
+<strong>Order ID:</strong>
+${escapeHtml(
+order.orderId||orderId
+)}
+</p>
+
+<p>
+<strong>Status:</strong>
+${escapeHtml(
+order.status||"Pending"
+)}
+</p>
+
+<p>
+<strong>Estimated Delivery:</strong>
+${escapeHtml(
+order.estimatedDeliveryTime||
+"Not updated"
+)}
+</p>
+
+<p>
+<strong>Payment Method:</strong>
+${escapeHtml(
+order.paymentMethod||
+"Not updated"
+)}
+</p>
+
+<p>
+<strong>Payment Status:</strong>
+${escapeHtml(
+order.paymentStatus||
+"Pending"
+)}
+</p>
+
+<p>
+<strong>Medicines:</strong>
+</p>
+
+<ul>
+${
+medicines||
+"<li>Not available</li>"
+}
+</ul>
+
+<p>
+<strong>Original MRP:</strong>
+${money(order.originalMRP)}
+</p>
+
+<p>
+<strong>Discount:</strong>
+${money(order.discountAmount)}
+${
+order.discountPercent!=null
+?
+" ("+
+escapeHtml(order.discountPercent)+
+"%)"
+:""
+}
+</p>
+
+<p>
+<strong>Payable Amount:</strong>
+${money(order.payableAmount)}
+</p>
+
+<p>
+<strong>Customer Payment:</strong>
+${money(order.paymentAmount)}
+</p>
+
+</div>
+
+`;
+
+}catch(error){
+
+console.error(
+"Track error:",
+error
+);
+
+
+result.innerHTML=`
+
+<div class="error">
+
+❌ Could not load the order.
+
+<br><br>
+
+${escapeHtml(
+error.message||
+"Firebase error"
+)}
+
+</div>
+
+`;
+
+}
+
+}
+);
+
+
+/* ==========================================
+MONEY
+========================================== */
+
+function money(value){
+
+if(
+value===null||
+value===undefined||
+value===""
+){
+
+return "Not updated";
+
+}
+
+const number=
+Number(value);
+
+
+if(Number.isNaN(number)){
+
+return "Not updated";
+
+}
+
+return "₹"+
+number.toFixed(2);
 
 }
 
