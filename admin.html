@@ -3,195 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Online Medicine Doorstep Delivery - Admin Panel</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  font-family:Arial, sans-serif;
-  background:#f1f5f9;
-  color:#222;
-}
-
-header{
-  background:#087c59;
-  color:white;
-  padding:18px 15px;
-  text-align:center;
-}
-
-header h1{
-  font-size:22px;
-}
-
-.container{
-  max-width:1100px;
-  margin:25px auto;
-  padding:0 15px;
-}
-
-.card{
-  background:white;
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:20px;
-  box-shadow:0 3px 12px rgba(0,0,0,0.08);
-}
-
-h2{
-  color:#087c59;
-  margin-bottom:15px;
-}
-
-input,
-select,
-button{
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  margin-bottom:12px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  font-size:15px;
-}
-
-button{
-  border:none;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.login-btn{
-  background:#087c59;
-  color:white;
-}
-
-.refresh-btn{
-  background:#2563eb;
-  color:white;
-}
-
-.logout-btn{
-  background:#dc2626;
-  color:white;
-}
-
-.save-btn{
-  background:#087c59;
-  color:white;
-}
-
-.delete-btn{
-  background:#dc2626;
-  color:white;
-}
-
-button:hover{
-  opacity:.9;
-}
-
-.hidden{
-  display:none;
-}
-
-.message{
-  padding:12px;
-  border-radius:8px;
-  margin-top:10px;
-  display:none;
-}
-
-.success{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.error{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.order-card{
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:18px;
-  margin-bottom:18px;
-  background:#fff;
-}
-
-.order-title{
-  font-size:19px;
-  font-weight:bold;
-  color:#087c59;
-  margin-bottom:12px;
-}
-
-.info{
-  margin:7px 0;
-  line-height:1.5;
-}
-
-.medicines{
-  background:#f8fafc;
-  padding:12px;
-  border-radius:8px;
-  margin:12px 0;
-}
-
-.medicine-item{
-  padding:7px 0;
-  border-bottom:1px solid #ddd;
-}
-
-.medicine-item:last-child{
-  border-bottom:none;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.section-title{
-  margin-top:15px;
-  margin-bottom:5px;
-  font-weight:bold;
-  color:#444;
-}
-
-.readonly{
-  background:#f3f4f6;
-}
-
-.top-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f1f5f9;color:#222}
+header{background:#087c59;color:white;padding:18px 15px;text-align:center}
+header h1{font-size:22px}
+.container{max-width:1100px;margin:25px auto;padding:0 15px}
+.card{background:white;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+h2{color:#087c59;margin-bottom:15px}
+input,select,button{width:100%;padding:12px;margin-top:8px;margin-bottom:12px;border-radius:8px;border:1px solid #ccc;font-size:15px}
+button{border:none;cursor:pointer;font-weight:bold}
+.login-btn{background:#087c59;color:white}
+.refresh-btn{background:#2563eb;color:white}
+.logout-btn{background:#dc2626;color:white}
+.save-btn{background:#087c59;color:white}
+.delete-btn{background:#dc2626;color:white}
+button:hover{opacity:.9}
+button:disabled{opacity:.6;cursor:not-allowed}
+.hidden{display:none}
+.message{padding:12px;border-radius:8px;margin-top:10px;display:none}
+.success{background:#dcfce7;color:#166534}
+.error{background:#fee2e2;color:#991b1b}
+.order-card{border:1px solid #ddd;border-radius:12px;padding:18px;margin-bottom:18px;background:#fff}
+.order-title{font-size:19px;font-weight:bold;color:#087c59;margin-bottom:12px}
+.info{margin:7px 0;line-height:1.5}
+.medicines{background:#f8fafc;padding:12px;border-radius:8px;margin:12px 0}
+.medicine-item{padding:7px 0;border-bottom:1px solid #ddd}
+.medicine-item:last-child{border-bottom:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.section-title{margin-top:15px;margin-bottom:5px;font-weight:bold;color:#444}
+.readonly{background:#f3f4f6}
+.top-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.small-note{font-size:13px;color:#64748b;margin-top:-5px;margin-bottom:10px}
 @media(max-width:700px){
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .top-buttons{
-    grid-template-columns:1fr;
-  }
-
-  header h1{
-    font-size:18px;
-  }
-
-  .container{
-    margin-top:15px;
-  }
+  .grid{grid-template-columns:1fr}
+  .top-buttons{grid-template-columns:1fr}
+  header h1{font-size:18px}
+  .container{margin-top:15px}
 }
 </style>
 </head>
@@ -205,77 +55,37 @@ button:hover{
 
 <div class="container">
 
-  <!-- LOGIN -->
   <div id="loginSection" class="card">
-
     <h2>🔐 Admin Login</h2>
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Admin Email"
-      autocomplete="email"
-    >
+    <input type="email" id="email" placeholder="Admin Email" autocomplete="email">
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password">
 
-    <button class="login-btn" id="loginBtn">
-      Login
-    </button>
+    <button class="login-btn" id="loginBtn">Login</button>
 
     <div id="loginMessage" class="message"></div>
-
   </div>
 
-
-  <!-- ADMIN AREA -->
   <div id="adminSection" class="hidden">
 
     <div class="card">
-
       <h2>📦 Order Management</h2>
 
       <div class="top-buttons">
-
-        <button
-          class="refresh-btn"
-          id="refreshBtn"
-        >
-          🔄 Refresh Orders
-        </button>
-
-        <button
-          class="logout-btn"
-          id="logoutBtn"
-        >
-          🚪 Logout
-        </button>
-
+        <button class="refresh-btn" id="refreshBtn">🔄 Refresh Orders</button>
+        <button class="logout-btn" id="logoutBtn">🚪 Logout</button>
       </div>
 
       <div id="adminMessage" class="message"></div>
-
     </div>
 
-
-    <!-- ORDERS -->
     <div id="ordersContainer"></div>
 
   </div>
-
 </div>
 
-
 <script type="module">
-
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
 
 import {
   initializeApp
@@ -302,100 +112,42 @@ import {
 
 
 const firebaseConfig = {
-
   apiKey: "AIzaSyBfBAo9GW1bDu-IlFy_hha_uOdUmsRSiF8",
-
-  authDomain:
-    "online-medicine-delivery-74346.firebaseapp.com",
-
-  projectId:
-    "online-medicine-delivery-74346",
-
-  storageBucket:
-    "online-medicine-delivery-74346.firebasestorage.app",
-
-  messagingSenderId:
-    "1061955108881",
-
-  appId:
-    "1:1061955108881:web:64f36ad79b5c612a2171b0",
-
-  measurementId:
-    "G-LMHDFF01QC"
+  authDomain: "online-medicine-delivery-74346.firebaseapp.com",
+  projectId: "online-medicine-delivery-74346",
+  storageBucket: "online-medicine-delivery-74346.firebasestorage.app",
+  messagingSenderId: "1061955108881",
+  appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
+  measurementId: "G-LMHDFF01QC"
 };
 
 
-/* =========================================================
-   INITIALIZE FIREBASE
-========================================================= */
-
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-
 const db = getFirestore(app);
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+const loginSection = document.getElementById("loginSection");
+const adminSection = document.getElementById("adminSection");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const refreshBtn = document.getElementById("refreshBtn");
+const loginMessage = document.getElementById("loginMessage");
+const adminMessage = document.getElementById("adminMessage");
+const ordersContainer = document.getElementById("ordersContainer");
 
-const loginSection =
-  document.getElementById("loginSection");
-
-const adminSection =
-  document.getElementById("adminSection");
-
-const emailInput =
-  document.getElementById("email");
-
-const passwordInput =
-  document.getElementById("password");
-
-const loginBtn =
-  document.getElementById("loginBtn");
-
-const logoutBtn =
-  document.getElementById("logoutBtn");
-
-const refreshBtn =
-  document.getElementById("refreshBtn");
-
-const loginMessage =
-  document.getElementById("loginMessage");
-
-const adminMessage =
-  document.getElementById("adminMessage");
-
-const ordersContainer =
-  document.getElementById("ordersContainer");
-
-
-/* =========================================================
-   MESSAGE FUNCTION
-========================================================= */
 
 function showMessage(element, message, type){
-
   element.textContent = message;
-
-  element.className =
-    "message " + type;
-
+  element.className = "message " + type;
   element.style.display = "block";
-
 }
 
 
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
-
 function escapeHTML(value){
-
-  if(value === null || value === undefined){
-    return "";
-  }
+  if(value === null || value === undefined) return "";
 
   return String(value)
     .replace(/&/g,"&amp;")
@@ -406,98 +158,54 @@ function escapeHTML(value){
 }
 
 
-/* =========================================================
-   LOGIN
-========================================================= */
-
 loginBtn.addEventListener("click", async function(){
 
-  const email =
-    emailInput.value.trim();
-
-  const password =
-    passwordInput.value;
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
 
   if(!email || !password){
-
     showMessage(
       loginMessage,
       "Please enter email and password.",
       "error"
     );
-
     return;
   }
 
   loginBtn.disabled = true;
-
   loginBtn.textContent = "Logging in...";
 
   try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    await signInWithEmailAndPassword(auth,email,password);
 
   }catch(error){
 
     console.error(error);
 
-    let message =
-      "Login failed.";
+    let message = "Login failed.";
 
     if(error.code === "auth/invalid-credential"){
-      message =
-        "Invalid email or password.";
+      message = "Invalid email or password.";
+    }else if(error.code === "auth/user-not-found"){
+      message = "Admin account not found.";
+    }else if(error.code === "auth/wrong-password"){
+      message = "Wrong password.";
+    }else if(error.code === "auth/invalid-email"){
+      message = "Invalid email address.";
+    }else if(error.code === "auth/too-many-requests"){
+      message = "Too many attempts. Please try again later.";
+    }else{
+      message = error.message;
     }
 
-    else if(error.code === "auth/user-not-found"){
-      message =
-        "Admin account not found.";
-    }
-
-    else if(error.code === "auth/wrong-password"){
-      message =
-        "Wrong password.";
-    }
-
-    else if(error.code === "auth/invalid-email"){
-      message =
-        "Invalid email address.";
-    }
-
-    else if(error.code === "auth/too-many-requests"){
-      message =
-        "Too many attempts. Please try again later.";
-    }
-
-    else{
-      message =
-        error.message;
-    }
-
-    showMessage(
-      loginMessage,
-      message,
-      "error"
-    );
+    showMessage(loginMessage,message,"error");
 
   }finally{
-
     loginBtn.disabled = false;
-
     loginBtn.textContent = "Login";
-
   }
-
 });
 
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
 
 onAuthStateChanged(auth, async function(user){
 
@@ -505,20 +213,8 @@ onAuthStateChanged(auth, async function(user){
 
     try{
 
-      /*
-       Admin verification:
-       admins/{USER_UID}
-      */
-
-      const adminRef =
-        doc(
-          db,
-          "admins",
-          user.uid
-        );
-
-      const adminSnap =
-        await getDoc(adminRef);
+      const adminRef = doc(db,"admins",user.uid);
+      const adminSnap = await getDoc(adminRef);
 
       if(!adminSnap.exists()){
 
@@ -529,12 +225,10 @@ onAuthStateChanged(auth, async function(user){
         );
 
         await signOut(auth);
-
         return;
       }
 
       loginSection.classList.add("hidden");
-
       adminSection.classList.remove("hidden");
 
       loadOrders();
@@ -545,46 +239,28 @@ onAuthStateChanged(auth, async function(user){
 
       showMessage(
         loginMessage,
-        "Admin verification failed: " +
-        error.message,
+        "Admin verification failed: " + error.message,
         "error"
       );
-
     }
 
   }else{
 
     loginSection.classList.remove("hidden");
-
     adminSection.classList.add("hidden");
-
   }
-
 });
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
 
 logoutBtn.addEventListener("click", async function(){
 
   try{
-
     await signOut(auth);
-
   }catch(error){
-
     console.error(error);
-
   }
-
 });
 
-
-/* =========================================================
-   LOAD ORDERS
-========================================================= */
 
 async function loadOrders(){
 
@@ -593,18 +269,12 @@ async function loadOrders(){
 
   try{
 
-    /*
-     IMPORTANT:
-     Orders are stored in publicOrders
-    */
-
     const q = query(
-      collection(db, "publicOrders"),
-      orderBy("createdAt", "desc")
+      collection(db,"publicOrders"),
+      orderBy("createdAt","desc")
     );
 
-    const snapshot =
-      await getDocs(q);
+    const snapshot = await getDocs(q);
 
     if(snapshot.empty){
 
@@ -618,14 +288,12 @@ async function loadOrders(){
 
     snapshot.forEach(function(orderDoc){
 
-      const order =
-        orderDoc.data();
+      const order = orderDoc.data();
 
       createOrderCard(
         orderDoc.id,
         order
       );
-
     });
 
     showMessage(
@@ -638,17 +306,10 @@ async function loadOrders(){
 
     console.error(error);
 
-    /*
-     If createdAt/orderBy causes a problem,
-     show useful message.
-    */
-
     ordersContainer.innerHTML =
       "<div class='card'>" +
       "<h2>Unable to load orders</h2>" +
-      "<p>" +
-      escapeHTML(error.message) +
-      "</p>" +
+      "<p>" + escapeHTML(error.message) + "</p>" +
       "</div>";
 
     showMessage(
@@ -656,28 +317,18 @@ async function loadOrders(){
       "Could not load orders.",
       "error"
     );
-
   }
-
 }
 
 
-/* =========================================================
-   CREATE ORDER CARD
-========================================================= */
+function createOrderCard(documentId,order){
 
-function createOrderCard(documentId, order){
+  const card = document.createElement("div");
+  card.className = "order-card";
 
-  const card =
-    document.createElement("div");
-
-  card.className =
-    "order-card";
-
-  const medicines =
-    Array.isArray(order.medicines)
-      ? order.medicines
-      : [];
+  const medicines = Array.isArray(order.medicines)
+    ? order.medicines
+    : [];
 
   let medicineHTML = "";
 
@@ -687,47 +338,36 @@ function createOrderCard(documentId, order){
 
       medicineHTML += `
         <div class="medicine-item">
-          <strong>💊 ${escapeHTML(
-            medicine.name || "Medicine"
-          )}</strong>
+          <strong>💊 ${escapeHTML(medicine.name || "Medicine")}</strong>
           <br>
-          Quantity:
-          ${escapeHTML(
-            medicine.quantity || 1
-          )}
+          Quantity: ${escapeHTML(medicine.quantity || 1)}
         </div>
       `;
-
     });
 
   }else{
 
     medicineHTML =
       "<div>No medicine information found.</div>";
-
   }
 
 
-  const originalMRP =
-    order.originalMRP ?? "";
+  const originalMRP = order.originalMRP ?? "";
+  const discountPercent = order.discountPercent ?? "";
+  const paymentStatus = order.paymentStatus || "Pending";
+  const status = order.status || "Pending";
 
-  const discountPercent =
-    order.discountPercent ?? "";
-
-  const paymentStatus =
-    order.paymentStatus || "Pending";
-
-  const status =
-    order.status || "Pending";
+  const currentEstimatedTime =
+    order.estimatedDeliveryTime ||
+    order.estimatedDelivery ||
+    "";
 
 
   card.innerHTML = `
 
     <div class="order-title">
       🧾 Order ID:
-      ${escapeHTML(
-        order.orderId || documentId
-      )}
+      ${escapeHTML(order.orderId || documentId)}
     </div>
 
     <div class="info">
@@ -742,6 +382,7 @@ function createOrderCard(documentId, order){
     <div class="info">
       <strong>Mobile:</strong>
       ${escapeHTML(
+        order.customerPhone ||
         order.mobile ||
         order.phone ||
         ""
@@ -758,11 +399,8 @@ function createOrderCard(documentId, order){
     </div>
 
     <div class="info">
-      <strong>Estimated Delivery:</strong>
-      ${escapeHTML(
-        order.estimatedDelivery ||
-        "Not specified"
-      )}
+      <strong>Current Estimated Delivery:</strong>
+      ${escapeHTML(currentEstimatedTime || "Not specified")}
     </div>
 
     <div class="info">
@@ -772,6 +410,7 @@ function createOrderCard(documentId, order){
         "Not specified"
       )}
     </div>
+
 
     <div class="medicines">
 
@@ -784,7 +423,43 @@ function createOrderCard(documentId, order){
     </div>
 
 
-    <!-- PAYMENT DETAILS -->
+    <div class="section-title">
+      🚚 Set Estimated Delivery Time
+    </div>
+
+    <select class="estimated-delivery-input">
+
+      <option value="30–60 minutes"
+        ${currentEstimatedTime === "30–60 minutes" ? "selected" : ""}>
+        30–60 minutes
+      </option>
+
+      <option value="1–2 hours"
+        ${currentEstimatedTime === "1–2 hours" ? "selected" : ""}>
+        1–2 hours
+      </option>
+
+      <option value="2–4 hours"
+        ${currentEstimatedTime === "2–4 hours" ? "selected" : ""}>
+        2–4 hours
+      </option>
+
+      <option value="Today"
+        ${currentEstimatedTime === "Today" ? "selected" : ""}>
+        Today
+      </option>
+
+      <option value="Tomorrow"
+        ${currentEstimatedTime === "Tomorrow" ? "selected" : ""}>
+        Tomorrow
+      </option>
+
+    </select>
+
+    <div class="small-note">
+      Select the delivery time and press Save Order.
+    </div>
+
 
     <div class="section-title">
       💰 Payment Details
@@ -793,10 +468,7 @@ function createOrderCard(documentId, order){
     <div class="grid">
 
       <div>
-
-        <label>
-          Original MRP
-        </label>
+        <label>Original MRP</label>
 
         <input
           type="number"
@@ -806,15 +478,11 @@ function createOrderCard(documentId, order){
           value="${escapeHTML(originalMRP)}"
           placeholder="Original MRP"
         >
-
       </div>
 
 
       <div>
-
-        <label>
-          Discount Percent (%)
-        </label>
+        <label>Discount Percent (%)</label>
 
         <input
           type="number"
@@ -825,15 +493,11 @@ function createOrderCard(documentId, order){
           value="${escapeHTML(discountPercent)}"
           placeholder="Discount %"
         >
-
       </div>
 
 
       <div>
-
-        <label>
-          Discount Amount
-        </label>
+        <label>Discount Amount</label>
 
         <input
           type="number"
@@ -841,15 +505,11 @@ function createOrderCard(documentId, order){
           readonly
           placeholder="Discount Amount"
         >
-
       </div>
 
 
       <div>
-
-        <label>
-          Payable Amount
-        </label>
+        <label>Payable Amount</label>
 
         <input
           type="number"
@@ -857,15 +517,11 @@ function createOrderCard(documentId, order){
           readonly
           placeholder="Payable Amount"
         >
-
       </div>
 
 
       <div>
-
-        <label>
-          Customer Payment Amount
-        </label>
+        <label>Customer Payment Amount</label>
 
         <input
           type="number"
@@ -873,13 +529,10 @@ function createOrderCard(documentId, order){
           readonly
           placeholder="Customer Payment"
         >
-
       </div>
 
     </div>
 
-
-    <!-- PAYMENT STATUS -->
 
     <div class="section-title">
       💳 Payment Status
@@ -904,8 +557,6 @@ function createOrderCard(documentId, order){
 
     </select>
 
-
-    <!-- ORDER STATUS -->
 
     <div class="section-title">
       📦 Order Status
@@ -950,17 +601,11 @@ function createOrderCard(documentId, order){
   ordersContainer.appendChild(card);
 
 
-  /* =====================================================
-     INPUTS
-  ===================================================== */
-
   const mrpInput =
     card.querySelector(".mrp-input");
 
   const discountPercentInput =
-    card.querySelector(
-      ".discount-percent-input"
-    );
+    card.querySelector(".discount-percent-input");
 
   const discountInput =
     card.querySelector(".discount-input");
@@ -971,45 +616,35 @@ function createOrderCard(documentId, order){
   const paymentInput =
     card.querySelector(".payment-input");
 
+  const estimatedDeliveryInput =
+    card.querySelector(".estimated-delivery-input");
 
-  /* =====================================================
-     CALCULATE PAYMENT
-  ===================================================== */
 
   function calculatePayment(){
 
-    const mrp =
-      parseFloat(mrpInput.value);
+    const mrp = parseFloat(mrpInput.value);
 
-    const percent =
-      parseFloat(
-        discountPercentInput.value
-      );
+    let percent =
+      parseFloat(discountPercentInput.value);
 
-    if(
-      isNaN(mrp) ||
-      mrp < 0
-    ){
+    if(isNaN(mrp) || mrp < 0){
 
       discountInput.value = "";
-
       payableInput.value = "";
-
       paymentInput.value = "";
 
       return;
     }
 
+    if(isNaN(percent)){
+      percent = 0;
+    }
 
-    const discount =
-      !isNaN(percent)
-        ? mrp * percent / 100
-        : 0;
+    if(percent < 0) percent = 0;
+    if(percent > 100) percent = 100;
 
-
-    const payable =
-      mrp - discount;
-
+    const discount = mrp * percent / 100;
+    const payable = mrp - discount;
 
     discountInput.value =
       discount.toFixed(2);
@@ -1019,7 +654,6 @@ function createOrderCard(documentId, order){
 
     paymentInput.value =
       payable.toFixed(2);
-
   }
 
 
@@ -1033,25 +667,19 @@ function createOrderCard(documentId, order){
     calculatePayment
   );
 
-
   calculatePayment();
 
 
-  /* =====================================================
-     SAVE ORDER
-  ===================================================== */
-
   const saveBtn =
     card.querySelector(".save-btn");
+
 
   saveBtn.addEventListener(
     "click",
     async function(){
 
       saveBtn.disabled = true;
-
-      saveBtn.textContent =
-        "Saving...";
+      saveBtn.textContent = "Saving...";
 
       try{
 
@@ -1070,23 +698,19 @@ function createOrderCard(documentId, order){
         const paymentValue =
           paymentInput.value.trim();
 
-
         const paymentStatus =
           card.querySelector(
             ".payment-status"
           ).value;
-
 
         const orderStatus =
           card.querySelector(
             ".order-status"
           ).value;
 
+        const estimatedDeliveryTime =
+          estimatedDeliveryInput.value;
 
-        /*
-         IMPORTANT:
-         Save to publicOrders
-        */
 
         await updateDoc(
 
@@ -1129,16 +753,17 @@ function createOrderCard(documentId, order){
               paymentStatus,
 
             status:
-              orderStatus
+              orderStatus,
 
+            estimatedDeliveryTime:
+              estimatedDeliveryTime
           }
-
         );
 
 
         showMessage(
           adminMessage,
-          "Order saved successfully.",
+          "Order saved successfully. Estimated delivery time updated.",
           "success"
         );
 
@@ -1147,10 +772,8 @@ function createOrderCard(documentId, order){
           "✅ Saved";
 
         setTimeout(function(){
-
           saveBtn.textContent =
             "💾 Save Order";
-
         },1500);
 
 
@@ -1171,16 +794,10 @@ function createOrderCard(documentId, order){
       }finally{
 
         saveBtn.disabled = false;
-
       }
-
     }
   );
 
-
-  /* =====================================================
-     DELETE ORDER
-  ===================================================== */
 
   const deleteBtn =
     card.querySelector(".delete-btn");
@@ -1199,33 +816,22 @@ function createOrderCard(documentId, order){
         return;
       }
 
-
       deleteBtn.disabled = true;
-
-      deleteBtn.textContent =
-        "Deleting...";
+      deleteBtn.textContent = "Deleting...";
 
 
       try{
 
-        /*
-         IMPORTANT:
-         Delete from publicOrders
-        */
-
         await deleteDoc(
-
           doc(
             db,
             "publicOrders",
             documentId
           )
-
         );
 
 
         card.remove();
-
 
         showMessage(
           adminMessage,
@@ -1246,21 +852,13 @@ function createOrderCard(documentId, order){
         );
 
         deleteBtn.disabled = false;
-
         deleteBtn.textContent =
           "🗑️ Delete Order";
-
       }
-
     }
   );
-
 }
 
-
-/* =========================================================
-   REFRESH
-========================================================= */
 
 refreshBtn.addEventListener(
   "click",
