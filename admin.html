@@ -2,115 +2,64 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Online Medicine Doorstep Delivery - Admin Panel</title>
-
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f1f5f9;color:#222}
-header{background:#087c59;color:white;padding:18px 15px;text-align:center}
-header h1{font-size:22px}
-.container{max-width:1100px;margin:25px auto;padding:0 15px}
-.card{background:white;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
-h2{color:#087c59;margin-bottom:15px}
-input,select,button{width:100%;padding:12px;margin-top:8px;margin-bottom:12px;border-radius:8px;border:1px solid #ccc;font-size:15px}
-button{border:none;cursor:pointer;font-weight:bold}
-.login-btn{background:#087c59;color:white}
-.refresh-btn{background:#2563eb;color:white}
-.logout-btn{background:#dc2626;color:white}
-.save-btn{background:#087c59;color:white}
-.delete-btn{background:#dc2626;color:white}
-button:hover{opacity:.9}
-button:disabled{opacity:.6;cursor:not-allowed}
-.hidden{display:none}
-.message{padding:12px;border-radius:8px;margin-top:10px;display:none}
-.success{background:#dcfce7;color:#166534}
-.error{background:#fee2e2;color:#991b1b}
-.order-card{border:1px solid #ddd;border-radius:12px;padding:18px;margin-bottom:18px;background:#fff}
-.order-title{font-size:19px;font-weight:bold;color:#087c59;margin-bottom:12px}
-.info{margin:7px 0;line-height:1.5}
-.medicines{background:#f8fafc;padding:12px;border-radius:8px;margin:12px 0}
-.medicine-item{padding:7px 0;border-bottom:1px solid #ddd}
-.medicine-item:last-child{border-bottom:none}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.section-title{margin-top:15px;margin-bottom:5px;font-weight:bold;color:#444}
-.readonly{background:#f3f4f6}
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#f4f7f6;color:#222}
+header{background:#087c59;color:#fff;padding:20px;text-align:center}
+.container{max-width:1000px;margin:20px auto;padding:0 15px}
+.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 3px 14px rgba(0,0,0,.08);margin-bottom:18px}
+input,select{width:100%;padding:12px;margin:6px 0 12px;border:1px solid #ccc;border-radius:8px;font-size:15px}
+button{padding:12px 16px;border:0;border-radius:8px;font-weight:700;cursor:pointer}
+.login-btn,.save-btn{background:#087c59;color:#fff}
+.logout-btn,.delete-btn{background:#d62828;color:#fff}
+.refresh-btn{background:#555;color:#fff}
 .top-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.small-note{font-size:13px;color:#64748b;margin-top:-5px;margin-bottom:10px}
-@media(max-width:700px){
-  .grid{grid-template-columns:1fr}
-  .top-buttons{grid-template-columns:1fr}
-  header h1{font-size:18px}
-  .container{margin-top:15px}
-}
+.hidden{display:none!important}
+.message{display:none;margin-top:12px;padding:12px;border-radius:8px;font-weight:700}
+.success{background:#d9f5e9;color:#087c59}
+.error{background:#ffe0e0;color:#b00020}
+.order-card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 3px 14px rgba(0,0,0,.08);margin:18px 0}
+.order-title{font-size:19px;font-weight:700;color:#087c59;margin-bottom:15px}
+.info{padding:8px 0;border-bottom:1px solid #eee;word-break:break-word}
+.info strong{color:#087c59}
+.section-title{font-weight:700;margin-top:17px;margin-bottom:6px;color:#444}
+.medicine-item{background:#f7faf9;padding:10px;border-radius:8px;margin:7px 0;border:1px solid #e0e0e0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.readonly{background:#f0f2f2}
+.small-note{font-size:13px;color:#666}
+@media(max-width:650px){.grid,.top-buttons{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-
-<header>
-  <h1>💊 Online Medicine Doorstep Delivery</h1>
-  <p>Admin Panel</p>
-</header>
-
+<header><h1>💊 Online Medicine Doorstep Delivery</h1><p>Admin Panel</p></header>
 <div class="container">
+<div id="loginSection" class="card">
+<h2>🔐 Admin Login</h2>
+<input id="email" type="email" placeholder="Admin Email">
+<input id="password" type="password" placeholder="Password">
+<button id="loginBtn" class="login-btn">Login</button>
+<div id="loginMessage" class="message"></div>
+</div>
 
-  <div id="loginSection" class="card">
-    <h2>🔐 Admin Login</h2>
-
-    <input type="email" id="email" placeholder="Admin Email" autocomplete="email">
-
-    <input type="password" id="password" placeholder="Password" autocomplete="current-password">
-
-    <button class="login-btn" id="loginBtn">Login</button>
-
-    <div id="loginMessage" class="message"></div>
-  </div>
-
-  <div id="adminSection" class="hidden">
-
-    <div class="card">
-      <h2>📦 Order Management</h2>
-
-      <div class="top-buttons">
-        <button class="refresh-btn" id="refreshBtn">🔄 Refresh Orders</button>
-        <button class="logout-btn" id="logoutBtn">🚪 Logout</button>
-      </div>
-
-      <div id="adminMessage" class="message"></div>
-    </div>
-
-    <div id="ordersContainer"></div>
-
-  </div>
+<div id="adminSection" class="hidden">
+<div class="card">
+<h2>📦 Order Management</h2>
+<div class="top-buttons">
+<button id="refreshBtn" class="refresh-btn">🔄 Refresh Orders</button>
+<button id="logoutBtn" class="logout-btn">🚪 Logout</button>
+</div>
+<div id="adminMessage" class="message"></div>
+</div>
+<div id="ordersContainer"></div>
+</div>
 </div>
 
 <script type="module">
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  query,
-  orderBy,
-  getDocs,
-  doc,
-  getDoc,
-  updateDoc,
-  deleteDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,collection,getDocs,doc,getDoc,updateDoc,deleteDoc} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyBfBAo9GW1bDu-IlFy_hha_uOdUmsRSiF8",
   authDomain: "online-medicine-delivery-74346.firebaseapp.com",
@@ -120,830 +69,157 @@ const firebaseConfig = {
   appId: "1:1061955108881:web:64f36ad79b5c612a2171b0",
   measurementId: "G-LMHDFF01QC"
 };
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const loginSection=document.getElementById("loginSection"),adminSection=document.getElementById("adminSection");
+const email=document.getElementById("email"),password=document.getElementById("password"),loginBtn=document.getElementById("loginBtn"),logoutBtn=document.getElementById("logoutBtn"),refreshBtn=document.getElementById("refreshBtn");
+const loginMessage=document.getElementById("loginMessage"),adminMessage=document.getElementById("adminMessage"),ordersContainer=document.getElementById("ordersContainer");
 
+function msg(el,text,type){el.textContent=text;el.className="message "+type;el.style.display="block";}
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+loginBtn.onclick=async()=>{
+  const e=email.value.trim(),p=password.value;
+  if(!e||!p)return msg(loginMessage,"Please enter email and password.","error");
+  loginBtn.disabled=true;loginBtn.textContent="Logging in...";
+  try{await signInWithEmailAndPassword(auth,e,p);}
+  catch(error){console.error(error);msg(loginMessage,error.message,"error");}
+  finally{loginBtn.disabled=false;loginBtn.textContent="Login";}
+};
 
+logoutBtn.onclick=()=>signOut(auth);
 
-const loginSection = document.getElementById("loginSection");
-const adminSection = document.getElementById("adminSection");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const refreshBtn = document.getElementById("refreshBtn");
-const loginMessage = document.getElementById("loginMessage");
-const adminMessage = document.getElementById("adminMessage");
-const ordersContainer = document.getElementById("ordersContainer");
-
-
-function showMessage(element, message, type){
-  element.textContent = message;
-  element.className = "message " + type;
-  element.style.display = "block";
-}
-
-
-function escapeHTML(value){
-  if(value === null || value === undefined) return "";
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-
-loginBtn.addEventListener("click", async function(){
-
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-  if(!email || !password){
-    showMessage(
-      loginMessage,
-      "Please enter email and password.",
-      "error"
-    );
-    return;
-  }
-
-  loginBtn.disabled = true;
-  loginBtn.textContent = "Logging in...";
-
+onAuthStateChanged(auth,async user=>{
+  if(!user){loginSection.classList.remove("hidden");adminSection.classList.add("hidden");return;}
   try{
-    await signInWithEmailAndPassword(auth,email,password);
-
-  }catch(error){
-
-    console.error(error);
-
-    let message = "Login failed.";
-
-    if(error.code === "auth/invalid-credential"){
-      message = "Invalid email or password.";
-    }else if(error.code === "auth/user-not-found"){
-      message = "Admin account not found.";
-    }else if(error.code === "auth/wrong-password"){
-      message = "Wrong password.";
-    }else if(error.code === "auth/invalid-email"){
-      message = "Invalid email address.";
-    }else if(error.code === "auth/too-many-requests"){
-      message = "Too many attempts. Please try again later.";
-    }else{
-      message = error.message;
-    }
-
-    showMessage(loginMessage,message,"error");
-
-  }finally{
-    loginBtn.disabled = false;
-    loginBtn.textContent = "Login";
-  }
+    const snap=await getDoc(doc(db,"admins",user.uid));
+    if(!snap.exists()){await signOut(auth);return msg(loginMessage,"This account is not registered as an admin.","error");}
+    loginSection.classList.add("hidden");adminSection.classList.remove("hidden");loadOrders();
+  }catch(error){console.error(error);msg(loginMessage,"Admin verification failed: "+error.message,"error");}
 });
 
+function timestampValue(v){return v?.seconds ? v.seconds : 0;}
 
-onAuthStateChanged(auth, async function(user){
-
-  if(user){
-
-    try{
-
-      const adminRef = doc(db,"admins",user.uid);
-      const adminSnap = await getDoc(adminRef);
-
-      if(!adminSnap.exists()){
-
-        showMessage(
-          loginMessage,
-          "This account is not registered as an admin.",
-          "error"
-        );
-
-        await signOut(auth);
-        return;
-      }
-
-      loginSection.classList.add("hidden");
-      adminSection.classList.remove("hidden");
-
-      loadOrders();
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        loginMessage,
-        "Admin verification failed: " + error.message,
-        "error"
-      );
-    }
-
-  }else{
-
-    loginSection.classList.remove("hidden");
-    adminSection.classList.add("hidden");
-  }
-});
-
-
-logoutBtn.addEventListener("click", async function(){
-
-  try{
-    await signOut(auth);
-  }catch(error){
-    console.error(error);
-  }
-});
-
+async function loadCollection(name){
+  const snap=await getDocs(collection(db,name));
+  const arr=[];
+  snap.forEach(d=>arr.push({documentId:d.id,collectionName:name,data:d.data()}));
+  return arr;
+}
 
 async function loadOrders(){
-
-  ordersContainer.innerHTML =
-    "<div class='card'>Loading orders...</div>";
-
+  ordersContainer.innerHTML='<div class="card">Loading orders...</div>';
   try{
-
-    /*
-      Read both collections:
-      1. publicOrders = current guest-order system
-      2. orders      = older order records
-
-      This prevents old orders from losing Customer/Address information.
-    */
-
-    const publicQuery = query(
-      collection(db,"publicOrders"),
-      orderBy("createdAt","desc")
-    );
-
-    const oldQuery = query(
-      collection(db,"orders"),
-      orderBy("createdAt","desc")
-    );
-
-    const [publicSnapshot, oldSnapshot] =
-      await Promise.all([
-        getDocs(publicQuery),
-        getDocs(oldQuery)
-      ]);
-
-    const allOrders = [];
-
-    publicSnapshot.forEach(function(orderDoc){
-      allOrders.push({
-        documentId: orderDoc.id,
-        collectionName: "publicOrders",
-        data: orderDoc.data()
-      });
+    const [publicOrders,oldOrders]=await Promise.all([loadCollection("publicOrders"),loadCollection("orders")]);
+    const map=new Map();
+    [...oldOrders,...publicOrders].forEach(item=>{
+      const id=item.data.orderId||item.documentId;
+      if(!map.has(id)||item.collectionName==="publicOrders")map.set(id,item);
     });
-
-    oldSnapshot.forEach(function(orderDoc){
-      allOrders.push({
-        documentId: orderDoc.id,
-        collectionName: "orders",
-        data: orderDoc.data()
-      });
-    });
-
-    /*
-      Remove duplicate Order IDs.
-      publicOrders is preferred when the same Order ID exists
-      in both collections.
-    */
-
-    const uniqueOrders = new Map();
-
-    allOrders.forEach(function(item){
-
-      const orderId =
-        item.data.orderId || item.documentId;
-
-      if(
-        !uniqueOrders.has(orderId) ||
-        item.collectionName === "publicOrders"
-      ){
-        uniqueOrders.set(orderId,item);
-      }
-    });
-
-    const orders = Array.from(
-      uniqueOrders.values()
-    );
-
-    orders.sort(function(a,b){
-
-      const aSeconds =
-        a.data.createdAt?.seconds || 0;
-
-      const bSeconds =
-        b.data.createdAt?.seconds || 0;
-
-      return bSeconds - aSeconds;
-    });
-
-
-    if(orders.length === 0){
-
-      ordersContainer.innerHTML =
-        "<div class='card'><h2>No orders found.</h2></div>";
-
-      return;
-    }
-
-
-    ordersContainer.innerHTML = "";
-
-    orders.forEach(function(item){
-
-      createOrderCard(
-        item.documentId,
-        item.data,
-        item.collectionName
-      );
-
-    });
-
-
-    showMessage(
-      adminMessage,
-      "Orders loaded successfully.",
-      "success"
-    );
-
-
+    const orders=[...map.values()].sort((a,b)=>timestampValue(b.data.createdAt)-timestampValue(a.data.createdAt));
+    if(!orders.length){ordersContainer.innerHTML='<div class="card"><h2>No orders found.</h2></div>';return;}
+    ordersContainer.innerHTML="";
+    orders.forEach(item=>createOrderCard(item));
+    msg(adminMessage,orders.length+" order(s) loaded.","success");
   }catch(error){
-
     console.error(error);
-
-    ordersContainer.innerHTML =
-      "<div class='card'>" +
-      "<h2>Unable to load orders</h2>" +
-      "<p>" +
-      escapeHTML(error.message) +
-      "</p>" +
-      "</div>";
-
-    showMessage(
-      adminMessage,
-      "Could not load orders.",
-      "error"
-    );
+    ordersContainer.innerHTML='<div class="card"><b>Could not load orders:</b> '+esc(error.message)+'</div>';
+    msg(adminMessage,"Could not load orders.","error");
   }
 }
 
-function createOrderCard(documentId,order,collectionName){
-
-  const card = document.createElement("div");
-  card.className = "order-card";
-
-  const medicines = Array.isArray(order.medicines)
-    ? order.medicines
-    : [];
-
-  let medicineHTML = "";
-
-  if(medicines.length > 0){
-
-    medicines.forEach(function(medicine){
-
-      medicineHTML += `
-        <div class="medicine-item">
-          <strong>💊 ${escapeHTML(medicine.name || "Medicine")}</strong>
-          <br>
-          Quantity: ${escapeHTML(medicine.quantity || 1)}
-        </div>
-      `;
-    });
-
-  }else{
-
-    medicineHTML =
-      "<div>No medicine information found.</div>";
-  }
-
-
-  const originalMRP = order.originalMRP ?? "";
-  const discountPercent = order.discountPercent ?? "";
-  const paymentStatus = order.paymentStatus || "Pending";
-  const status = order.status || "Pending";
-
-  const currentEstimatedTime =
-    order.estimatedDeliveryTime ||
-    order.estimatedDelivery ||
-    "";
-
-
-  card.innerHTML = `
-
-    <div class="order-title">
-      🧾 Order ID:
-      ${escapeHTML(order.orderId || documentId)}
-    </div>
-
-    <div class="info">
-      <strong>Customer Name:</strong>
-      ${escapeHTML(
-        order.customerName ||
-        order.fullName ||
-        order.name ||
-        ""
-      )}
-    </div>
-
-    <div class="info">
-      <strong>Mobile:</strong>
-      ${escapeHTML(
-        order.customerPhone ||
-        order.mobile ||
-        order.phone ||
-        ""
-      )}
-    </div>
-
-    <div class="info">
-      <strong>Address:</strong>
-      ${escapeHTML(
-        order.address ||
-        order.deliveryAddress ||
-        order.customerAddress ||
-        ""
-      )}
-    </div>
-
-    <div class="info">
-      <strong>Current Estimated Delivery:</strong>
-      ${escapeHTML(currentEstimatedTime || "Not specified")}
-    </div>
-
-    <div class="info">
-      <strong>Payment Method:</strong>
-      ${escapeHTML(
-        order.paymentMethod ||
-        "Not specified"
-      )}
-    </div>
-
-
-    <div class="medicines">
-
-      <div class="section-title">
-        💊 Medicines
-      </div>
-
-      ${medicineHTML}
-
-    </div>
-
-
-    <div class="section-title">
-      🚚 Set Estimated Delivery Time
-    </div>
-
-    <select class="estimated-delivery-input">
-
-      <option value="30–60 minutes"
-        ${currentEstimatedTime === "30–60 minutes" ? "selected" : ""}>
-        30–60 minutes
-      </option>
-
-      <option value="1–2 hours"
-        ${currentEstimatedTime === "1–2 hours" ? "selected" : ""}>
-        1–2 hours
-      </option>
-
-      <option value="2–4 hours"
-        ${currentEstimatedTime === "2–4 hours" ? "selected" : ""}>
-        2–4 hours
-      </option>
-
-      <option value="Today"
-        ${currentEstimatedTime === "Today" ? "selected" : ""}>
-        Today
-      </option>
-
-      <option value="Tomorrow"
-        ${currentEstimatedTime === "Tomorrow" ? "selected" : ""}>
-        Tomorrow
-      </option>
-
-    </select>
-
-    <div class="small-note">
-      Select the delivery time and press Save Order.
-    </div>
-
-
-    <div class="section-title">
-      💰 Payment Details
-    </div>
-
-    <div class="grid">
-
-      <div>
-        <label>Original MRP</label>
-
-        <input
-          type="number"
-          min="0"
-          step="0.01"
-          class="mrp-input"
-          value="${escapeHTML(originalMRP)}"
-          placeholder="Original MRP"
-        >
-      </div>
-
-
-      <div>
-        <label>Discount Percent (%)</label>
-
-        <input
-          type="number"
-          min="0"
-          max="100"
-          step="0.01"
-          class="discount-percent-input"
-          value="${escapeHTML(discountPercent)}"
-          placeholder="Discount %"
-        >
-      </div>
-
-
-      <div>
-        <label>Discount Amount</label>
-
-        <input
-          type="number"
-          class="discount-input readonly"
-          readonly
-          placeholder="Discount Amount"
-        >
-      </div>
-
-
-      <div>
-        <label>Payable Amount</label>
-
-        <input
-          type="number"
-          class="payable-input readonly"
-          readonly
-          placeholder="Payable Amount"
-        >
-      </div>
-
-
-      <div>
-        <label>Customer Payment Amount</label>
-
-        <input
-          type="number"
-          class="payment-input readonly"
-          readonly
-          placeholder="Customer Payment"
-        >
-      </div>
-
-    </div>
-
-
-    <div class="section-title">
-      💳 Payment Status
-    </div>
-
-    <select class="payment-status">
-
-      <option value="Pending"
-        ${paymentStatus === "Pending" ? "selected" : ""}>
-        Pending
-      </option>
-
-      <option value="Paid"
-        ${paymentStatus === "Paid" ? "selected" : ""}>
-        Paid
-      </option>
-
-      <option value="Failed"
-        ${paymentStatus === "Failed" ? "selected" : ""}>
-        Failed
-      </option>
-
-    </select>
-
-
-    <div class="section-title">
-      📦 Order Status
-    </div>
-
-    <select class="order-status">
-
-      <option value="Pending"
-        ${status === "Pending" ? "selected" : ""}>
-        Pending
-      </option>
-
-      <option value="Confirmed"
-        ${status === "Confirmed" ? "selected" : ""}>
-        Confirmed
-      </option>
-
-      <option value="Out for Delivery"
-        ${status === "Out for Delivery" ? "selected" : ""}>
-        Out for Delivery
-      </option>
-
-      <option value="Delivered"
-        ${status === "Delivered" ? "selected" : ""}>
-        Delivered
-      </option>
-
-    </select>
-
-
-    <button class="save-btn">
-      💾 Save Order
-    </button>
-
-    <button class="delete-btn">
-      🗑️ Delete Order
-    </button>
-
+function createOrderCard(item){
+  const order=item.data,id=item.documentId,collectionName=item.collectionName;
+  const card=document.createElement("div");card.className="order-card";
+  const meds=Array.isArray(order.medicines)?order.medicines:[];
+  const medicineHTML=meds.length?meds.map((m,i)=>`<div class="medicine-item"><b>💊 Medicine ${i+1}:</b> ${esc(m.name||"N/A")}<br><b>Quantity:</b> ${esc(m.quantity)} ${esc(m.unit||"")}</div>`).join(""):"<div>No medicine information found.</div>";
+  const address=order.address||order.deliveryAddress||order.customerAddress||"";
+  const name=order.customerName||order.fullName||order.name||"";
+  const phone=order.customerPhone||order.mobile||order.phone||"";
+  const estimated=order.estimatedDeliveryTime||order.estimatedDelivery||"";
+  const mrp=order.originalMRP??"";
+  const disc=order.discountPercent??10;
+  const payStatus=order.paymentStatus||"Pending";
+  const status=order.status||"Pending";
+  card.innerHTML=`
+  <div class="order-title">🧾 Order ID: ${esc(order.orderId||id)}</div>
+  <div class="info"><strong>Customer Name:</strong> ${esc(name)}</div>
+  <div class="info"><strong>Mobile:</strong> ${esc(phone)}</div>
+  <div class="info"><strong>🏠 Address:</strong> ${esc(address||"Address not provided")}</div>
+  <div class="info"><strong>💳 Payment Method:</strong> ${esc(order.paymentMethod||"Cash on Delivery")}</div>
+  <div class="section-title">💊 Medicines</div>${medicineHTML}
+  <div class="section-title">🚚 Estimated Delivery Time</div>
+  <select class="estimated">
+    <option value="30–60 minutes">30–60 minutes</option>
+    <option value="1–2 hours">1–2 hours</option>
+    <option value="2–4 hours">2–4 hours</option>
+    <option value="Today">Today</option>
+    <option value="Tomorrow">Tomorrow</option>
+  </select>
+  <div class="small-note">Change the time, then press Save Order.</div>
+  <div class="section-title">💰 Payment Details</div>
+  <div class="grid">
+    <div><label>Original MRP</label><input class="mrp" type="number" min="0" step="0.01" value="${esc(mrp)}"></div>
+    <div><label>Discount %</label><input class="discountPercent" type="number" min="0" max="100" step="0.01" value="${esc(disc)}"></div>
+    <div><label>Discount Amount</label><input class="discountAmount readonly" readonly></div>
+    <div><label>Payable Amount</label><input class="payable readonly" readonly></div>
+    <div><label>Customer Payment Amount</label><input class="paymentAmount readonly" readonly></div>
+  </div>
+  <div class="section-title">💳 Payment Status</div>
+  <select class="paymentStatus"><option>Pending</option><option>Paid</option><option>Failed</option></select>
+  <div class="section-title">📦 Order Status</div>
+  <select class="orderStatus"><option>Pending</option><option>Confirmed</option><option>Out for Delivery</option><option>Delivered</option></select>
+  <br><br>
+  <button class="save-btn">💾 Save Order</button>
+  <button class="delete-btn">🗑️ Delete Order</button>
   `;
-
-
   ordersContainer.appendChild(card);
 
+  const estimatedInput=card.querySelector(".estimated");
+  const paymentStatusInput=card.querySelector(".paymentStatus");
+  const statusInput=card.querySelector(".orderStatus");
+  estimatedInput.value=estimated||"30–60 minutes";
+  if(![...estimatedInput.options].some(o=>o.value===estimatedInput.value))estimatedInput.value="30–60 minutes";
+  paymentStatusInput.value=payStatus;
+  statusInput.value=status;
 
-  const mrpInput =
-    card.querySelector(".mrp-input");
+  const mrpInput=card.querySelector(".mrp"),percentInput=card.querySelector(".discountPercent");
+  const discountInput=card.querySelector(".discountAmount"),payableInput=card.querySelector(".payable"),paymentInput=card.querySelector(".paymentAmount");
 
-  const discountPercentInput =
-    card.querySelector(".discount-percent-input");
-
-  const discountInput =
-    card.querySelector(".discount-input");
-
-  const payableInput =
-    card.querySelector(".payable-input");
-
-  const paymentInput =
-    card.querySelector(".payment-input");
-
-  const estimatedDeliveryInput =
-    card.querySelector(".estimated-delivery-input");
-
-
-  function calculatePayment(){
-
-    const mrp = parseFloat(mrpInput.value);
-
-    let percent =
-      parseFloat(discountPercentInput.value);
-
-    if(isNaN(mrp) || mrp < 0){
-
-      discountInput.value = "";
-      payableInput.value = "";
-      paymentInput.value = "";
-
-      return;
-    }
-
-    if(isNaN(percent)){
-      percent = 0;
-    }
-
-    if(percent < 0) percent = 0;
-    if(percent > 100) percent = 100;
-
-    const discount = mrp * percent / 100;
-    const payable = mrp - discount;
-
-    discountInput.value =
-      discount.toFixed(2);
-
-    payableInput.value =
-      payable.toFixed(2);
-
-    paymentInput.value =
-      payable.toFixed(2);
+  function calc(){
+    const m=parseFloat(mrpInput.value),p=Math.min(100,Math.max(0,parseFloat(percentInput.value)||0));
+    if(!Number.isFinite(m)||m<0){discountInput.value="";payableInput.value="";paymentInput.value="";return;}
+    const d=m*p/100,total=m-d;discountInput.value=d.toFixed(2);payableInput.value=total.toFixed(2);paymentInput.value=total.toFixed(2);
   }
+  mrpInput.oninput=calc;percentInput.oninput=calc;calc();
 
+  card.querySelector(".save-btn").onclick=async()=>{
+    const btn=card.querySelector(".save-btn");btn.disabled=true;btn.textContent="Saving...";
+    try{
+      await updateDoc(doc(db,collectionName,id),{
+        originalMRP:mrpInput.value===""?null:Number(mrpInput.value),
+        discountPercent:percentInput.value===""?null:Number(percentInput.value),
+        discountAmount:discountInput.value===""?null:Number(discountInput.value),
+        payableAmount:payableInput.value===""?null:Number(payableInput.value),
+        paymentAmount:paymentInput.value===""?null:Number(paymentInput.value),
+        paymentStatus:paymentStatusInput.value,
+        status:statusInput.value,
+        estimatedDeliveryTime:estimatedInput.value
+      });
+      msg(adminMessage,"Order saved. Estimated delivery time updated.","success");btn.textContent="✅ Saved";
+      setTimeout(()=>btn.textContent="💾 Save Order",1200);
+    }catch(error){console.error(error);msg(adminMessage,"Could not save: "+error.message,"error");btn.textContent="💾 Save Order";}
+    finally{btn.disabled=false;}
+  };
 
-  mrpInput.addEventListener(
-    "input",
-    calculatePayment
-  );
-
-  discountPercentInput.addEventListener(
-    "input",
-    calculatePayment
-  );
-
-  calculatePayment();
-
-
-  const saveBtn =
-    card.querySelector(".save-btn");
-
-
-  saveBtn.addEventListener(
-    "click",
-    async function(){
-
-      saveBtn.disabled = true;
-      saveBtn.textContent = "Saving...";
-
-      try{
-
-        const mrpValue =
-          mrpInput.value.trim();
-
-        const discountPercentValue =
-          discountPercentInput.value.trim();
-
-        const discountValue =
-          discountInput.value.trim();
-
-        const payableValue =
-          payableInput.value.trim();
-
-        const paymentValue =
-          paymentInput.value.trim();
-
-        const paymentStatus =
-          card.querySelector(
-            ".payment-status"
-          ).value;
-
-        const orderStatus =
-          card.querySelector(
-            ".order-status"
-          ).value;
-
-        const estimatedDeliveryTime =
-          estimatedDeliveryInput.value;
-
-
-        await updateDoc(
-
-          doc(
-            db,
-            collectionName,
-            documentId
-          ),
-
-          {
-
-            originalMRP:
-              mrpValue === ""
-                ? null
-                : Number(mrpValue),
-
-            discountPercent:
-              discountPercentValue === ""
-                ? null
-                : Number(
-                    discountPercentValue
-                  ),
-
-            discountAmount:
-              discountValue === ""
-                ? null
-                : Number(discountValue),
-
-            payableAmount:
-              payableValue === ""
-                ? null
-                : Number(payableValue),
-
-            paymentAmount:
-              paymentValue === ""
-                ? null
-                : Number(paymentValue),
-
-            paymentStatus:
-              paymentStatus,
-
-            status:
-              orderStatus,
-
-            estimatedDeliveryTime:
-              estimatedDeliveryTime
-          }
-        );
-
-
-        showMessage(
-          adminMessage,
-          "Order saved successfully. Estimated delivery time updated.",
-          "success"
-        );
-
-
-        saveBtn.textContent =
-          "✅ Saved";
-
-        setTimeout(function(){
-          saveBtn.textContent =
-            "💾 Save Order";
-        },1500);
-
-
-      }catch(error){
-
-        console.error(error);
-
-        showMessage(
-          adminMessage,
-          "Could not save order: " +
-          error.message,
-          "error"
-        );
-
-        saveBtn.textContent =
-          "💾 Save Order";
-
-      }finally{
-
-        saveBtn.disabled = false;
-      }
-    }
-  );
-
-
-  const deleteBtn =
-    card.querySelector(".delete-btn");
-
-
-  deleteBtn.addEventListener(
-    "click",
-    async function(){
-
-      const confirmDelete =
-        confirm(
-          "Are you sure you want to delete this order?"
-        );
-
-      if(!confirmDelete){
-        return;
-      }
-
-      deleteBtn.disabled = true;
-      deleteBtn.textContent = "Deleting...";
-
-
-      try{
-
-        await deleteDoc(
-          doc(
-            db,
-            "publicOrders",
-            documentId
-          )
-        );
-
-
-        card.remove();
-
-        showMessage(
-          adminMessage,
-          "Order deleted successfully.",
-          "success"
-        );
-
-
-      }catch(error){
-
-        console.error(error);
-
-        showMessage(
-          adminMessage,
-          "Could not delete order: " +
-          error.message,
-          "error"
-        );
-
-        deleteBtn.disabled = false;
-        deleteBtn.textContent =
-          "🗑️ Delete Order";
-      }
-    }
-  );
+  card.querySelector(".delete-btn").onclick=async()=>{
+    if(!confirm("Delete this order?"))return;
+    const btn=card.querySelector(".delete-btn");btn.disabled=true;btn.textContent="Deleting...";
+    try{await deleteDoc(doc(db,collectionName,id));card.remove();msg(adminMessage,"Order deleted.","success");}
+    catch(error){console.error(error);msg(adminMessage,"Could not delete: "+error.message,"error");btn.disabled=false;btn.textContent="🗑️ Delete Order";}
+  };
 }
 
-
-refreshBtn.addEventListener(
-  "click",
-  loadOrders
-);
-
+refreshBtn.onclick=loadOrders;
 </script>
-
 </body>
 </html>
